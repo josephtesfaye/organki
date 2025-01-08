@@ -1,0 +1,941 @@
+* Vocabulary :food:
+:PROPERTIES:
+:ANKI_NOTETYPE: Vocabulary
+:ANKI_DECK: Test
+:END:
+
+#+NAME: 202410212013
+- 林檎 りんご [0] n. apple
+- 蜜柑 みかん [1] [[cl:202410021528.m4a][⏯]] n. mandarin orange
+- みず n. water
+
+#+NAME: 202410222002
+#+ATTR_ANKI: :deck "Test2" :tags "tag1 tag2"
+- 林檎 りんご [0] n. apple
+- 蜜柑 みかん [1] [[cl:202410021528.m4a][⏯]] n. mandarin orange
+- みず n. water
+
+* Sentences :food:
+:PROPERTIES:
+:ANKI_NOTETYPE: Sentence
+:ANKI_DECK: Test
+:END:
+
+#+NAME: 202410222317
+- みずです。 It's water.
+- みずとごはんです。 It's water and rice.
+- みず、ください。 Water, please.
+
+#+NAME: 202410231144
+#+ATTR_ANKI: :deck "Test2" :tags "tag1 tag2"
+- みずです。 It's water.
+- みずとごはんです。 It's water and rice.
+- みず、ください。 Water, please.
+
+#+NAME: 202410231201
+#+ATTR_ANKI: :tags "tag1 tag2"
+1. どれが欲しいですか。 Which one do you want?
+2. ここにあります。 It is here.
+3. A: いつにほんへきましたか。 When did you come to Japan?
+   B: 四月に日本に来ました。 I came to Japan in April.
+4. 彼らは来るでしょう。
+   - P: かれらはくるでしょう。
+   - T: They will probably come.
+5. あしたもきっといい天気だろう。
+   - P: [[cl:202410021528.m4a][⏯]]
+   - T: The weather will probably be nice tomorrow, too.
+   - V:
+     - きっと [0] adv. surely; probably
+     - だろう [2] col. I think; probably
+6. この辺は木も多いし、たぶん昼間も静かだろう。
+   - P: [[cl:202410021635.m4a][⏯]]
+   - T: This area also has many trees and it’s probably quiet in the daytime.
+   - V:
+     - 辺 へん [0] n. side 边; nearby 附近
+     - 木/樹 き [1] n. tree
+     - 昼間 ひる・ま [3] n. daytime 白天
+
+#+NAME: 202410241949
+1. (sentence 1)。 (translation 1)
+2. (sentence 2)？  (translation 2)
+3. A: (sentence 3.2)? (translation 3.2)
+   B: (sentence 3.3)？ (translation 3.3)
+
+4. (sentence 4)
+   - P: (pronunciation 4) [[cl:202410021529.m5a][⏯]]
+   - T: (translation 4)
+
+5. (sentence 5)
+   - P: [[cl:202410021529.m5a][⏯]]
+   - T: (translation 5)
+   - V:
+     - (word5.2) (pronunciation5.2) (class5.2). (translation5.2)
+     - (word5.3) (pronunciation5.3) (class5.3). (translation5.3)
+
+* Test :Test:
+:PROPERTIES:
+:ANKI_NOTETYPE: Vocabulary
+:ANKI_DECK: Test
+:END:
+
+** Date & Time
+:PROPERTIES:
+:ANKI_TAGS: date time
+:END:
+
+#+NAME: 202410242106
+#+ATTR_ANKI: :deck "Test2" :tags "tag1 tag2"
+- 今日 きょう [1] [[cl:106329x1268.wav][⏯]] n. today 今天
+- 午前 ご・ぜん [1] n. morning 早上
+- 午後 ご・ご [1] [[cl:330479x304.wav][⏯]] n. afternoon 下午
+
+#+NAME: 202410282038
+#+ATTR_ANKI: :notetype "Sentence" :tags "number"
+- 一つのりんごを食べました。/りんごを一つ食べました。 I ate one apple.
+- 二個の玉葱を切ってください。 Please cut two onions.
+
+** Greetings
+#+NAME: 202410282039
+- 交流 こう·りゅう [0] n. exchange
+  - L:
+    - 交流会 こう·りゅう·かい [0] n. (cultural) exchange meeting, social gathering
+- 会議 かい·ぎ [1] n. meeting, conference
+- 客 きゃく [0] n. visitor; guest; customer
+  - F:
+    - 招かれざる客 まね・かれざる·きゃく phrn. an uninvited visitor
+    - 不意の客 phrn. an unexpected visitor
+  - L:
+    - 招く まね・く[2] v. invite
+    - 招かれざる まね・かれざる adj. uninvited
+    - 不意 ふ·い [1][0] n. surprise, sudden 突然
+- 挨拶 あい・さつ [1] n. greeting
+  - F:
+    - 挨拶する あいさつする v. greet
+- 和^{▽}やか にこやか [2] n. a big smile
+  - L:
+    - にこやかにあいさつする phrv. greet (sb.) with a big/bright smile
+    - にこやかな顔 phrn. a bright face
+    - 顔 かお [0] n. face
+
+#+NAME: 202410291202
+#+ATTR_ANKI: :notetype "Sentence"
+- 彼はにこやかに客に挨拶した。 He greeted the guests with a smile.
+  - V:
+    - 和^{▽}やか にこやか [2] n. a big smile
+    - 客 きゃく [0] n. visitor; guest; customer
+    - 挨拶 あい・さつ [1] n. greeting
+
+** More Testing Lists
+#+NAME: 202410292115
+#+ATTR_ANKI: :notetype "Sentence"
+1. [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.
+
+2. [[cl:202410271111.m4a][⏯]] A: 君も行くだろう？ You’re also going, right?
+   [[cl:202410271112.m4a][⏯]] B: はい、もちろん。 Yes, of course.
+
+3. [[cl:202410271111.m4a][⏯]] A: 君も行くだろう2？ You’re also going, right?
+   B: はい、もちろん。 Yes, of course.
+
+4. A: 君も行くだろう3？ You’re also going, right?
+   [[cl:202410271112.m4a][⏯]] B: はい、もちろん。 Yes, of course.
+
+5. [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。
+   - T: The weather will probably be nice tomorrow, too.
+   - V:
+     - きっと [0] adv. surely; probably
+     - だろう [2] col. I think/suppose/guess (that) ...
+
+#+NAME: 202410302159
+- 午前 ご・ぜん [1] n. morning; a.m.
+  - E:
+    - 午前八時ごろ起きます。 I wake up around eight a.m.
+    - [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.
+  - L:
+    - 昼前 ひる・まえ [3] n. late morning 上午
+    - 午前零時三分 ごぜんれいじさんぷん n. 00:03
+  - C:
+    - Comment1
+    - Comment2
+- 昼間 ひる・ま [3] / ちゅう・かん [0] n. daytime 白天
+  - C: The pronunciation ちゅうかん is less common and typically used in formal, technical contexts or used to form compound words.
+- 日中(1) にっちゅう [0] n. daytime 白天
+  - L:
+    - 日中(2) にっちゅう [[cl:485624x978.wav][⏯]] n. 日本和中国
+
+#+NAME: 202410312039
+- 李さん りさん n. Mr. Li 李先生
+- 限定詞 げんていし [3] n. determiner 限定词
+  - L:
+    - 冠詞 かんし [0] n. article (a, the) 冠词
+      - F:
+        - 定冠詞 ていかんし [3] n. the definite article (the) 定冠词
+        - 不定冠詞 ふていかんし [4] n. the indefinite article (a, an) 不定冠词
+    - 指示形容詞 しじけいようし [5] n. demonstrative adjective (e.g. this, that, these, etc.)
+    - 数量形容詞 すうりょうけいようし [7] n. quantitative adjective (e.g. no, few, etc.)
+
+#+NAME: 202411082333
+#+ATTR_ANKI: :notetype "Sentence"
+1. 交流会で話します。
+   - T: I will speak at the social gathering.
+   - V:
+     - 交流 こう・りゅう [0] n. exchange
+       - L:
+         - 交流会 こう・りゅう・かい [0] n. (cultural) exchange meeting, social gathering
+         - 会議 かい・ぎ [1] n. meeting, conference
+
+2. 彼はにこやかに客に挨拶した。
+   - T: He greeted the guests with a smile.
+   - V:
+     - 和^{▽}やか にこやか [2] n. a big smile
+       - L:
+         - にこやかにあいさつする phrv. greet (sb.) with a big/bright smile
+         - にこやかな顔 phrn. a bright face
+           - L:
+             - 顔 かお [0] n. face
+     - 客 きゃく [0] n. visitor; guest; customer
+       - F:
+         - 招かれざる客 まね・かれざる・きゃく phrn. an uninvited visitor
+         - 不意の客 ふいのきゃく phrn. an unexpected visitor
+       - L:
+         - 招く まね・く[2] v. invite
+         - 招かれざる まね・かれざる adj. uninvited
+         - 不意 ふ・い [1][0] n. surprise, sudden 突然
+     - 挨拶 あい・さつ [1] n. greeting
+       - F:
+         - 挨拶する あいさつする v. greet
+
+#+NAME: 202411062020
+- [[CL:202403021546.m4a][⏯]] 李さんは中国人です。    小李是中国人。
+- [[cl:202403021553.m4a][⏯]] 森さんは学生ではありません。    森先生不是学生。
+- [[cl:202403021618.m4a][⏯]] 甲: わたしは李です。小野さんですか。  我姓李。您是小野先生吗？
+  [[cl:202403021618.m4a][⏯]] 乙: はい，そうです。小野です。          是的，我是小野。
+- [[cl:202403021715.m4a][⏯]] 甲: 吉田さんですか。    您是吉田先生吗？
+  乙: いいえ，ちがいます。森です。 不，不是。我是森。
+- 甲: 李さんはJC企画の社員ですか。 李先生您是JC策划公司的职员吗？
+  [[cl:202403021726.m4a][⏯]] 乙: はい，そうです。 是的，我是。
+
+#+NAME: 202411272207
+- 人（Quantifier） にん [1] qt. Quantifier used for people
+  - F:
+    - 十人 じゅうにん [1] n. 10 people
+      - S:
+        - 十人の社員が会議に出席します。 Ten employees will attend the meeting.
+          - V:
+            - 出席 しゅっせき [0] n. attendance
+              - L:
+                - 欠席 けっせき [0] n. absence
+                  - E:
+                    - 今日の欠席者は誰ですか。 Who is absent today?
+                      - V:
+                        - 欠席者 けっせきしゃ [2] n. absentee
+                  - S:
+                    - きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.
+                      - V:
+                        - 病気 びょうき [0] n. illness, disease
+
+#+NAME: 202411062029
+- さん suf. Mr./Mrs./Ms. 先生/女士
+  - C: さん is a suffix used after surnames.
+  - E: Here are some examples:
+    - 李さん りさん n. Mr. Li 李先生
+      - 李さんは学生ですか。 Is Mr. Li a student?
+        - Nest item 2
+    - 森さん もりさん n. 森先生
+  - S:
+    - 李さんはJC企画の社員ですか。 李先生您是JC策划公司的职员吗？
+
+- 羽 わ qt. Quantifier used for birds and rabbits
+
+  |  N | Kanji  | Hiragana   |
+  |----+--------+------------|
+  | 10 | 十羽   | じゅっぱ   |
+
+  - C: The standard reading of "十羽" is "じっぱ" or "じゅうわ", but it's commonly read as "じゅっぱ" in everyday life.
+  - F:
+    - 一羽 いちわ [2] qt. one (bird/rabbit)
+    - 十羽 じゅっぱ [1] qt. ten (birds/rabbits)
+      - F:
+        - 十羽のウサギ じゅっぱのうさぎ phrn. 10 rabbits
+          - F:
+            - うさぎ [0] n. rabbit
+              - A: 兎^{▼}
+
+#+NAME: 202412212325
+#+ATTR_ANKI: :notetype "Sentence"
+- A: 何年ありますか？ How many years are there?
+  B: 3年あります。 There are three years.
+  A: 何年そのことをしていますか？ How many years have you been doing this?
+  B: 10年しています。 I have been doing it for 10 years.
+  B: かれこれ10年です。 Nearly ten years.
+  A: それから何年経ちましたか？ How many years has it been since then?
+  B: 5年経ちました。 It’s been five years.
+
+  - C: Asking about years.
+  - V:
+    - 何年 なんねん [1] int. which year, what year; how many years
+      - C: Asking about years.
+      - E: :L (1 3 6)
+      - S: :L (1) :G ((1 2) (6 7))
+        - :G ((3 4) (3 5))
+        - :L (3)
+    - かれこれ [1] adv. almost, nearly; pron. this and that
+      - A: 彼此^{▼}
+      - S: :G ((3 5))
+    - それから [0] conj. then 然后; since then 从那以后
+      - C: Asking about years.
+      - S:
+        - :L (6) :G ((6 7))
+        - 彼は夕食を食べて, それからすぐ寝た。
+          - T: He had dinner, and then went to bed.
+          - V:
+            - 夕食 ゆうしょく [0] n. dinner
+      - L:
+        - そして [0] conj. and
+    - 経^{▽}つ たつ [1] v. (time) pass
+
+#+NAME: 202412272225
+#+ATTR_ANKI: :notetype "Sentence"
+- Asking about years (This line is ignored.)
+  - M:
+    1) A: 何年ありますか？ How many years are there?
+    2) B: 3年あります。 There are three years.
+    3) A: 何年そのことをしていますか？ How many years have you been doing this?
+    4) B: 10年しています。 I have been doing it for 10 years.
+    5) B: かれこれ10年です。 Nearly ten years.
+    6) A: それから何年経ちましたか？ How many years has it been since then?
+    7) B: 5年経ちました。 It’s been five years.
+
+  - C: Asking about years.
+  - V:
+    - 何年 なんねん [1] int. which year, what year; how many years
+      - C: Asking about years.
+      - E: :L (1 3 6)
+      - S: :L (1) :G ((1 2) (6 7))
+        - :G ((3 4) (3 5))
+        - :L (3)
+    - かれこれ [1] adv. almost, nearly; pron. this and that
+      - A: 彼此^{▼}
+      - S: :G ((3 5))
+    - それから [0] conj. then 然后; since then 从那以后
+      - C: Asking about years.
+      - S:
+        - :L (6) :G ((6 7))
+        - 彼は夕食を食べて, それからすぐ寝た。
+          - T: He had dinner, and then went to bed.
+          - V:
+            - 夕食 ゆうしょく [0] n. dinner
+      - L:
+        - そして [0] conj. and
+    - 経^{▽}つ たつ [1] v. (time) pass
+
+* Conventions
+This section is about how to write test cases in this file and the conventions to follow.
+
+The =#+ATTR_ARGS= lines you see above the example blocks are used to store the testing parameters, such as the arguments to a function to be tested upon, the locations where the current point is at, the regions to be selected, etc. For example, this [[case1/organki/import-region/output1][output]] is produced with points at 89, 110, etc., or with the region from 110 to 190 selected, etc., meanwhile calling the function ~organki/import-region~.
+
+If the =#+ATTR_ARGS= line or some of the arguments to the function to be tested upon are missing then the default values (if any) are used.
+
+* Test cases
+** Case 1: Converting a Vocabulary list
+*ERT Tests*
+
+: test-organki/import-vocabulary
+
+*Description*
+
+This test case tests the functions related to converting a Vocabulary list. By placing the current point at different positions of the list or selecting the items and then calling the converting functions, one can test the baseline functionality as well as the corner cases.
+
+For this [[202410212013][list]] put point at these places:
+
+1. The start of the =#+NAME= line
+2. The start of the first item
+3. The 林 character
+4. The end of the first item
+5. The start of the second item
+6. The end of the second item
+7. The blank line after the last item
+
+or mark these regions:
+
+1. From the start of the =#+NAME= line to the end of the last item
+1. From the start of the =#+NAME= line to the blank line after the last item
+2. From the start of the first item to the end of the last item
+3. From the start of the first item to blank line after the last item
+
+and then run ~organki/import-region~ respectively. The output should all be the same:
+
+#+NAME: case1/organki/import-region/output1
+#+ATTR_ARGS: :points (85 106 108 127 128 200 201) :regions ((85 200) (85 201) (106 200) (106 201) (25 201))
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	food	林檎	りんご [0] n.	apple	
+Vocabulary	Test	food	蜜柑	みかん [1] [sound:202410021528.m4a] n.	mandarin orange	
+Vocabulary	Test	food	みず	n.	water	
+#+end_example
+
+If the region doesn't start with the first line of the list, for example, from a line above the =#+NAME= line to the end of the list, an error will be signaled.
+
+For another [[202410222002][list]] put point at these places:
+
+1. The start of the =#+NAME= line
+2. The start of the first item
+
+or select all items, and run ~organki/import-region~ respectively. The output should all the same:
+
+#+NAME: case1/organki/import-region/output2
+#+ATTR_ARGS: :points (202 268) :regions ((202 363) (268 362))
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test2	food::tag1 food::tag2	林檎	りんご [0] n.	apple	
+Vocabulary	Test2	food::tag1 food::tag2	蜜柑	みかん [1] [sound:202410021528.m4a] n.	mandarin orange	
+Vocabulary	Test2	food::tag1 food::tag2	みず	n.	water	
+#+end_example
+
+For this [[202410282039][list]] whose items contain sublists, running ~organki/import-region~ should give out this output:
+
+#+NAME: case1/organki/import-region/output3
+#+ATTR_ARGS: :points (2403)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	交流	こう·りゅう [0] n.	exchange	<b>Linking</b><ul><li>交流会 こう·りゅう·かい [0] n. (cultural) exchange meeting, social gathering</li></ul>
+Vocabulary	Test	Test	交流会	こう·りゅう·かい [0] n.	(cultural) exchange meeting, social gathering	<b>Linking</b><ul><li>交流 こう·りゅう [0] n. exchange</li></ul>
+Vocabulary	Test	Test	会議	かい·ぎ [1] n.	meeting, conference	
+Vocabulary	Test	Test	客	きゃく [0] n.	visitor; guest; customer	<b>Family</b><ul><li>招かれざる客 まね・かれざる·きゃく phrn. an uninvited visitor</li><li>不意の客 phrn. an unexpected visitor</li></ul><b>Linking</b><ul><li>招く まね・く[2] v. invite</li><li>招かれざる まね・かれざる adj. uninvited</li><li>不意 ふ·い [1][0] n. surprise, sudden 突然</li></ul>
+Vocabulary	Test	Test	招かれざる客	まね・かれざる·きゃく phrn.	an uninvited visitor	<b>Family</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	不意の客	phrn.	an unexpected visitor	<b>Family</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	招く	まね・く[2] v.	invite	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	招かれざる	まね・かれざる adj.	uninvited	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	不意	ふ·い [1][0] n.	surprise, sudden 突然	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	挨拶	あい・さつ [1] n.	greeting	<b>Family</b><ul><li>挨拶する あいさつする v. greet</li></ul>
+Vocabulary	Test	Test	挨拶する	あいさつする v.	greet	<b>Family</b><ul><li>挨拶 あい・さつ [1] n. greeting</li></ul>
+Vocabulary	Test	Test	<ruby>和<rt>▽</rt>やか</ruby>	にこやか [2] n.	a big smile	<b>Linking</b><ul><li>にこやかにあいさつする phrv. greet (sb.) with a big/bright smile</li><li>にこやかな顔 phrn. a bright face</li><li>顔 かお [0] n. face</li></ul>
+Vocabulary	Test	Test	にこやかにあいさつする	phrv.	greet (sb.) with a big/bright smile	<b>Linking</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li></ul>
+Vocabulary	Test	Test	にこやかな顔	phrn.	a bright face	<b>Linking</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li></ul>
+Vocabulary	Test	Test	顔	かお [0] n.	face	<b>Linking</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li></ul>
+#+end_example
+
+** Case 2: Converting a Sentence list
+*ERT Tests*
+
+: test-organki/import-sentences
+
+*Description*
+
+This test case tests the functions related to converting a Sentence list. By placing the current point at different positions of the list or selecting the items and then calling the converting functions, one can test the baseline functionality as well as the corner cases.
+
+For this [[202410222317][list]] put point at these places:
+
+1. The start of the =#+NAME= line
+2. The start of the first item
+3. The first み character
+4. The end of the first item
+5. The start of the second item
+6. The end of the last item
+7. The blank line after the last item
+
+or mark these regions:
+
+1. From the start of the =#+NAME= line to the end of the last item
+1. From the start of the =#+NAME= line to the blank line after the last item
+2. From the start of the first item to the end of the last item
+3. From the start of the first item to blank line after the last item
+
+and then run ~organki/import-region~ respectively. The output should all be the same:
+
+#+NAME: case2/organki/import-region/output1
+#+ATTR_ARGS: :points (445 466 468 485 486 544 545) :regions ((445 544) (445 545) (466 544) (466 545))
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	food	みずです。		It's water.	
+Sentence	Test	food	みずとごはんです。		It's water and rice.	
+Sentence	Test	food	みず、ください。		Water, please.	
+#+end_example
+
+For another [[202410231144][list]] put point at these places:
+
+1. The start of the =#+NAME= line
+2. The start of the first item
+
+or select all items, and run ~organki/import-region~ respectively. The output should all the same:
+
+#+NAME: case2/organki/import-region/output2
+#+ATTR_ARGS: :points (546 612) :regions ((546 691) (612 690))
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test2	food::tag1 food::tag2	みずです。		It's water.	
+Sentence	Test2	food::tag1 food::tag2	みずとごはんです。		It's water and rice.	
+Sentence	Test2	food::tag1 food::tag2	みず、ください。		Water, please.	
+#+end_example
+
+For this [[202410231201][list]] put point at these places:
+
+1. The start of the =#+NAME= line
+2. The start of the first item
+3. The end of the first =- V:= line
+4. The end of the last item
+5. The blank line after the last item
+
+or select all items, and run ~organki/import-region~ respectively. The output should all the same:
+
+#+NAME: case2/organki/import-region/output3/1
+#+ATTR_ARGS: :points (692 744 1081 1398 1399) :regions ((692 1399) (744 1398))
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	food::tag1 food::tag2	どれが欲しいですか。		Which one do you want?	
+Sentence	Test	food::tag1 food::tag2	ここにあります。		It is here.	
+Sentence	Test	food::tag1 food::tag2	A: いつにほんへきましたか。<br>B: 四月に日本に来ました。		A: When did you come to Japan?<br>B: I came to Japan in April.	
+Sentence	Test	food::tag1 food::tag2	彼らは来るでしょう。	かれらはくるでしょう。	They will probably come.	
+Sentence	Test	food::tag1 food::tag2	あしたもきっといい天気だろう。	[sound:202410021528.m4a]	The weather will probably be nice tomorrow, too.	<b>Vocabulary</b><ul><li>きっと [0] adv. surely; probably</li><li>だろう [2] col. I think; probably</li></ul>
+Sentence	Test	food::tag1 food::tag2	この辺は木も多いし、たぶん昼間も静かだろう。	[sound:202410021635.m4a]	This area also has many trees and it’s probably quiet in the daytime.	<b>Vocabulary</b><ul><li>辺 へん [0] n. side 边; nearby 附近</li><li>木/樹 き [1] n. tree</li><li>昼間 ひる・ま [3] n. daytime 白天</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output3/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	food::tag1 food::tag2	きっと	[0] adv.	surely; probably	<b>Examples</b><ul><li>あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	だろう	[2] col.	I think; probably	<b>Examples</b><ul><li>あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	辺	へん [0] n.	side 边; nearby 附近	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	木/樹	き [1] n.	tree	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	昼間	ひる・ま [3] n.	daytime 白天	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+#+end_example
+
+Here there are two outputs for the same execution of ~organki/import-region~ since there are Vocabulary sublists in the Sentence list.
+
+For the same list select the items partially the output should be as follows:
+
+#+NAME: case2/organki/import-region/output4
+#+ATTR_ARGS: :regions ((747 981) (780 1074))
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	food::tag1 food::tag2	ここにあります。		It is here.	
+Sentence	Test	food::tag1 food::tag2	A: いつにほんへきましたか。<br>B: 四月に日本に来ました。		A: When did you come to Japan?<br>B: I came to Japan in April.	
+Sentence	Test	food::tag1 food::tag2	彼らは来るでしょう。	かれらはくるでしょう。	They will probably come.	
+#+end_example
+
+#+NAME: case2/organki/import-region/output5/1
+#+ATTR_ARGS: :regions ((909 1399) (963 1398))
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	food::tag1 food::tag2	あしたもきっといい天気だろう。	[sound:202410021528.m4a]	The weather will probably be nice tomorrow, too.	<b>Vocabulary</b><ul><li>きっと [0] adv. surely; probably</li><li>だろう [2] col. I think; probably</li></ul>
+Sentence	Test	food::tag1 food::tag2	この辺は木も多いし、たぶん昼間も静かだろう。	[sound:202410021635.m4a]	This area also has many trees and it’s probably quiet in the daytime.	<b>Vocabulary</b><ul><li>辺 へん [0] n. side 边; nearby 附近</li><li>木/樹 き [1] n. tree</li><li>昼間 ひる・ま [3] n. daytime 白天</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output5/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	food::tag1 food::tag2	きっと	[0] adv.	surely; probably	<b>Examples</b><ul><li>あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	だろう	[2] col.	I think; probably	<b>Examples</b><ul><li>あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	辺	へん [0] n.	side 边; nearby 附近	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	木/樹	き [1] n.	tree	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+Vocabulary	Test	food::tag1 food::tag2	昼間	ひる・ま [3] n.	daytime 白天	<b>Examples</b><ul><li>この辺は木も多いし、たぶん昼間も静かだろう。 This area also has many trees and it’s probably quiet in the daytime.</li></ul>
+#+end_example
+
+This [[202410241949][list]] is used to test all sorts of rules. Put point at the start of the first item should generate the following output:
+
+#+NAME: case2/organki/import-region/output6/1
+#+ATTR_ARGS: :points (1421)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	food	(sentence 1)。		(translation 1)	
+Sentence	Test	food	(sentence 2)？		(translation 2)	
+Sentence	Test	food	A: (sentence 3.2)?<br>B: (sentence 3.3)？		A: (translation 3.2)<br>B: (translation 3.3)	
+Sentence	Test	food	(sentence 4)	(pronunciation 4) [sound:202410021529.m5a]	(translation 4)	
+Sentence	Test	food	(sentence 5)	[sound:202410021529.m5a]	(translation 5)	<b>Vocabulary</b><ul><li>(word5.2) (pronunciation5.2) (class5.2). (translation5.2)</li><li>(word5.3) (pronunciation5.3) (class5.3). (translation5.3)</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output6/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	food	(word5.2)	(pronunciation5.2) (class5.2).	(translation5.2)	<b>Examples</b><ul><li>(sentence 5) (translation 5)</li></ul>
+Vocabulary	Test	food	(word5.3)	(pronunciation5.3) (class5.3).	(translation5.3)	<b>Examples</b><ul><li>(sentence 5) (translation 5)</li></ul>
+#+end_example
+
+This [[202410291202][list]] is used to test when a sentence's translation is on the same line as the entry while it has a notes sublist. If there's no translation item in the sublist the translation on the entry line should be used. The output should be:
+
+#+NAME: case2/organki/import-region/output7/1
+#+ATTR_ARGS: :points (3072)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	彼はにこやかに客に挨拶した。		He greeted the guests with a smile.	<b>Vocabulary</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li><li>客 きゃく [0] n. visitor; guest; customer</li><li>挨拶 あい・さつ [1] n. greeting</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output7/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	<ruby>和<rt>▽</rt>やか</ruby>	にこやか [2] n.	a big smile	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul>
+Vocabulary	Test	Test	客	きゃく [0] n.	visitor; guest; customer	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul>
+Vocabulary	Test	Test	挨拶	あい・さつ [1] n.	greeting	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul>
+#+end_example
+
+This [[202410292115][list]] is used to test audios of sentences. The output should be:
+
+#+NAME: case2/organki/import-region/output8/1
+#+ATTR_ARGS: :points (3268)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	[sound:202410021528.m4a]  あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	
+Sentence	Test	Test	[sound:202410271111.m4a]  A: 君も行くだろう？<br>[sound:202410271112.m4a]  B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	Test	[sound:202410271111.m4a]  A: 君も行くだろう2？<br>B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	Test	A: 君も行くだろう3？<br>[sound:202410271112.m4a]  B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	Test	[sound:202410021528.m4a]  あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	<b>Vocabulary</b><ul><li>きっと [0] adv. surely; probably</li><li>だろう [2] col. I think/suppose/guess (that) ...</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output8/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	きっと	[0] adv.	surely; probably	<b>Examples</b><ul><li>[sound:202410021528.m4a]  あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	Test	だろう	[2] col.	I think/suppose/guess (that) ...	<b>Examples</b><ul><li>[sound:202410021528.m4a]  あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+#+end_example
+
+This [[202411082333][list]] is used to test multi-level Vocabulary sublists in Sentences. The output should be:
+
+#+NAME: case2/organki/import-region/output9/1
+#+ATTR_ARGS: :points (4945)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	交流会で話します。		I will speak at the social gathering.	<b>Vocabulary</b><ul><li>交流 こう・りゅう [0] n. exchange</li></ul>
+Sentence	Test	Test	彼はにこやかに客に挨拶した。		He greeted the guests with a smile.	<b>Vocabulary</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li><li>客 きゃく [0] n. visitor; guest; customer</li><li>挨拶 あい・さつ [1] n. greeting</li></ul>
+#+end_example
+
+#+NAME: case2/organki/import-region/output9/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	交流	こう・りゅう [0] n.	exchange	<b>Examples</b><ul><li>交流会で話します。 I will speak at the social gathering.</li></ul><b>Linking</b><ul><li>交流会 こう・りゅう・かい [0] n. (cultural) exchange meeting, social gathering</li><li>会議 かい・ぎ [1] n. meeting, conference</li></ul>
+Vocabulary	Test	Test	交流会	こう・りゅう・かい [0] n.	(cultural) exchange meeting, social gathering	<b>Linking</b><ul><li>交流 こう・りゅう [0] n. exchange</li></ul>
+Vocabulary	Test	Test	会議	かい・ぎ [1] n.	meeting, conference	<b>Linking</b><ul><li>交流 こう・りゅう [0] n. exchange</li></ul>
+Vocabulary	Test	Test	<ruby>和<rt>▽</rt>やか</ruby>	にこやか [2] n.	a big smile	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul><b>Linking</b><ul><li>にこやかにあいさつする phrv. greet (sb.) with a big/bright smile</li><li>にこやかな顔 phrn. a bright face</li></ul>
+Vocabulary	Test	Test	にこやかにあいさつする	phrv.	greet (sb.) with a big/bright smile	<b>Linking</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li></ul>
+Vocabulary	Test	Test	にこやかな顔	phrn.	a bright face	<b>Linking</b><ul><li><ruby>和<rt>▽</rt>やか</ruby> にこやか [2] n. a big smile</li><li>顔 かお [0] n. face</li></ul>
+Vocabulary	Test	Test	顔	かお [0] n.	face	<b>Linking</b><ul><li>にこやかな顔 phrn. a bright face</li></ul>
+Vocabulary	Test	Test	客	きゃく [0] n.	visitor; guest; customer	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul><b>Family</b><ul><li>招かれざる客 まね・かれざる・きゃく phrn. an uninvited visitor</li><li>不意の客 ふいのきゃく phrn. an unexpected visitor</li></ul><b>Linking</b><ul><li>招く まね・く[2] v. invite</li><li>招かれざる まね・かれざる adj. uninvited</li><li>不意 ふ・い [1][0] n. surprise, sudden 突然</li></ul>
+Vocabulary	Test	Test	招かれざる客	まね・かれざる・きゃく phrn.	an uninvited visitor	<b>Family</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	不意の客	ふいのきゃく phrn.	an unexpected visitor	<b>Family</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	招く	まね・く[2] v.	invite	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	招かれざる	まね・かれざる adj.	uninvited	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	不意	ふ・い [1][0] n.	surprise, sudden 突然	<b>Linking</b><ul><li>客 きゃく [0] n. visitor; guest; customer</li></ul>
+Vocabulary	Test	Test	挨拶	あい・さつ [1] n.	greeting	<b>Examples</b><ul><li>彼はにこやかに客に挨拶した。 He greeted the guests with a smile.</li></ul><b>Family</b><ul><li>挨拶する あいさつする v. greet</li></ul>
+Vocabulary	Test	Test	挨拶する	あいさつする v.	greet	<b>Family</b><ul><li>挨拶 あい・さつ [1] n. greeting</li></ul>
+#+end_example
+
+** Case 3: Converting default properties
+*ERT Tests*
+
+: test-organki/default-properties
+
+*Description*
+
+This [[202410242106][list]] and this [[202410282038][list]] are used to test the usage of default properties such notetypes, decks, and tags. Run ~organki/import-region~ at the specfied points should produce the following outputs:
+
+#+NAME: case3/default-properties/vocabulary
+#+ATTR_ARGS: :points (2078)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test2	Test::date::tag1 Test::date::tag2 Test::time::tag1 Test::time::tag2	今日	きょう [1] [sound:106329x1268.wav] n.	today 今天	
+Vocabulary	Test2	Test::date::tag1 Test::date::tag2 Test::time::tag1 Test::time::tag2	午前	ご・ぜん [1] n.	morning 早上	
+Vocabulary	Test2	Test::date::tag1 Test::date::tag2 Test::time::tag1 Test::time::tag2	午後	ご・ご [1] [sound:330479x304.wav] n.	afternoon 下午	
+#+end_example
+
+#+NAME: case3/default-properties/sentence
+#+ATTR_ARGS: :points (2261)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test::date::number Test::time::number	一つのりんごを食べました。/りんごを一つ食べました。		I ate one apple.	
+Sentence	Test	Test::date::number Test::time::number	二個の玉葱を切ってください。		Please cut two onions.	
+#+end_example
+
+** Case 4: Testing documentation examples
+*ERT Tests*
+
+: test-organki/documentation-examples
+
+*Description*
+
+For this [[file:~/.spacemacs.d/README.org::organki-example-properties][example]] the output of calling ~organki/import-region~ should be this:
+
+#+NAME: case4/documentation/default-properties
+#+ATTR_ARGS: :points (245)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Japanese2	JP::Date::elementary JP::Time::elementary JLPT::Date::elementary JLPT::Time::elementary	今日	きょう [1] [sound:106329x1268.wav] n.	today 今天	
+Vocabulary	Japanese2	JP::Date::elementary JP::Time::elementary JLPT::Date::elementary JLPT::Time::elementary	午前	ご・ぜん [1] n.	morning 早上	
+Vocabulary	Japanese2	JP::Date::elementary JP::Time::elementary JLPT::Date::elementary JLPT::Time::elementary	午後	ご・ご [1] [sound:330479x304.wav] n.	afternoon 下	
+#+end_example
+
+** Case 5: Testing sublists in Vocabulary
+*ERT Tests*
+
+: test-organki/vocabulary-sublists
+
+*Description*
+
+This [[202410302159][list]] demonstrates the comments and examples sublists in a Vocabulary list. The output should be:
+
+#+NAME: case5/vocabulary/sublists/1
+#+ATTR_ARGS: :points (3950)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	午前	ご・ぜん [1] n.	morning; a.m.	<b>Comments</b><p>• Comment1<br>• Comment2</p><b>Examples</b>• 午前八時ごろ起きます。 I wake up around eight a.m.<br>• [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.<b>Linking</b><ul><li>昼前 ひる・まえ [3] n. late morning 上午</li><li>午前零時三分 ごぜんれいじさんぷん n. 00:03</li></ul>
+Vocabulary	Test	Test	昼前	ひる・まえ [3] n.	late morning 上午	<b>Linking</b><ul><li>午前 ご・ぜん [1] n. morning; a.m.</li></ul>
+Vocabulary	Test	Test	午前零時三分	ごぜんれいじさんぷん n.	00:03	<b>Linking</b><ul><li>午前 ご・ぜん [1] n. morning; a.m.</li></ul>
+Vocabulary	Test	Test	昼間	ひる・ま [3] / ちゅう・かん [0] n.	daytime 白天	<b>Comments</b><p>The pronunciation ちゅうかん is less common and typically used in formal, technical contexts or used to form compound words.</p>
+Vocabulary	Test	Test	日中(1)	にっちゅう [0] n.	daytime 白天	<b>Linking</b><ul><li>日中(2) にっちゅう [sound:485624x978.wav] n. 日本和中国</li></ul>
+Vocabulary	Test	Test	日中(2)	にっちゅう [sound:485624x978.wav] n.	日本和中国	<b>Linking</b><ul><li>日中(1) にっちゅう [0] n. daytime 白天</li></ul>
+#+end_example
+
+This [[202410312039][list]] serves two purposes:
+
+1. Testing when an item contains multiple periods (.) in the entry line
+2. Testing multi-level nested sublists under an item
+
+The output should be:
+
+#+NAME: case5/vocabulary/sublists/2
+#+ATTR_ARGS: :points (4528)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	李さん	りさん n.	Mr. Li 李先生	
+Vocabulary	Test	Test	限定詞	げんていし [3] n.	determiner 限定词	<b>Linking</b><ul><li>冠詞 かんし [0] n. article (a, the) 冠词</li><li>指示形容詞 しじけいようし [5] n. demonstrative adjective (e.g. this, that, these, etc.)</li><li>数量形容詞 すうりょうけいようし [7] n. quantitative adjective (e.g. no, few, etc.)</li></ul>
+Vocabulary	Test	Test	冠詞	かんし [0] n.	article (a, the) 冠词	<b>Family</b><ul><li>定冠詞 ていかんし [3] n. the definite article (the) 定冠词</li><li>不定冠詞 ふていかんし [4] n. the indefinite article (a, an) 不定冠词</li></ul><b>Linking</b><ul><li>限定詞 げんていし [3] n. determiner 限定词</li></ul>
+Vocabulary	Test	Test	定冠詞	ていかんし [3] n.	the definite article (the) 定冠词	<b>Family</b><ul><li>冠詞 かんし [0] n. article (a, the) 冠词</li></ul>
+Vocabulary	Test	Test	不定冠詞	ふていかんし [4] n.	the indefinite article (a, an) 不定冠词	<b>Family</b><ul><li>冠詞 かんし [0] n. article (a, the) 冠词</li></ul>
+Vocabulary	Test	Test	指示形容詞	しじけいようし [5] n.	demonstrative adjective (e.g. this, that, these, etc.)	<b>Linking</b><ul><li>限定詞 げんていし [3] n. determiner 限定词</li></ul>
+Vocabulary	Test	Test	数量形容詞	すうりょうけいようし [7] n.	quantitative adjective (e.g. no, few, etc.)	<b>Linking</b><ul><li>限定詞 げんていし [3] n. determiner 限定词</li></ul>
+#+end_example
+
+This [[202411272207][list]] demonstrates the Vocabulary and Sentence sublists in the notes field. The output should be:
+
+#+NAME: case5/vocabulary/sublists/3/1
+#+ATTR_ARGS: :points (6308)
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	人（Quantifier）	にん [1] qt.	Quantifier used for people	<b>Family</b><ul><li>十人 じゅうにん [1] n. 10 people</li></ul>
+Vocabulary	Test	Test	十人	じゅうにん [1] n.	10 people	<b>Examples</b><ul><li>十人の社員が会議に出席します。 Ten employees will attend the meeting.</li></ul><b>Family</b><ul><li>人（Quantifier） にん [1] qt. Quantifier used for people</li></ul>
+Vocabulary	Test	Test	出席	しゅっせき [0] n.	attendance	<b>Examples</b><ul><li>十人の社員が会議に出席します。 Ten employees will attend the meeting.</li></ul><b>Linking</b><ul><li>欠席 けっせき [0] n. absence</li></ul>
+Vocabulary	Test	Test	欠席	けっせき [0] n.	absence	<b>Examples</b>• 今日の欠席者は誰ですか。 Who is absent today?<br>&nbsp;&nbsp;• V:<br>&nbsp;&nbsp;&nbsp;&nbsp;• 欠席者 けっせきしゃ [2] n. absentee<br><ul><li>きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.</li></ul><b>Linking</b><ul><li>出席 しゅっせき [0] n. attendance</li></ul>
+Vocabulary	Test	Test	病気	びょうき [0] n.	illness, disease	<b>Examples</b><ul><li>きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.</li></ul>
+#+end_example
+
+#+NAME: case5/vocabulary/sublists/3/2
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	十人の社員が会議に出席します。		Ten employees will attend the meeting.	<b>Vocabulary</b><ul><li>十人 じゅうにん [1] n. 10 people</li><li>出席 しゅっせき [0] n. attendance</li></ul>
+Sentence	Test	Test	きのうは病気で学校を欠席しました。		I was absent from school yesterday because I was sick.	<b>Vocabulary</b><ul><li>欠席 けっせき [0] n. absence</li><li>病気 びょうき [0] n. illness, disease</li></ul>
+#+end_example
+
+For this [[202411062029][list]] the output should be:
+
+#+NAME: case5/vocabulary/sublists/4/1
+#+ATTR_ARGS: :points (6977)
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	さん	suf.	Mr./Mrs./Ms. 先生/女士	<b>Comments</b><p>さん is a suffix used after surnames.</p><b>Examples</b>Here are some examples:<br>• 李さん りさん n. Mr. Li 李先生<br>&nbsp;&nbsp;• 李さんは学生ですか。 Is Mr. Li a student?<br>&nbsp;&nbsp;&nbsp;&nbsp;• Nest item 2<br>• 森さん もりさん n. 森先生<br><ul><li>李さんはJC企画の社員ですか。 李先生您是JC策划公司的职员吗？</li></ul>
+Vocabulary	Test	Test	羽	わ qt.	Quantifier used for birds and rabbits	<b>Comments</b><p>The standard reading of "十羽" is "じっぱ" or "じゅうわ", but it's commonly read as "じゅっぱ" in everyday life.</p><b>Family</b><ul><li>一羽 いちわ [2] qt. one (bird/rabbit)</li><li>十羽 じゅっぱ [1] qt. ten (birds/rabbits)</li></ul>
+Vocabulary	Test	Test	一羽	いちわ [2] qt.	one (bird/rabbit)	<b>Family</b><ul><li>羽 わ qt. Quantifier used for birds and rabbits</li></ul>
+Vocabulary	Test	Test	十羽	じゅっぱ [1] qt.	ten (birds/rabbits)	<b>Family</b><ul><li>羽 わ qt. Quantifier used for birds and rabbits</li><li>十羽のウサギ じゅっぱのうさぎ phrn. 10 rabbits</li></ul>
+Vocabulary	Test	Test	十羽のウサギ	じゅっぱのうさぎ phrn.	10 rabbits	<b>Family</b><ul><li>十羽 じゅっぱ [1] qt. ten (birds/rabbits)</li><li>うさぎ [0] n. rabbit</li></ul>
+Vocabulary	Test	Test	うさぎ	[0] n.	rabbit	<b>Alternatives</b><p><ruby>兎<rt>▼</rt></ruby></p><b>Family</b><ul><li>十羽のウサギ じゅっぱのうさぎ phrn. 10 rabbits</li></ul>
+#+end_example
+
+#+NAME: case5/vocabulary/sublists/4/2
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	李さんはJC企画の社員ですか。		李先生您是JC策划公司的职员吗？	<b>Vocabulary</b><ul><li>さん suf. Mr./Mrs./Ms. 先生/女士</li></ul>
+#+end_example
+
+** Case 6: Testing prettifying region
+*ERT Tests*
+
+: test-organki/prettfy-region
+
+*Description*
+
+For this [[202411062020][list]] the output of running ~organki--sentences-prettified-string~ should be:
+
+#+NAME: case6/prettify-region
+#+ATTR_ARGS: :points (5883)
+#+begin_example
+- [[CL:202403021546.m4a][⏯]] 李さんは中国人です。                    小李是中国人。
+- [[cl:202403021553.m4a][⏯]] 森さんは学生ではありません。            森先生不是学生。
+- [[cl:202403021618.m4a][⏯]] 甲: わたしは李です。小野さんですか。    我姓李。您是小野先生吗？
+- [[cl:202403021618.m4a][⏯]] 乙: はい，そうです。小野です。          是的，我是小野。
+- [[cl:202403021715.m4a][⏯]] 甲: 吉田さんですか。                    您是吉田先生吗？
+-    乙: いいえ，ちがいます。森です。        不，不是。我是森。
+-    甲: 李さんはJC企画の社員ですか。        李先生您是JC策划公司的职员吗？
+- [[cl:202403021726.m4a][⏯]] 乙: はい，そうです。                    是的，我是。
+#+end_example
+
+** Case 7: Supporting multiple entry lines for Sentence lists
+*ERT Tests*
+
+: test-organki/multi-entry-lines
+
+*Description*
+
+This case tests the functions related to converting a Sentence list which has multiple entry lines.
+
+For these lists:
+
+- [[202412212325]]
+- [[202412272225]]
+
+the output should be the same:
+
+#+NAME: case7/sentence/multi/1
+#+ATTR_ARGS: :points (7727 8746)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	A: 何年ありますか？<br>B: 3年あります。<br>A: 何年そのことをしていますか？<br>B: 10年しています。<br>B: かれこれ10年です。<br>A: それから何年経ちましたか？<br>B: 5年経ちました。		A: How many years are there?<br>B: There are three years.<br>A: How many years have you been doing this?<br>B: I have been doing it for 10 years.<br>B: Nearly ten years.<br>A: How many years has it been since then?<br>B: It’s been five years.	<b>Comments</b><p>Asking about years.</p><b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>かれこれ [1] adv. almost, nearly; pron. this and that</li><li>それから [0] conj. then 然后; since then 从那以后</li><li><ruby>経<rt>▽</rt>つ</ruby> たつ [1] v. (time) pass</li></ul>
+Sentence	Test	Test	A: 何年ありますか？		A: How many years are there?	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
+Sentence	Test	Test	A: 何年ありますか？<br>B: 3年あります。		A: How many years are there?<br>B: There are three years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
+Sentence	Test	Test	A: それから何年経ちましたか？<br>B: 5年経ちました。		A: How many years has it been since then?<br>B: It’s been five years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>それから [0] conj. then 然后; since then 从那以后</li></ul>
+Sentence	Test	Test	A: 何年そのことをしていますか？<br>B: 10年しています。		A: How many years have you been doing this?<br>B: I have been doing it for 10 years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
+Sentence	Test	Test	A: 何年そのことをしていますか？<br>B: かれこれ10年です。		A: How many years have you been doing this?<br>B: Nearly ten years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>かれこれ [1] adv. almost, nearly; pron. this and that</li></ul>
+Sentence	Test	Test	A: 何年そのことをしていますか？		A: How many years have you been doing this?	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
+Sentence	Test	Test	A: それから何年経ちましたか？		A: How many years has it been since then?	<b>Vocabulary</b><ul><li>それから [0] conj. then 然后; since then 从那以后</li></ul>
+Sentence	Test	Test	彼は夕食を食べて, それからすぐ寝た。		He had dinner, and then went to bed.	<b>Vocabulary</b><ul><li>それから [0] conj. then 然后; since then 从那以后</li><li>夕食 ゆうしょく [0] n. dinner</li></ul>
+#+end_example
+
+#+NAME: case7/sentence/multi/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	何年	なんねん [1] int.	which year, what year; how many years	<b>Comments</b><p>Asking about years.</p><b>Examples</b>:L (1 3 6)<br><ul><li>A: 何年ありますか？ A: How many years are there?</li><li>A: 何年ありますか？ How many years are there?<br>B: 3年あります。 There are three years.</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: 10年しています。 I have been doing it for 10 years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: かれこれ10年です。 Nearly ten years.</li><li>A: 何年そのことをしていますか？ A: How many years have you been doing this?</li></ul>
+Vocabulary	Test	Test	かれこれ	[1] adv.	almost, nearly; pron. this and that	<b>Alternatives</b><p><ruby>彼此<rt>▼</rt></ruby></p><b>Examples</b><ul><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: かれこれ10年です。 Nearly ten years.</li></ul>
+Vocabulary	Test	Test	それから	[0] conj.	then 然后; since then 从那以后	<b>Comments</b><p>Asking about years.</p><b>Examples</b><ul><li>A: それから何年経ちましたか？ A: How many years has it been since then?</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul><b>Linking</b><ul><li>そして [0] conj. and</li></ul>
+Vocabulary	Test	Test	夕食	ゆうしょく [0] n.	dinner	<b>Examples</b><ul><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul>
+Vocabulary	Test	Test	そして	[0] conj.	and	<b>Linking</b><ul><li>それから [0] conj. then 然后; since then 从那以后</li></ul>
+Vocabulary	Test	Test	<ruby>経<rt>▽</rt>つ</ruby>	たつ [1] v.	(time) pass	
+#+end_example
