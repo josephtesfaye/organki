@@ -1,0 +1,347 @@
+Organki: Combining the magics of Org Mode and Anki!
+
+* User Guide
+When you started building vocabulary you might write down a list of words and manage to memorize them somehow. Then you might have multiple lists which were taken down by categories. But as the lists got more and more day after day they started getting out of hand even if you tried a careful curation. The effort of maintaining them is simply too immense (the same goes to anything that piles up). You started feeling overwhelmed, feeling this isn't the way to do it, and eventually, quit. But wait! Here comes *Organki*!
+
+Now with Organki you can use Org Mode to manage your language learning notes, including vocabulary, sentences, etc., and easily import them into Anki, the best open-source spaced-repetition flashcard software right now!
+
+Well, with that being said, Organki may be not suitable for everyone (but it strives to be!) because it assumes you have used Org Mode and Anki, both worth trying out if you haven't IMHO.
+
+Now let's start using Organki. The first thing you need to know is that if you want to import your notes into Anki (or anything else) you should write them down in a set format, which for Organki is just plain lists with some handy rules.
+
+Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of lists every first-level item is a note, with the same conceptual meaning of an Anki Note.
+
+** Vocabulary
+:PROPERTIES:
+:CUSTOM_ID: 202410092157
+:END:
+
+A *Vocabulary* list uses this format:
+
+#+begin_example
+- <entry> [<pronunciation>] [<class>] <translation>
+  - [<notes>]
+#+end_example
+
+- =entry=: A word or phrase that you try to remember.
+  The entry should only contain the most common form of the word or phrase, and if it has other forms put them in the =A= subitem under the =notes= section.
+
+- =pronunciation=: How to pronounce this entry. For Japanese entries, it's composed of these parts:
+  : [<hiragana>] [<accent type>] [<audio file>]
+
+  - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
+    - When the entry contains multiple kanji characters the hiragana characters are separated or grouped using middle dots =・= by their kanji readings.
+
+  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[d:Japanese/japanese-accent.pdf][日本語のアクセントの型]].
+  - =audio file=: The audio of the reading, if any.
+
+  All these parts and the whole pronunciation are optional.
+
+- =class=: The word class, or part of speech of the entry. Abbreviations are commonly used for word classes, such as =n.=, =v.=, =adj.=, etc. You can define your own set of abbreviations but they must end with a period when in use. For example, here is the [[p:notes/japanese.org::parts-of-speech][Japanese Parts of Speech]].
+
+- =translation=: The translation of the entry in the languages you're familair with.
+  - If there are multiple languages they appear in the order below, where =primary= is the language you're most familar with. You can define your own order and what matters is to keep consistency.
+    : <primary> [<English> <Chinese> ...] [; ...]
+
+  - If there are multiple translations for the entry, separate them with semicolons =;=.
+  - For each translation (regardless of language) try to keep it as short and precise as possible. Use only one word if possible because these entries are meant to be memorized so that you can recall them as quickly as possible. If you want to write explanations or notes for the entry you can put them in the =notes= sublist.
+
+- =notes=: Additional notes about the entry. It includes the following optional sub-notes:
+  - A: <alternative forms>
+    A single line listing the alternative forms of the entry (same pronunciation, different forms).
+
+    For Japanese some conventional symbols as seen in the dictionary [[file:~/projects/notes/japanese.org::#202411121149][Dajirin 4]] are supported here to mark something uncommon or less standard about the characters. The symbols are listed below:
+
+    - ^{▽}: A white down-pointing triangle superscript, meaning the marked character's readings (音訓) are not included in the Jōyō Kanji Table ([[file:~/projects/notes/japanese.org::#202409272057][常用漢字表]]). For example, 和^{▽}やか.
+
+    - 〈〉: A pair of angle brackets enclosing the entry, meaning the reading is a Jukujikun (熟字訓) for the entry. For example, 〈今日〉.
+
+  - C: <comments>
+    Explanatory notes or tips about the entry. It may contain a sublist which would then be displayed as-is except the bullet style in the cards' Notes fields.
+
+  - E: <examples>
+    Examples that demonstrate the usage of the entry. The format of its contents is the same as that of =C:=.
+
+  - S: <sentences>
+    A [[#202410092201][Sentence]] sublist that demonstrates the usage of the entry, the items of which are combined with the contents of =E:= so both of them are displayed under the "Examples" sub-notes. The items of this sublist are also imported as new entries, and the main entry will be displayed in the "Vocabulary" sub-notes of their "Notes" field. Only the first-level items will display the main entry in this way if the sublist is a multi-level list.
+
+  - F: <family>
+    A Vocabulary sublist of words or phrases closely related to or belonging to the same grammatical family as the entry.
+
+  - L: <linking>
+    A Vocabulary sublist, are words or phrases related to the entry that may assist in your memorization.
+
+Here is a simple Vocabulary list:
+
+- 林檎 りんご [0] n. apple
+- 蜜柑 みかん [1] [[cl:202410021528.m4a][⏯]] n. mandarin orange
+
+Here is a more comprehensive Vocabulary list:
+
+- 交流 こう·りゅう [0] n. exchange
+  - L:
+    - 交流会 こう·りゅう·かい [0] n. (cultural) exchange meeting, social gathering
+- 会議 かい·ぎ [1] n. meeting, conference
+- 客 きゃく [0] n. visitor; guest; customer
+  - F:
+    - 招かれざる客 まね・かれざる·きゃく phrn. an uninvited visitor
+    - 不意の客 phrn. an unexpected visitor
+  - L:
+    - 招く まね・く[2] v. invite
+    - 招かれざる まね・かれざる adj. uninvited
+    - 不意 ふ·い [1][0] n. surprise, sudden 突然
+- 挨拶 あい・さつ [1] n. greeting
+  - F:
+    - 挨拶する あいさつする v. greet
+- 和^{▽}やか にこやか [2] n. a big smile
+  - L:
+    - にこやかにあいさつする phrv. greet (sb.) with a big/bright smile
+    - にこやかな顔 phrn. a bright face
+    - 顔 かお [0] n. face
+- 午前 ご・ぜん [1] n. morning; a.m.
+  - C:
+    - Comment 1
+    - Comment 2
+  - E:
+    - 午前八時ごろ起きます。 I wake up around eight a.m.
+  - L:
+    - 昼前 ひる・まえ [3] n. late morning 上午
+    - 午前零時三分 ごぜんれいじさんぷん n. 00:03
+- 昼間 ひる・ま [3]/ちゅう・かん [0] n. daytime 白天
+  - C: The pronunciation ちゅうかん is less common and typically used in formal, technical contexts or used to form compound words.
+- 日中(1) にっちゅう [0] n. daytime 白天
+  - L:
+    - 日中(2) にっちゅう [[cl:485624x978.wav][⏯]] n. 日本和中国
+
+** Sentences
+:PROPERTIES:
+:CUSTOM_ID: 202410092201
+:END:
+
+A *Sentence* list uses this format:
+
+#+begin_example
+- [<audio>] <entry> [<translation>]
+  - [<notes>]
+#+end_example
+
+- =audio=: The audio of the entry, if any.
+- =entry=: A sentence in the original language, such as Japanese. The entry must end in one of these punctuation marks followed by at least one space: =.?。？=.
+
+- =translation=: The translation of =entry=, in whatever language you're familiar with. It's optional in the sense that if the entry is a complex sentence that needs further explanation with the =notes= sublist (see below), it can or should be omitted from the same line of =entry= and put in the =T:= item of the =notes= sublist instead. If it's a simple sentence with no need of further explanation then just put it on the same line with =entry=, separated by at least one white space. If the translation is present on both the entry line and the =T:= sub-notes the =T:= sub-notes is preferred.
+
+  Here is an example of a simple Sentence list:
+
+  - みずです。 It's water.
+  - みずとごはんです。 It's water and rice.
+  - みず、ください。 Water, please.
+
+  The =audio=, =entry= and =translation= combined is called an "entry line". There can be multiple entry lines on the same item, say, to form a dialog or a short passage. If it's a dialog each line must begin with a *speaker* which takes the format "<speaker>: " where =speaker= is any string followed by a colon and a space. For example,
+
+  - A: はなさんはイギリス人ですか。 Is Hana British?
+    B: いいえ、ブラジル人です。 No, she's Brazilian.
+
+  Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See below.
+
+- =notes=: The notes sublist contains further explanation for the entry, which is composed of the following sub-notes. The notes sublist and the sub-notes are all optional.
+
+  - P: <pronunciation>
+    How to pronounce this entry. For Japanese entries, it's composed of these parts:
+    : [<hiragana>] [<audio>]
+
+    - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
+    - =audio=: The audio of the reading.
+
+    Both parts are optional.
+
+  - T: <translation>
+    The translation of the entry in the languages you're familair with.
+
+  - M: <multiple entry lines>
+    A sublist where each item is an entry line. This is useful when there are multiple entry lines for the current item and you want to make SPR (see below) out of them.
+
+  - V: <vocabulary>
+    A [[#202410092157][Vocabulary]] sublist related to =entry=, the items of which will also be imported. If the parent item contains only one entry line, it will be used automatically as an example for these Vocabulary items, so that for example, it is displayed under the "Examples" sub-notes in their "Notes" field. This is called Automatic Parent Reference (APR). Only the first-level items have APR if the sublist is a multi-level list. This is because typically the first-level items are supposed to be contained in the parent item (i.e., a sentence and the new words it contains) while the nested items are not necessarily so, and you only want to see the contained vocabulary of a sentence after importing.
+
+    If the parent item contains multiple entry lines, there is no APR. Instead, there is Selective Parent Reference (SPR), which makes reference only to the selected lines by utilizing the following specifications, which are specified in the =S:= sub-notes of each Vocabulary item. The indices are one-based, i.e., they start from 1, not 0.
+
+    - =:L (<indices>)=
+      The lines to be referenced. Each line is treated as an example.
+
+      - =:L=: A keyword short for "Lines".
+      - =(<indices>)=: The indices of the lines to be referenced in the parent item.
+
+    - =:G ((<indices>)...)=
+      The groups of lines to be referenced. Each group of lines together is one example. This is useful for generating multi-line examples such as dialogues.
+
+      - =:G=: A keyword short for "Groups".
+      - =((<indices>)...)=: The groups of indices of the lines to be referenced.
+
+    The specs only tell which lines to select when used in the =S:= sub-notes and do not affect other aspects of the sub-notes.
+
+    The example below says selecting the 1st line, the 1st and 2nd line, the 6th and 7th line from the entry lines as examples for the current Vocabulary item.
+
+    #+begin_example
+    - S: :L (1) :G ((1 2))
+      - :G ((6 7))
+    #+end_example
+
+    The entry lines can be specified in =entry= or the =M:= sub-notes. If both are present =M:= is preferred and =entry= is ignored.
+
+    You can specify lines or groups repetitively under different Vocabulary items of the same entry lines. The effect is that for an example which are repetitively specified, all the Vocabulary items specifying it are accumulated into its =V:= sub-notes, and it will be imported only once.
+
+  - C: <comments>
+    A single line or sublist explaining the entry.
+
+Here is an example of a comprehensive Sentence list:
+
+1. どれが欲しいですか。 Which one do you want?
+2. A: いつにほんへきましたか。 When did you come to Japan?
+   B: 四月に日本に来ました。 I came to Japan in April.
+3. 彼らは来るでしょう。
+   - P: かれらはくるでしょう。
+   - T: They will probably come.
+4. この辺は木も多いし、たぶん昼間も静かだろう。
+   - P: [[cl:202410021635.m4a][⏯]]
+   - T: This area also has many trees and it’s probably quiet in the daytime.
+   - V:
+     - 辺 へん [0] n. side 边; nearby 附近
+     - 木/樹 き [1] n. tree
+     - 昼間 ひる・ま [3] n. daytime 白天
+
+5. [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.
+
+6. [[cl:202410271111.m4a][⏯]] A: 君も行くだろう？ You’re also going, right?
+   [[cl:202410271112.m4a][⏯]] B: はい、もちろん。 Yes, of course.
+
+7. Asking about years (This line is ignored.)
+   - M:
+     1) A: 何年ありますか？ How many years are there?
+     2) B: 3年あります。 There are three years.
+     3) A: 何年そのことをしていますか？ How many years have you been doing this?
+     4) B: 10年しています。 I have been doing it for 10 years.
+     5) B: かれこれ10年です。 Nearly ten years.
+     6) A: それから何年経ちましたか？ How many years has it been since then?
+     7) B: 5年経ちました。 It’s been five years.
+
+   - C: Asking about years.
+   - V:
+     - 何年 なんねん [1] int. which year, what year; how many years
+       - C: Asking about years.
+       - E: :L (1 3 6)
+       - S: :L (1) :G ((1 2) (6 7))
+         - :G ((3 4) (3 5))
+         - :L (3)
+     - かれこれ [1] adv. almost, nearly; pron. this and that
+       - A: 彼此^{▼}
+       - S: :G ((3 5))
+     - それから [0] conj. then 然后; since then 从那以后
+       - C: Asking about years.
+       - S:
+         - :L (6) :G ((6 7))
+         - 彼は夕食を食べて, それからすぐ寝た。
+           - T: He had dinner, and then went to bed.
+           - V:
+             - 夕食 ゆうしょく [0] n. dinner
+       - L:
+         - そして [0] conj. and
+     - 経^{▽}つ たつ [1] v. (time) pass
+
+** Properties
+:PROPERTIES:
+:CUSTOM_ID: 202410211926
+:END:
+Both Vocabulary and Sentence lists have these properties: notetype, deck, and tags, which correspond to the same-name concepts in Anki. These provide the default values for the notes when importing to Anki. You can specify them in heading drawers by the names =anki_notetype=, =anki_deck=, and =anki_tags=, or directly on a =#+ATTR_ANKI= tag line of a list, in a plist format such as =:notetype "my_notetype" :deck "my_deck" :tags "tag1 tag2"=.
+
+For notetype and deck the one closest to the list takes precedence if they occur multiple times in the subree of the list. For tags all occurrences are accumulated for use along with tags on the headlines of the subtree. The tags are transformed into a sort of hierarchical tags corresponding to the hierarchy of the headings, which will then be displayed hierarchically in the tag tree of the Anki Browser.
+
+Take this subtree for example,
+
+#+NAME: organki-example-properties
+#+begin_example
+\* Japanese :JP:
+:PROPERTIES:
+:ANKI_NOTETYPE: Vocabulary
+:ANKI_DECK: Japanese
+:ANKI_TAGS: JLPT
+:END:
+
+\** Date & Time :Date:Time:
+\*** Vocabulary
+:PROPERTIES:
+:ANKI_NOTE: One Entry One Card
+:END:
+
+#+ATTR_ANKI: :deck "Japanese2" :tags "elementary"
+- 今日 きょう [1] [[cl:106329x1268.wav][⏯]] n. today 今天
+- 午前 ご・ぜん [1] n. morning 早上
+- 午後 ご・ご [1] [[cl:330479x304.wav][⏯]] n. afternoon 下午
+#+end_example
+
+The notetype and deck of the imported notes would be "Vocabulary" and "Japanese2" respectively, and they would have a tag tree like this:
+
+#+begin_example
+- JP
+  - Date
+    - elementary
+  - Time
+    - elementary
+- JLPT
+  - Date
+    - elementary
+  - Time
+    - elementary
+#+end_example
+
+** Importing
+To import a Vocabulary or Sentence list to Anki you only need to select the items and then call ~organki/import-region~. You would be asked to enter the notetype, deck, and tags for those notes. You can use the default values as defined in your org files if you don't want to change them. If you didn't select a region then the whole list at the current point would be selected for importing. When the command finishes successfully a file or files named "import<timestamp>.txt" will be produced under the =output-dir= you entered when calling the function.
+
+When importing the generated file to Anki you can choose the Import option "Existing notes" in the "Import File" window to decide what to do with the existing notes - Update, Preserve, or Duplicate. It is recommended to always use "Duplicate" so that the existing notes would not be overwritten without notice, unless you're absolutely sure that those notes should be updated immediately.
+
+The scope for duplication detection should be within all notes of the same notetype, i.e., Notetype for Match scope. The idea is that there should be only one note for an entry in a notetype no matter which deck it belongs to so that you don't have to go through multiple memory sessions for the same entry. If duplicates are found for a note you should examine and decide how to deal with them.
+
+[[i:20241019091112.png][screenshot]]
+
+If the list doesn't have the default notetype, deck, or tags as described in the [[#202410211926][Properties]] section, and you also didn't enter them when calling the function, then the generated file or files would contain no such information, and you need to choose them manually in the "Import File" window when importing to Anki.
+
+[[i:20241019090928.png][screenshot]]
+
+*Which notetypes can you import the notes to?*
+
+Technically any notetype that has the same fields and order of the fields as Vocabulary and Sentence - as specified in the previous sections - can be used for importing the notes. In this case you're free to use any notetype name as you like.
+
+*Options*
+
+You can use the following options to control certain aspects of the generated contents. Check their docstrings for more detailed descriptions.
+
+- ~toggle-organki/import-region-open-files~: Whether to open the generated files automatically.
+
+- ~toggle-organki/import-region-disable-tags~: Whether to disable tags.
+
+** Normalizing & Prettifying
+Organki can prettify the Vocabulary lists and Sentence lists to increase visual clarity.
+
+[[i:20241109160431.png][Image: Original list]]
+
+[[i:20241109160353.png][Image: Formatted list]]
+
+- ~organki/format-region-pretty~: Format the Sentence list in the region from START to END to a prettified version.
+- ~organki/prettify-region~: It's the same as ~organki/format-region-pretty~ visually but it doesn't change the original content. If ARG is non-nil revert to the original.
+
+# todo
+- Normalize lists
+
+* Developer Guide
+Organki uses the plain text format exported from Anki for importing.
+
+[[i:20241019090828.png][screenshot]]
+
+In the file beginning there's a comment section where the columns of the notetype, deck, and tags of the notes are specified.
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:6
+#+end_example

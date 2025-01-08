@@ -14,6 +14,7 @@
 (require 'jts-buffer-utils)
 (require 'organki)
 
+;; * Tests for business logics
 (defconst test-organki
   (let* ((resources (expand-file-name "test/resources" (project-root (project-current))))
          (file (expand-file-name "test-organki.org" resources)))
@@ -277,7 +278,7 @@
     (test-organki/import-region-multi-outputs "case7/sentence/multi")))
 
 
-;; ==== Unit Tests ====
+;; * Unit Tests
 (ert-deftest test-organki--convert-pronunciation ()
   :tags '(organki)
 
