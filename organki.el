@@ -321,20 +321,16 @@ Return an alist of notetype/list-of-objects pairs."
 
   (let (sentences vocabulary)
     (dolist (item items)
-      ;; Support multiple sentences on one item.
+      ;; Support multiple sentences on one item. If there are multiple entry
+      ;; lines combine them all into one sentence object. Otherwise use the
+      ;; first one as the main entry object.
       (let* ((key-items (org-list-item-get-children item))
              (item-sentences (organki--get-item-sentences item key-items))
-             (multi (length> item-sentences 1))
-             item-sentence)
-        ;; If there are multiple entry lines combine them all into one sentence
-        ;; object. Otherwise use the first one as the main entry object.
-        (if-let ((multi)
-                 (selects (organki--select-sentences item-sentences
-                                                     (list organki--SPR-all t)
-                                                     (make-hash-table :test 'equal)))
-                 (sel-ents (car selects)))
-            (setq item-sentence (car sel-ents))
-          (setq item-sentence (car item-sentences)))
+             (select-all (when (length> item-sentences 1)
+                           (organki--select-sentences item-sentences
+                                                      (list organki--SPR-all t)
+                                                      (make-hash-table :test 'equal))))
+             (item-sentence (or (caar select-all) (car item-sentences))))
         (push item-sentence sentences)
 
         (cond
@@ -388,7 +384,9 @@ Return an alist of notetype/list-of-objects pairs."
                 (dolist (voc children)
                   (let* ((notes (or (oref voc notes) (make-hash-table :test 'equal)))
                          (notes-sens1 (gethash organki--key-sentence notes))
-                         (notes-sens2 (when (not multi) (list item-sentence))))
+                         ;; When there isn't any SPR specs use APR
+                         (notes-sens2 (when (not (seq-find #'plistp notes-sens1))
+                                        (list (or (caadr select-all) item-sentence)))))
                     (dolist (sentence notes-sens1)
                       ;; If sentence is a plist it's the SPR specs. Replace it with
                       ;; the specified entry line objects.
@@ -478,8 +476,31 @@ Return an alist of notetype/list-of-objects pairs."
 specs. Otherwise, return STRING."
 
   (if (string-match ":[LGA] " string)
-      (read (concat "(" string ")"))
+      (organki--read (concat "(" string ")"))
     string))
+
+
+(defun organki--read (&optional stream)
+  "When `debug-on-error' is enabled and the `read' command throws some errors
+the stacktrace may not show up, obscuring the bugs. Try the two forms to see
+the difference:
+
+  (read \"(0 1\") ; This throws `end-of-file' but stacktrace dosen't show up
+  (/ 1 0)       ; This throws `arith-error' and stacktrace shows up
+  (signal 'arith-error '(\"error\"))
+  (signal 'end-of-file '(\"error\"))
+
+This is because Emacs uses the `debug-ignored-errors' variable to specify
+patterns of error messages that should not invoke the debugger, and
+`end-of-file' is one of them.
+
+Thus it becomes necessary to write a wrapper around it and signal the error
+explicitly."
+
+  (condition-case err
+      (read stream)
+    (error
+     (signal 'error (list 'read stream (error-message-string err))))))
 
 
 (defun organki--select-sentences (sentences specs selects-table)
@@ -543,7 +564,8 @@ generated entries to prevent duplicates."
                                :entry entries
                                :translation translations))
             (puthash organki--SPR-all final-entry selects-table)))
-        (push final-entry all)))
+        (push final-entry all)
+        (push sentences sel-sens)))
 
     ;; Make sure the order of the combined objects corresponds to that of SPECS.
     (when lines (plist-put sel-ents organki--SPR-lines lines))

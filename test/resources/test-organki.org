@@ -292,6 +292,7 @@
       - L:
         - そして [0] conj. and
     - 経^{▽}つ たつ [1] v. (time) pass
+      - S: :G ((6 7))
 
 #+NAME: 202412272225
 #+ATTR_ANKI: :notetype "Sentence"
@@ -327,6 +328,15 @@
       - L:
         - そして [0] conj. and
     - 経^{▽}つ たつ [1] v. (time) pass
+      - S: :G ((6 7))
+
+#+NAME: 20250111174547
+#+ATTR_ANKI: :notetype "Sentence"
+- A: 今日は何日ですか？ Which day of month is today?
+  B: 今日は三日です。 Today is the third day of month.
+  - V:
+    - 何日^{3} なん・にち [1] int. what day of month
+    - 三日 みっか [0] n. 3 days
 
 * Conventions
 This section is about how to write test cases in this file and the conventions to follow.
@@ -905,7 +915,7 @@ For these lists:
 the output should be the same:
 
 #+NAME: case7/sentence/multi/1
-#+ATTR_ARGS: :points (7727 8746)
+#+ATTR_ARGS: :points (7727 8768)
 #+ATTR_TYPE: Sentence
 #+begin_example
 #separator:tab
@@ -916,7 +926,7 @@ the output should be the same:
 Sentence	Test	Test	A: 何年ありますか？<br>B: 3年あります。<br>A: 何年そのことをしていますか？<br>B: 10年しています。<br>B: かれこれ10年です。<br>A: それから何年経ちましたか？<br>B: 5年経ちました。		A: How many years are there?<br>B: There are three years.<br>A: How many years have you been doing this?<br>B: I have been doing it for 10 years.<br>B: Nearly ten years.<br>A: How many years has it been since then?<br>B: It’s been five years.	<b>Comments</b><p>Asking about years.</p><b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>かれこれ [1] adv. almost, nearly; pron. this and that</li><li>それから [0] conj. then 然后; since then 从那以后</li><li><ruby>経<rt>▽</rt>つ</ruby> たつ [1] v. (time) pass</li></ul>
 Sentence	Test	Test	A: 何年ありますか？		A: How many years are there?	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
 Sentence	Test	Test	A: 何年ありますか？<br>B: 3年あります。		A: How many years are there?<br>B: There are three years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
-Sentence	Test	Test	A: それから何年経ちましたか？<br>B: 5年経ちました。		A: How many years has it been since then?<br>B: It’s been five years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>それから [0] conj. then 然后; since then 从那以后</li></ul>
+Sentence	Test	Test	A: それから何年経ちましたか？<br>B: 5年経ちました。		A: How many years has it been since then?<br>B: It’s been five years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>それから [0] conj. then 然后; since then 从那以后</li><li><ruby>経<rt>▽</rt>つ</ruby> たつ [1] v. (time) pass</li></ul>
 Sentence	Test	Test	A: 何年そのことをしていますか？<br>B: 10年しています。		A: How many years have you been doing this?<br>B: I have been doing it for 10 years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
 Sentence	Test	Test	A: 何年そのことをしていますか？<br>B: かれこれ10年です。		A: How many years have you been doing this?<br>B: Nearly ten years.	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li><li>かれこれ [1] adv. almost, nearly; pron. this and that</li></ul>
 Sentence	Test	Test	A: 何年そのことをしていますか？		A: How many years have you been doing this?	<b>Vocabulary</b><ul><li>何年 なんねん [1] int. which year, what year; how many years</li></ul>
@@ -937,5 +947,31 @@ Vocabulary	Test	Test	かれこれ	[1] adv.	almost, nearly; pron. this and that	<
 Vocabulary	Test	Test	それから	[0] conj.	then 然后; since then 从那以后	<b>Comments</b><p>Asking about years.</p><b>Examples</b><ul><li>A: それから何年経ちましたか？ A: How many years has it been since then?</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul><b>Linking</b><ul><li>そして [0] conj. and</li></ul>
 Vocabulary	Test	Test	夕食	ゆうしょく [0] n.	dinner	<b>Examples</b><ul><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul>
 Vocabulary	Test	Test	そして	[0] conj.	and	<b>Linking</b><ul><li>それから [0] conj. then 然后; since then 从那以后</li></ul>
-Vocabulary	Test	Test	<ruby>経<rt>▽</rt>つ</ruby>	たつ [1] v.	(time) pass	
+Vocabulary	Test	Test	<ruby>経<rt>▽</rt>つ</ruby>	たつ [1] v.	(time) pass	<b>Examples</b><ul><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li></ul>
+#+end_example
+
+This [[20250111174547][list]] is used to test APR when there's no SPR. The output should be:
+
+#+NAME: case7/sentence/multi-apr/1
+#+ATTR_ARGS: :points (9896)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	A: 今日は何日ですか？<br>B: 今日は三日です。		A: Which day of month is today?<br>B: Today is the third day of month.	<b>Vocabulary</b><ul><li><ruby>何日<rt>3</rt></ruby> なん・にち [1] int. what day of month</li><li>三日 みっか [0] n. 3 days</li></ul>
+#+end_example
+
+#+NAME: case7/sentence/multi-apr/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	<ruby>何日<rt>3</rt></ruby>	なん・にち [1] int.	what day of month	<b>Examples</b><ul><li>A: 今日は何日ですか？ Which day of month is today?<br>B: 今日は三日です。 Today is the third day of month.</li></ul>
+Vocabulary	Test	Test	三日	みっか [0] n.	3 days	<b>Examples</b><ul><li>A: 今日は何日ですか？ Which day of month is today?<br>B: 今日は三日です。 Today is the third day of month.</li></ul>
 #+end_example

@@ -224,7 +224,9 @@
          (output-content (oref output-element content))
          (attr-args (oref output-element attr-args))
          (points (plist-get attr-args :points)))
-    (with-current-buffer (find-file-noselect (concat user-emacs-directory "README.org"))
+    (with-current-buffer (find-file-noselect
+                          (expand-file-name "readme.org"
+                                            (project-root (project-current))))
       (org-element-map (org-element-parse-buffer) 'example-block
         (lambda (current-block)
           (let (name)
@@ -275,7 +277,8 @@
   :tags '(organki)
 
   (with-current-buffer test-organki
-    (test-organki/import-region-multi-outputs "case7/sentence/multi")))
+    (test-organki/import-region-multi-outputs "case7/sentence/multi/")
+    (test-organki/import-region-multi-outputs "case7/sentence/multi-apr/")))
 
 
 ;; * Unit Tests

@@ -136,12 +136,12 @@ A *Sentence* list uses this format:
   - みずとごはんです。 It's water and rice.
   - みず、ください。 Water, please.
 
-  The =audio=, =entry= and =translation= combined is called an "entry line". There can be multiple entry lines on the same item, say, to form a dialog or a short passage. If it's a dialog each line must begin with a *speaker* which takes the format "<speaker>: " where =speaker= is any string followed by a colon and a space. For example,
+The =audio=, =entry= and =translation= combined is called an "entry line". There can be multiple entry lines on the same item, say, to form a dialogue or a short passage. If it's a dialogue each line must begin with a *speaker* which takes the format "<speaker>: " where =speaker= is any string followed by a colon and a space. For example,
 
-  - A: はなさんはイギリス人ですか。 Is Hana British?
-    B: いいえ、ブラジル人です。 No, she's Brazilian.
+- A: はなさんはイギリス人ですか。 Is Hana British?
+  B: いいえ、ブラジル人です。 No, she's Brazilian.
 
-  Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See below.
+Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See below.
 
 - =notes=: The notes sublist contains further explanation for the entry, which is composed of the following sub-notes. The notes sublist and the sub-notes are all optional.
 
@@ -163,7 +163,7 @@ A *Sentence* list uses this format:
   - V: <vocabulary>
     A [[#202410092157][Vocabulary]] sublist related to =entry=, the items of which will also be imported. If the parent item contains only one entry line, it will be used automatically as an example for these Vocabulary items, so that for example, it is displayed under the "Examples" sub-notes in their "Notes" field. This is called Automatic Parent Reference (APR). Only the first-level items have APR if the sublist is a multi-level list. This is because typically the first-level items are supposed to be contained in the parent item (i.e., a sentence and the new words it contains) while the nested items are not necessarily so, and you only want to see the contained vocabulary of a sentence after importing.
 
-    If the parent item contains multiple entry lines, there is no APR. Instead, there is Selective Parent Reference (SPR), which makes reference only to the selected lines by utilizing the following specifications, which are specified in the =S:= sub-notes of each Vocabulary item. The indices are one-based, i.e., they start from 1, not 0.
+    If the parent item contains multiple entry lines you can use Selective Parent Reference (SPR), which makes reference only to the selected lines by utilizing the following specifications in the =S:= sub-notes of each Vocabulary item. The indices start from 1 in accordance with the numbering of items in ordered lists.
 
     - =:L (<indices>)=
       The lines to be referenced. Each line is treated as an example.
@@ -177,7 +177,9 @@ A *Sentence* list uses this format:
       - =:G=: A keyword short for "Groups".
       - =((<indices>)...)=: The groups of indices of the lines to be referenced.
 
-    The specs only tell which lines to select when used in the =S:= sub-notes and do not affect other aspects of the sub-notes.
+    The specs only tell the =S:= sub-notes which lines to select and do not affect its other aspects.
+
+    If there isn't any SPR specs APR will be in effect.
 
     The example below says selecting the 1st line, the 1st and 2nd line, the 6th and 7th line from the entry lines as examples for the current Vocabulary item.
 
