@@ -32,7 +32,7 @@ A *Vocabulary* list uses this format:
   - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
     - When the entry contains multiple kanji characters the hiragana characters are separated or grouped using middle dots =・= by their kanji readings.
 
-  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[d:Japanese/japanese-accent.pdf][日本語のアクセントの型]].
+  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250109121237][日本語のアクセントの型]].
   - =audio file=: The audio of the reading, if any.
 
   All these parts and the whole pronunciation are optional.

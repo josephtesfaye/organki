@@ -278,7 +278,8 @@
 
   (with-current-buffer test-organki
     (test-organki/import-region-multi-outputs "case7/sentence/multi/")
-    (test-organki/import-region-multi-outputs "case7/sentence/multi-apr/")))
+    (test-organki/import-region-multi-outputs "case7/sentence/multi-apr/")
+    (test-organki/import-region-multi-outputs "case7/sentence/multi-sep/")))
 
 
 ;; * Unit Tests

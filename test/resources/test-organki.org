@@ -338,6 +338,19 @@
     - 何日^{3} なん・にち [1] int. what day of month
     - 三日 みっか [0] n. 3 days
 
+#+NAME: 20250114163852
+#+ATTR_ANKI: :notetype "Sentence"
+- Asking how many years has it been
+  - M:
+    1) A: ここに何年いますか？ How many years have you been here?
+    2) B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.
+
+  - V:
+    - もう adv. already 已经
+      - S: :G ((1 2))
+    - 長年 ながねん [0] n. many years; long time
+      - S: :G ((1 2))
+
 * Conventions
 This section is about how to write test cases in this file and the conventions to follow.
 
@@ -784,7 +797,7 @@ This [[202410302159][list]] demonstrates the comments and examples sublists in a
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	Test	午前	ご・ぜん [1] n.	morning; a.m.	<b>Comments</b><p>• Comment1<br>• Comment2</p><b>Examples</b>• 午前八時ごろ起きます。 I wake up around eight a.m.<br>• [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.<b>Linking</b><ul><li>昼前 ひる・まえ [3] n. late morning 上午</li><li>午前零時三分 ごぜんれいじさんぷん n. 00:03</li></ul>
+Vocabulary	Test	Test	午前	ご・ぜん [1] n.	morning; a.m.	<b>Comments</b><p>• Comment1<br>• Comment2</p><b>Examples</b><p>• 午前八時ごろ起きます。 I wake up around eight a.m.<br>• [[cl:202410021528.m4a][⏯]] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</p><b>Linking</b><ul><li>昼前 ひる・まえ [3] n. late morning 上午</li><li>午前零時三分 ごぜんれいじさんぷん n. 00:03</li></ul>
 Vocabulary	Test	Test	昼前	ひる・まえ [3] n.	late morning 上午	<b>Linking</b><ul><li>午前 ご・ぜん [1] n. morning; a.m.</li></ul>
 Vocabulary	Test	Test	午前零時三分	ごぜんれいじさんぷん n.	00:03	<b>Linking</b><ul><li>午前 ご・ぜん [1] n. morning; a.m.</li></ul>
 Vocabulary	Test	Test	昼間	ひる・ま [3] / ちゅう・かん [0] n.	daytime 白天	<b>Comments</b><p>The pronunciation ちゅうかん is less common and typically used in formal, technical contexts or used to form compound words.</p>
@@ -830,7 +843,7 @@ This [[202411272207][list]] demonstrates the Vocabulary and Sentence sublists in
 Vocabulary	Test	Test	人（Quantifier）	にん [1] qt.	Quantifier used for people	<b>Family</b><ul><li>十人 じゅうにん [1] n. 10 people</li></ul>
 Vocabulary	Test	Test	十人	じゅうにん [1] n.	10 people	<b>Examples</b><ul><li>十人の社員が会議に出席します。 Ten employees will attend the meeting.</li></ul><b>Family</b><ul><li>人（Quantifier） にん [1] qt. Quantifier used for people</li></ul>
 Vocabulary	Test	Test	出席	しゅっせき [0] n.	attendance	<b>Examples</b><ul><li>十人の社員が会議に出席します。 Ten employees will attend the meeting.</li></ul><b>Linking</b><ul><li>欠席 けっせき [0] n. absence</li></ul>
-Vocabulary	Test	Test	欠席	けっせき [0] n.	absence	<b>Examples</b>• 今日の欠席者は誰ですか。 Who is absent today?<br>&nbsp;&nbsp;• V:<br>&nbsp;&nbsp;&nbsp;&nbsp;• 欠席者 けっせきしゃ [2] n. absentee<br><ul><li>きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.</li></ul><b>Linking</b><ul><li>出席 しゅっせき [0] n. attendance</li></ul>
+Vocabulary	Test	Test	欠席	けっせき [0] n.	absence	<b>Examples</b><p>• 今日の欠席者は誰ですか。 Who is absent today?<br>&nbsp;&nbsp;• V:<br>&nbsp;&nbsp;&nbsp;&nbsp;• 欠席者 けっせきしゃ [2] n. absentee</p><br><ul><li>きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.</li></ul><b>Linking</b><ul><li>出席 しゅっせき [0] n. attendance</li></ul>
 Vocabulary	Test	Test	病気	びょうき [0] n.	illness, disease	<b>Examples</b><ul><li>きのうは病気で学校を欠席しました。 I was absent from school yesterday because I was sick.</li></ul>
 #+end_example
 
@@ -857,7 +870,7 @@ For this [[202411062029][list]] the output should be:
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	Test	さん	suf.	Mr./Mrs./Ms. 先生/女士	<b>Comments</b><p>さん is a suffix used after surnames.</p><b>Examples</b>Here are some examples:<br>• 李さん りさん n. Mr. Li 李先生<br>&nbsp;&nbsp;• 李さんは学生ですか。 Is Mr. Li a student?<br>&nbsp;&nbsp;&nbsp;&nbsp;• Nest item 2<br>• 森さん もりさん n. 森先生<br><ul><li>李さんはJC企画の社員ですか。 李先生您是JC策划公司的职员吗？</li></ul>
+Vocabulary	Test	Test	さん	suf.	Mr./Mrs./Ms. 先生/女士	<b>Comments</b><p>さん is a suffix used after surnames.</p><b>Examples</b><p>Here are some examples:<br>• 李さん りさん n. Mr. Li 李先生<br>&nbsp;&nbsp;• 李さんは学生ですか。 Is Mr. Li a student?<br>&nbsp;&nbsp;&nbsp;&nbsp;• Nest item 2<br>• 森さん もりさん n. 森先生</p><br><ul><li>李さんはJC企画の社員ですか。 李先生您是JC策划公司的职员吗？</li></ul>
 Vocabulary	Test	Test	羽	わ qt.	Quantifier used for birds and rabbits	<b>Comments</b><p>The standard reading of "十羽" is "じっぱ" or "じゅうわ", but it's commonly read as "じゅっぱ" in everyday life.</p><b>Family</b><ul><li>一羽 いちわ [2] qt. one (bird/rabbit)</li><li>十羽 じゅっぱ [1] qt. ten (birds/rabbits)</li></ul>
 Vocabulary	Test	Test	一羽	いちわ [2] qt.	one (bird/rabbit)	<b>Family</b><ul><li>羽 わ qt. Quantifier used for birds and rabbits</li></ul>
 Vocabulary	Test	Test	十羽	じゅっぱ [1] qt.	ten (birds/rabbits)	<b>Family</b><ul><li>羽 わ qt. Quantifier used for birds and rabbits</li><li>十羽のウサギ じゅっぱのうさぎ phrn. 10 rabbits</li></ul>
@@ -942,7 +955,7 @@ Sentence	Test	Test	彼は夕食を食べて, それからすぐ寝た。		He had
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	Test	何年	なんねん [1] int.	which year, what year; how many years	<b>Comments</b><p>Asking about years.</p><b>Examples</b>:L (1 3 6)<br><ul><li>A: 何年ありますか？ A: How many years are there?</li><li>A: 何年ありますか？ How many years are there?<br>B: 3年あります。 There are three years.</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: 10年しています。 I have been doing it for 10 years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: かれこれ10年です。 Nearly ten years.</li><li>A: 何年そのことをしていますか？ A: How many years have you been doing this?</li></ul>
+Vocabulary	Test	Test	何年	なんねん [1] int.	which year, what year; how many years	<b>Comments</b><p>Asking about years.</p><b>Examples</b><p>:L (1 3 6)</p><br><ul><li>A: 何年ありますか？ A: How many years are there?</li><li>A: 何年ありますか？ How many years are there?<br>B: 3年あります。 There are three years.</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: 10年しています。 I have been doing it for 10 years.</li><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: かれこれ10年です。 Nearly ten years.</li><li>A: 何年そのことをしていますか？ A: How many years have you been doing this?</li></ul>
 Vocabulary	Test	Test	かれこれ	[1] adv.	almost, nearly; pron. this and that	<b>Alternatives</b><p><ruby>彼此<rt>▼</rt></ruby></p><b>Examples</b><ul><li>A: 何年そのことをしていますか？ How many years have you been doing this?<br>B: かれこれ10年です。 Nearly ten years.</li></ul>
 Vocabulary	Test	Test	それから	[0] conj.	then 然后; since then 从那以后	<b>Comments</b><p>Asking about years.</p><b>Examples</b><ul><li>A: それから何年経ちましたか？ A: How many years has it been since then?</li><li>A: それから何年経ちましたか？ How many years has it been since then?<br>B: 5年経ちました。 It’s been five years.</li><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul><b>Linking</b><ul><li>そして [0] conj. and</li></ul>
 Vocabulary	Test	Test	夕食	ゆうしょく [0] n.	dinner	<b>Examples</b><ul><li>彼は夕食を食べて, それからすぐ寝た。 He had dinner, and then went to bed.</li></ul>
@@ -974,4 +987,31 @@ Sentence	Test	Test	A: 今日は何日ですか？<br>B: 今日は三日です。
 #tags column:3
 Vocabulary	Test	Test	<ruby>何日<rt>3</rt></ruby>	なん・にち [1] int.	what day of month	<b>Examples</b><ul><li>A: 今日は何日ですか？ Which day of month is today?<br>B: 今日は三日です。 Today is the third day of month.</li></ul>
 Vocabulary	Test	Test	三日	みっか [0] n.	3 days	<b>Examples</b><ul><li>A: 今日は何日ですか？ Which day of month is today?<br>B: 今日は三日です。 Today is the third day of month.</li></ul>
+#+end_example
+
+This [[20250114163852][list]] is used to test sentence splitting when there are more than 2 separators. The output should be:
+
+#+NAME: case7/sentence/multi-sep/1
+#+ATTR_ARGS: :points (10125)
+#+ATTR_TYPE: Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	Test	A: ここに何年いますか？<br>B: もう長年ここにいます。多分10年以上でしょう。		A: How many years have you been here?<br>B: I've been here for many years. Probably more than 10 years.	<b>Vocabulary</b><ul><li>もう adv. already 已经</li><li>長年 ながねん [0] n. many years; long time</li></ul>
+Sentence	Test	Test	A: ここに何年いますか？<br>B: もう長年ここにいます。多分10年以上でしょう。		A: How many years have you been here?<br>B: I've been here for many years. Probably more than 10 years.	<b>Vocabulary</b><ul><li>もう adv. already 已经</li><li>長年 ながねん [0] n. many years; long time</li></ul>
+#+end_example
+
+#+NAME: case7/sentence/multi-sep/2
+#+ATTR_TYPE: Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	もう	adv.	already 已经	<b>Examples</b><ul><li>A: ここに何年いますか？ How many years have you been here?<br>B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.</li></ul>
+Vocabulary	Test	Test	長年	ながねん [0] n.	many years; long time	<b>Examples</b><ul><li>A: ここに何年いますか？ How many years have you been here?<br>B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.</li></ul>
 #+end_example

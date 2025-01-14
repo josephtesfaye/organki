@@ -463,7 +463,8 @@ Return an alist of notetype/list-of-objects pairs."
                                ((and audio speaker) (cddr split-line))
                                (t split-line)))
                (entry (string-join-non-blanks (list audio speaker (car contents)) " "))
-               (translation (string-join-non-blanks (list speaker (cadr contents)) " "))
+               (translation (string-join-non-blanks
+                             (flatten-list (list speaker (cdr contents))) " "))
                (sentence (organki--anki-sentence
                           :entry entry
                           :translation translation)))
@@ -695,7 +696,8 @@ displaying in an Anki card."
                             ((equal key organki--key-sentence)
                              (organki--convert-notes-sentences val))
 
-                            ((equal key organki--key-example) val)
+                            ((equal key organki--key-example)
+                             (concat "<p>" val "</p>"))
 
                             (t (concat (organki--convert-notes-subnote-name key)
                                        "<p>" val "</p>")))))
