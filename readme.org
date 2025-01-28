@@ -1,13 +1,15 @@
 Organki: Combining the magics of Org Mode and Anki!
 
+Organki is a note-taking tool for learning languanges.
+
+If you have experience of learning a foreign language you might have written down a list of words and sentences and somehow memorizing all of them. You might have the same struggle as I did - when the list grows and (inevitably) branches off to multiple lists of different topics or categories, things start to get out of hand even if you make a careful curation. Their large sizes and indefinite amount make the effort of maintenance so immense (the same goes to anything that piles up) that you start feeling overwhelmed, feeling this isn't the way to do it, and eventually, quit.
+
+But wait! Here comes Organki!
+
+Now with Organki you can manage your notes using Org Mode and transpose them into Anki with ease. Well, with that being said, Organki may not be suitable for everyone (but it strives to be!) because it assumes you use both Org Mode and Anki, which is the best open-source note-taking tool and spaced-repetition flashcard software respectively IMHO.
+
 * User Guide
-When you started building vocabulary you might write down a list of words and manage to memorize them somehow. Then you might have multiple lists which were taken down by categories. But as the lists got more and more day after day they started getting out of hand even if you tried a careful curation. The effort of maintaining them is simply too immense (the same goes to anything that piles up). You started feeling overwhelmed, feeling this isn't the way to do it, and eventually, quit. But wait! Here comes *Organki*!
-
-Now with Organki you can use Org Mode to manage your language learning notes, including vocabulary, sentences, etc., and easily import them into Anki, the best open-source spaced-repetition flashcard software right now!
-
-Well, with that being said, Organki may be not suitable for everyone (but it strives to be!) because it assumes you have used Org Mode and Anki, both worth trying out if you haven't IMHO.
-
-Now let's start using Organki. The first thing you need to know is that if you want to import your notes into Anki (or anything else) you should write them down in a set format, which for Organki is just plain lists with some handy rules.
+Now let's start using Organki. The first thing you need to know is that if you want to import your notes into Anki (or anything else) you should write them down in a set format, which for Organki is just plain lists in Org Mode with some handy rules.
 
 Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of lists every first-level item is a note, with the same conceptual meaning of an Anki Note.
 
