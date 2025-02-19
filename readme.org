@@ -1,6 +1,6 @@
 Organki: Combining the magics of Org Mode and Anki!
 
-Organki is a note-taking tool for learning languanges.
+Organki is a note-taking tool for learning languages.
 
 If you have experience of learning a foreign language you might have written down a list of words and sentences and somehow memorizing all of them. You might have the same struggle as I did - when the list grows and (inevitably) branches off to multiple lists of different topics or categories, things start to get out of hand even if you make a careful curation. Their large sizes and indefinite amount make the effort of maintenance so immense (the same goes to anything that piles up) that you start feeling overwhelmed, feeling this isn't the way to do it, and eventually, quit.
 
@@ -11,7 +11,7 @@ Now with Organki you can manage your notes using Org Mode and transpose them int
 * User Guide
 Now let's start using Organki. The first thing you need to know is that if you want to import your notes into Anki (or anything else) you should write them down in a set format, which for Organki is just plain lists in Org Mode with some handy rules.
 
-Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of lists every first-level item is a note, with the same conceptual meaning of an Anki Note.
+Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of lists every first-level item is a note, with the same conceptual meaning of an [[https://docs.ankiweb.net/getting-started.html#notes--fields][Anki note]].
 
 ** Vocabulary
 :PROPERTIES:
@@ -26,7 +26,7 @@ A *Vocabulary* list uses this format:
 #+end_example
 
 - =entry=: A word or phrase that you try to remember.
-  The entry should only contain the most common form of the word or phrase, and if it has other forms put them in the =A= subitem under the =notes= section.
+  The entry should only contain the most common form of the word or phrase, and if it has other forms put them in the =A= sub-item under the =notes= section.
 
 - =pronunciation=: How to pronounce this entry. For Japanese entries, it's composed of these parts:
   : [<hiragana>] [<accent type>] [<audio file>]
@@ -34,15 +34,15 @@ A *Vocabulary* list uses this format:
   - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
     - When the entry contains multiple kanji characters the hiragana characters are separated or grouped using middle dots =・= by their kanji readings.
 
-  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250109121237][日本語のアクセントの型]].
+  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250218230448][Accent type convention]].
   - =audio file=: The audio of the reading, if any.
 
   All these parts and the whole pronunciation are optional.
 
 - =class=: The word class, or part of speech of the entry. Abbreviations are commonly used for word classes, such as =n.=, =v.=, =adj.=, etc. You can define your own set of abbreviations but they must end with a period when in use. For example, here is the [[p:notes/japanese.org::parts-of-speech][Japanese Parts of Speech]].
 
-- =translation=: The translation of the entry in the languages you're familair with.
-  - If there are multiple languages they appear in the order below, where =primary= is the language you're most familar with. You can define your own order and what matters is to keep consistency.
+- =translation=: The translation of the entry in the languages you're familiar with.
+  - If there are multiple languages they appear in the order below, where =primary= is the language you're most familiar with. You can define your own order and what matters is to keep consistency.
     : <primary> [<English> <Chinese> ...] [; ...]
 
   - If there are multiple translations for the entry, separate them with semicolons =;=.
@@ -59,19 +59,19 @@ A *Vocabulary* list uses this format:
     - 〈〉: A pair of angle brackets enclosing the entry, meaning the reading is a Jukujikun (熟字訓) for the entry. For example, 〈今日〉.
 
   - C: <comments>
-    Explanatory notes or tips about the entry. It may contain a sublist which would then be displayed as-is except the bullet style in the cards' Notes fields.
+    Explanatory notes or tips about the entry. It may contain a sub-list which would then be displayed as-is except the bullet style in the cards' Notes fields.
 
   - E: <examples>
     Examples that demonstrate the usage of the entry. The format of its contents is the same as that of =C:=.
 
   - S: <sentences>
-    A [[#202410092201][Sentence]] sublist that demonstrates the usage of the entry, the items of which are combined with the contents of =E:= so both of them are displayed under the "Examples" sub-notes. The items of this sublist are also imported as new entries, and the main entry will be displayed in the "Vocabulary" sub-notes of their "Notes" field. Only the first-level items will display the main entry in this way if the sublist is a multi-level list.
+    A [[#202410092201][Sentence]] sub-list that demonstrates the usage of the entry, the items of which are combined with the contents of =E:= so both of them are displayed under the "Examples" sub-notes. The items of this sub-list are also imported as new entries, and the main entry will be displayed in the "Vocabulary" sub-notes of their "Notes" field. Only the first-level items will display the main entry in this way if the sub-list is a multi-level list.
 
   - F: <family>
-    A Vocabulary sublist of words or phrases closely related to or belonging to the same grammatical family as the entry.
+    A Vocabulary sub-list of words or phrases closely related to or belonging to the same grammatical family as the entry.
 
   - L: <linking>
-    A Vocabulary sublist, are words or phrases related to the entry that may assist in your memorization.
+    A Vocabulary sub-list, are words or phrases related to the entry that may assist in your memorization.
 
 Here is a simple Vocabulary list:
 
