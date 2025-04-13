@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 ;; Copyright (C) 2024 josephtesfaye
 
-;; Author: Joseph Tesfaye
+;; Author: Joseph Huang
 ;; URL: https://josephtesfaye.com
 
 ;;; Commentary:
@@ -43,7 +43,8 @@
   (with-current-buffer test-organki
     (test-organki/import-region-case "case1/organki/import-region/output1")
     (test-organki/import-region-case "case1/organki/import-region/output2")
-    (test-organki/import-region-case "case1/organki/import-region/output3")))
+    (test-organki/import-region-case "case1/organki/import-region/output3")
+    (test-organki/import-region-case "case8/vocabulary/english/output1")))
 
 (defun test-organki/import-region-case (output-name)
   (elog--debug "Test Name: %s" output-name)
@@ -218,32 +219,36 @@
   "Case 4: Testing documentation examples"
   :tags '(organki)
 
-  (let* ((doc-examples (make-hash-table :test 'equal))
-         (output-element (gethash "case4/documentation/default-properties"
-                                  test-organki-elements))
-         (output-content (oref output-element content))
-         (attr-args (oref output-element attr-args))
-         (points (plist-get attr-args :points)))
-    (with-current-buffer (find-file-noselect
-                          (expand-file-name "readme.org"
-                                            (project-root (project-current))))
-      (org-element-map (org-element-parse-buffer) 'example-block
-        (lambda (current-block)
-          (let (name)
-            (setq name (org-element-property :name current-block))
-            (when (and name (string-prefix-p "organki" name))
-              (puthash name (org-example-convert current-block) doc-examples))))))
+  (let ((p-root (project-root (project-current))))
+    (should (equal p-root "/Users/josephtesfaye/projects/organki/"))
 
-    (with-temp-buffer
-      (insert (string-replace
-               "\\*" "*"
-               (oref (gethash "organki-example-properties" doc-examples) content)))
-      (org-mode)
-      (dolist (point points)
-        (elog--debug "Testing point: %s" point)
-        (goto-char point)
-        (deactivate-mark)
-        (test-organki/call-import-region attr-args output-content)))))
+    ;; Get input examples
+    (let* ((doc (find-file-noselect (expand-file-name "readme.org" p-root)))
+           (doc-examples (make-hash-table :test 'equal)))
+      (with-current-buffer doc
+        (org-element-map (org-element-parse-buffer) 'example-block
+          (lambda (current-block)
+            (let (name)
+              (setq name (org-element-property :name current-block))
+              (when (and name (string-prefix-p "organki" name))
+                (puthash name (org-example-convert current-block) doc-examples))))))
+
+      (let* (;; Get input content from the doc.
+             (input-element (gethash "organki-example-properties" doc-examples))
+             (input-content (oref input-element content))
+             ;; Get expected output info from the test file.
+             (output-element (gethash "case4/default-properties" test-organki-elements))
+             (output-content (oref output-element content))
+             (attr-args (oref output-element attr-args))
+             (points (plist-get attr-args :points)))
+        (with-temp-buffer
+          (insert (string-replace "\\*" "*" input-content))
+          (org-mode)
+          (dolist (point points)
+            (elog--debug "Testing point: %s" point)
+            (goto-char point)
+            (deactivate-mark)
+            (test-organki/call-import-region attr-args output-content)))))))
 
 
 (ert-deftest test-organki/vocabulary-sublists ()

@@ -1,6 +1,6 @@
-;; Copyright (C) 2024 josephtesfaye
+;; Copyright (C) 2024 Joseph Huang
 
-;; Author: Joseph Tesfaye
+;; Author: Joseph Huang
 ;; URL: https://josephtesfaye.com
 
 ;;; Commentary:

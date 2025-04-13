@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 ;;; organki.el --- A package that bridges Org Mode and Anki.
 
-;; Copyright (C) 2024 Joseph Tesfaye
+;; Copyright (C) 2024 Joseph Huang
 
 ;; Author: josephtesfaye
 ;; Version: 1.0
@@ -285,8 +285,18 @@ of `organki--anki-vocabulary' objects."
 
 (defun organki--get-vocabulary-content (item)
   (let ((content (org-list-item-get-content item t)))
-    (setq content (string-split-retain-separators content "\\. " 1))
-    (setq content (append (string-split (car content) " " t) (cdr content)))
+    (setq content (string-split-retain-separators content "\\. " 'after 1))
+    (if-let ((part (car content))
+             ;; Match English pronunciations, i.e., the part enclosed in `[]'
+             ;; which occurs first for all such parts and doesn't contain
+             ;; numbers.
+             (regexp "\\[[^0-9]+?\\]")
+             ((string-match "\\[.+?\\]" part))
+             ((string-match-p regexp (match-string 0 part)))
+             ;; ((string-match-p regexp part))
+             (splits (string-split-retain-separators part regexp nil 1)))
+        (setq content (append splits (cdr content)))
+      (setq content (append (string-split part " " t) (cdr content))))
     content))
 
 
@@ -454,7 +464,7 @@ Return an alist of notetype/list-of-objects pairs."
 
         ;; Create a sentence for each line
         (let* ((split-line (mapcar #'string-trim (string-split-retain-separators
-                                                  line "[]:.?。？] ")))
+                                                  line "[]:.?。？] " 'after)))
                (audio (when (string-match "⏯" (car split-line))
                         (concat (organki--convert-pronunciation (car split-line)) " ")))
                (speaker-peek (if audio (cadr split-line) (car split-line)))
@@ -632,7 +642,7 @@ displaying in an Anki card."
                  (ind (- (org-list-get-ind item struct) min-ind))
                  ((not (string-blank-p content))))
         (push (concat (string-repeat "&nbsp;" ind)
-               "• " (organki--convert-fragments content))
+                      "• " (organki--convert-fragments content))
               contents)))
 
     (when contents
@@ -922,7 +932,8 @@ item."
         (setq entry-lines (string-split entry-lines "\n"))
         (dolist (entry-line entry-lines)
           (setq entry-line (string-trim-left entry-line bullet-spaces))
-          (setq line-parts (string-split-retain-separators entry-line "[].?。？] +"))
+          (setq line-parts (string-split-retain-separators
+                            entry-line "[].?。？] +" 'after))
           (setq audio (and (string-match "⏯" (car line-parts)) (car line-parts)))
           (setq entry (or (and audio (cadr line-parts)) (car line-parts)))
           ;; Remove the equal-length leading spaces as the bullet.

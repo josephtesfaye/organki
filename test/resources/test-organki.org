@@ -351,6 +351,15 @@
     - 長年 ながねん [0] n. many years; long time
       - S: :G ((1 2))
 
+#+NAME: 20250412222031
+- glucose [ˈɡluːkoʊs] n. a simple sugar 葡萄糖
+  - L:
+    - glycemia [ɡlaɪˈsiːmɪk] n. the presence or level of glucose in the blood
+      - F:
+        - glycemic index [ɡlaɪˌsiːmɪk ˈɪndeks] n. abbr. GI 血糖指数
+- 蜜柑 みかん [1] [[cl:202410021528.m4a][⏯]] n. mandarin orange
+- foo bar [foo bar] [[cl:202410021528.m4a][⏯]] n. foo2 bar2
+
 * Conventions
 This section is about how to write test cases in this file and the conventions to follow.
 
@@ -765,9 +774,9 @@ Sentence	Test	Test::date::number Test::time::number	二個の玉葱を切って�
 
 *Description*
 
-For this [[file:~/.spacemacs.d/README.org::organki-example-properties][example]] the output of calling ~organki/import-region~ should be this:
+For this [[p:organki/readme.org::organki-example-properties][example]] the output of calling ~organki/import-region~ should be this:
 
-#+NAME: case4/documentation/default-properties
+#+NAME: case4/default-properties
 #+ATTR_ARGS: :points (245)
 #+begin_example
 #separator:tab
@@ -1014,4 +1023,22 @@ Sentence	Test	Test	A: ここに何年いますか？<br>B: もう長年ここに
 #tags column:3
 Vocabulary	Test	Test	もう	adv.	already 已经	<b>Examples</b><ul><li>A: ここに何年いますか？ How many years have you been here?<br>B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.</li></ul>
 Vocabulary	Test	Test	長年	ながねん [0] n.	many years; long time	<b>Examples</b><ul><li>A: ここに何年いますか？ How many years have you been here?<br>B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.</li></ul>
+#+end_example
+
+** Case 8: Supporting English formats
+This [[20250412222031][list]] is used to test the support for English entries in Vocabulary lists.
+
+#+NAME: case8/vocabulary/english/output1
+#+ATTR_ARGS: :points (10497)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	Test	glucose 	[ˈɡluːkoʊs]  n. 	a simple sugar 葡萄糖	<b>Linking</b><ul><li>glycemia  [ɡlaɪˈsiːmɪk]  n.  the presence or level of glucose in the blood</li></ul>
+Vocabulary	Test	Test	glycemia 	[ɡlaɪˈsiːmɪk]  n. 	the presence or level of glucose in the blood	<b>Family</b><ul><li>glycemic index  [ɡlaɪˌsiːmɪk ˈɪndeks]  n.  abbr. GI 血糖指数</li></ul><b>Linking</b><ul><li>glucose  [ˈɡluːkoʊs]  n.  a simple sugar 葡萄糖</li></ul>
+Vocabulary	Test	Test	glycemic index 	[ɡlaɪˌsiːmɪk ˈɪndeks]  n. 	abbr. GI 血糖指数	<b>Family</b><ul><li>glycemia  [ɡlaɪˈsiːmɪk]  n.  the presence or level of glucose in the blood</li></ul>
+Vocabulary	Test	Test	蜜柑	みかん [1] [sound:202410021528.m4a] n.	mandarin orange	
+Vocabulary	Test	Test	foo bar 	[foo bar]  [sound:202410021528.m4a] n. 	foo2 bar2	
 #+end_example

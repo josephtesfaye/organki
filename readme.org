@@ -37,6 +37,12 @@ A *Vocabulary* list uses this format:
   - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250218230448][Accent type convention]].
   - =audio file=: The audio of the reading, if any.
 
+  For English entries it's composed of these parts:
+
+  : [<IPA>] [<audio file>]
+
+  - =IPA=: The International Phonetics Alphabet pronunciation. Unlike the hiragana part, it must be enclosed in a pair of =[...]=, such as =[ˈɡluːkoʊs]=.
+
   All these parts and the whole pronunciation are optional.
 
 - =class=: The word class, or part of speech of the entry. Abbreviations are commonly used for word classes, such as =n.=, =v.=, =adj.=, etc. You can define your own set of abbreviations but they must end with a period when in use. For example, here is the [[p:notes/japanese.org::parts-of-speech][Japanese Parts of Speech]].
