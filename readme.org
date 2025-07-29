@@ -2,16 +2,32 @@ Organki: Combining the magics of Org Mode and Anki!
 
 Organki is a note-taking tool for learning languages.
 
-If you have experience of learning a foreign language you might have written down a list of words and sentences and somehow memorizing all of them. You might have the same struggle as I did - when the list grows and (inevitably) branches off to multiple lists of different topics or categories, things start to get out of hand even if you make a careful curation. Their large sizes and indefinite amount make the effort of maintenance so immense (the same goes to anything that piles up) that you start feeling overwhelmed, feeling this isn't the way to do it, and eventually, quit.
+If you have experience of learning a foreign language you might have written
+down a list or lists of words and sentences so that you can somehow memorize all
+of them. You might have the same struggle as I did - when the list grows and
+(inevitably) branches off to multiple lists of different topics or categories,
+things start to get out of hand even if you make a careful curation. Their large
+sizes and indefinite amount make the effort of maintenance so immense (the same
+goes to anything that piles up) that you start feeling overwhelmed, feeling this
+isn't the way to do it, and eventually, quit.
 
 But wait! Here comes Organki!
 
-Now with Organki you can manage your notes using Org Mode and transpose them into Anki with ease. Well, with that being said, Organki may not be suitable for everyone (but it strives to be!) because it assumes you use both Org Mode and Anki, which is the best open-source note-taking tool and spaced-repetition flashcard software respectively IMHO.
+Now with Organki you can manage your notes using Org Mode and transpose them
+into Anki with ease. Well, with that being said, Organki may not be suitable for
+everyone (but it strives to be!) because it assumes you use both Org Mode and
+Anki, which is the best open-source note-taking tool and spaced-repetition
+flashcard software respectively IMHO.
 
 * User Guide
-Now let's start using Organki. The first thing you need to know is that if you want to import your notes into Anki (or anything else) you should write them down in a set format, which for Organki is just plain lists in Org Mode with some handy rules.
+Now let's start using Organki. The first thing you need to know is that if you
+want to import your notes into Anki (or anything else) you should write them
+down in a set format, which for Organki is just plain lists in Org Mode with
+some handy rules.
 
-Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of lists every first-level item is a note, with the same conceptual meaning of an [[https://docs.ankiweb.net/getting-started.html#notes--fields][Anki note]].
+Organki supports two kinds of lists: *Vocabulary* and *Sentence*. For both kinds of
+lists every first-level item is a note, with the same conceptual meaning of an
+[[https://docs.ankiweb.net/getting-started.html#notes--fields][Anki note]].
 
 ** Vocabulary
 :PROPERTIES:
@@ -26,58 +42,89 @@ A *Vocabulary* list uses this format:
 #+end_example
 
 - =entry=: A word or phrase that you try to remember.
-  The entry should only contain the most common form of the word or phrase, and if it has other forms put them in the =A= sub-item under the =notes= section.
+  The entry should only contain the most common form of the word or phrase, and
+  if it has other forms put them in the =A= sub-item under the =notes= section.
 
-- =pronunciation=: How to pronounce this entry. For Japanese entries, it's composed of these parts:
+- =pronunciation=: How to pronounce this entry. For Japanese entries, it's
+  composed of these parts:
   : [<hiragana>] [<accent type>] [<audio file>]
 
-  - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
-    - When the entry contains multiple kanji characters the hiragana characters are separated or grouped using middle dots =・= by their kanji readings.
+  - =hiragana=: The hiragana reading of the entry. This is only necessary when the
+    entry contains Kanji.
+    - When the entry contains multiple kanji characters the hiragana characters
+      are separated or grouped using middle dots =・= by their kanji readings.
 
-  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250218230448][Accent type convention]].
+  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250218230448][Accent
+    type convention]].
   - =audio file=: The audio of the reading, if any.
 
   For English entries it's composed of these parts:
 
   : [<IPA>] [<audio file>]
 
-  - =IPA=: The International Phonetics Alphabet pronunciation. Unlike the hiragana part, it must be enclosed in a pair of =[...]=, such as =[ˈɡluːkoʊs]=.
+  - =IPA=: The International Phonetics Alphabet pronunciation. Unlike the hiragana
+    part, it must be enclosed in a pair of =[...]=, such as =[ˈɡluːkoʊs]=.
 
   All these parts and the whole pronunciation are optional.
 
-- =class=: The word class, or part of speech of the entry. Abbreviations are commonly used for word classes, such as =n.=, =v.=, =adj.=, etc. You can define your own set of abbreviations but they must end with a period when in use. For example, here is the [[p:notes/japanese.org::parts-of-speech][Japanese Parts of Speech]].
+- =class=: The word class, or part of speech of the entry. Abbreviations are
+  commonly used for word classes, such as =n.=, =v.=, =adj.=, etc. You can define your
+  own set of abbreviations but they must end with a period when in use. For
+  example, here is the [[p:notes/japanese.org::parts-of-speech][Japanese Parts of Speech]].
 
 - =translation=: The translation of the entry in the languages you're familiar with.
-  - If there are multiple languages they appear in the order below, where =primary= is the language you're most familiar with. You can define your own order and what matters is to keep consistency.
+  - If there are multiple languages they appear in the order below, where
+    =primary= is the language you're most familiar with. You can define your own
+    order and what matters is to keep consistency.
     : <primary> [<English> <Chinese> ...] [; ...]
 
   - If there are multiple translations for the entry, separate them with semicolons =;=.
-  - For each translation (regardless of language) try to keep it as short and precise as possible. Use only one word if possible because these entries are meant to be memorized so that you can recall them as quickly as possible. If you want to write explanations or notes for the entry you can put them in the =notes= sublist.
+  - For each translation (regardless of language) try to keep it as short and
+    precise as possible. Use only one word if possible because these entries are
+    meant to be memorized so that you can recall them as quickly as possible. If
+    you want to write explanations or notes for the entry you can put them in
+    the =notes= sublist.
 
-- =notes=: Additional notes about the entry. It includes the following optional sub-notes:
+- =notes=: Additional notes about the entry. It includes the following optional
+  sub-notes:
   - A: <alternative forms>
-    A single line listing the alternative forms of the entry (same pronunciation, different forms).
+    A single line listing the alternative forms of the entry (same
+    pronunciation, different forms).
 
-    For Japanese some conventional symbols as seen in the dictionary [[file:~/projects/notes/japanese.org::#202411121149][Dajirin 4]] are supported here to mark something uncommon or less standard about the characters. The symbols are listed below:
+    For Japanese some conventional symbols as seen in the dictionary [[file:~/projects/notes/japanese.org::#202411121149][Dajirin 4]]
+    are supported here to mark something uncommon or less standard about the
+    characters. The symbols are listed below:
 
-    - ^{▽}: A white down-pointing triangle superscript, meaning the marked character's readings (音訓) are not included in the Jōyō Kanji Table ([[file:~/projects/notes/japanese.org::#202409272057][常用漢字表]]). For example, 和^{▽}やか.
+    - ~^{▽}~: A white down-pointing triangle superscript, meaning the marked
+      character's readings (音訓) are not included in the Jōyō Kanji Table ([[file:~/projects/notes/japanese.org::#202409272057][常用
+      漢字表]]). For example, 和^{▽}やか.
 
-    - 〈〉: A pair of angle brackets enclosing the entry, meaning the reading is a Jukujikun (熟字訓) for the entry. For example, 〈今日〉.
+    - ~〈〉~: A pair of angle brackets enclosing the entry, meaning the reading is
+      a Jukujikun (熟字訓) for the entry. For example, 〈今日〉.
 
   - C: <comments>
-    Explanatory notes or tips about the entry. It may contain a sub-list which would then be displayed as-is except the bullet style in the cards' Notes fields.
+    Explanatory notes or tips about the entry. It may contain a sub-list which
+    would then be displayed as-is except the bullet style in the cards' Notes fields.
 
   - E: <examples>
-    Examples that demonstrate the usage of the entry. The format of its contents is the same as that of =C:=.
+    Examples that demonstrate the usage of the entry. The format of its contents
+    is the same as that of =C:=.
 
   - S: <sentences>
-    A [[#202410092201][Sentence]] sub-list that demonstrates the usage of the entry, the items of which are combined with the contents of =E:= so both of them are displayed under the "Examples" sub-notes. The items of this sub-list are also imported as new entries, and the main entry will be displayed in the "Vocabulary" sub-notes of their "Notes" field. Only the first-level items will display the main entry in this way if the sub-list is a multi-level list.
+    A [[#202410092201][Sentence]] sub-list that demonstrates the usage of the entry, the items of
+    which are combined with the contents of =E:= so both of them are displayed
+    under the "Examples" sub-notes. The items of this sub-list are also imported
+    as new entries, and the main entry will be displayed in the "Vocabulary"
+    sub-notes of their "Notes" field. Only the first-level items will display
+    the main entry in this way if the sub-list is a multi-level list.
 
   - F: <family>
-    A Vocabulary sub-list of words or phrases closely related to or belonging to the same grammatical family as the entry.
+    A Vocabulary sub-list of words or phrases closely related to or belonging to
+    the same grammatical family as the entry.
 
   - L: <linking>
-    A Vocabulary sub-list, are words or phrases related to the entry that may assist in your memorization.
+    A Vocabulary sub-list, are words or phrases related to the entry that may
+    assist in your memorization.
 
 Here is a simple Vocabulary list:
 
@@ -134,9 +181,17 @@ A *Sentence* list uses this format:
 #+end_example
 
 - =audio=: The audio of the entry, if any.
-- =entry=: A sentence in the original language, such as Japanese. The entry must end in one of these punctuation marks followed by at least one space: =.?。？=.
+- =entry=: A sentence in the original language, such as Japanese. The entry must
+  end in one of these punctuation marks followed by at least one space: =.?。？=.
 
-- =translation=: The translation of =entry=, in whatever language you're familiar with. It's optional in the sense that if the entry is a complex sentence that needs further explanation with the =notes= sublist (see below), it can or should be omitted from the same line of =entry= and put in the =T:= item of the =notes= sublist instead. If it's a simple sentence with no need of further explanation then just put it on the same line with =entry=, separated by at least one white space. If the translation is present on both the entry line and the =T:= sub-notes the =T:= sub-notes is preferred.
+- =translation=: The translation of =entry=, in whatever language you're familiar
+  with. It's optional in the sense that if the entry is a complex sentence that
+  needs further explanation with the =notes= sublist (see below), it can or should
+  be omitted from the same line of =entry= and put in the =T:= item of the =notes=
+  sublist instead. If it's a simple sentence with no need of further explanation
+  then just put it on the same line with =entry=, separated by at least one white
+  space. If the translation is present on both the entry line and the =T:=
+  sub-notes the =T:= sub-notes is preferred.
 
   Here is an example of a simple Sentence list:
 
@@ -144,20 +199,28 @@ A *Sentence* list uses this format:
   - みずとごはんです。 It's water and rice.
   - みず、ください。 Water, please.
 
-The =audio=, =entry= and =translation= combined is called an "entry line". There can be multiple entry lines on the same item, say, to form a dialogue or a short passage. If it's a dialogue each line must begin with a *speaker* which takes the format "<speaker>: " where =speaker= is any string followed by a colon and a space. For example,
+The =audio=, =entry= and =translation= combined is called an "entry line". There can
+be multiple entry lines on the same item, say, to form a dialogue or a short
+passage. If it's a dialogue each line must begin with a *speaker* which takes the
+format "<speaker>: " where =speaker= is any string followed by a colon and a
+space. For example,
 
 - A: はなさんはイギリス人ですか。 Is Hana British?
   B: いいえ、ブラジル人です。 No, she's Brazilian.
 
-Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See below.
+Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See
+below.
 
-- =notes=: The notes sublist contains further explanation for the entry, which is composed of the following sub-notes. The notes sublist and the sub-notes are all optional.
+- =notes=: The notes sublist contains further explanation for the entry, which is
+  composed of the following sub-notes. The notes sublist and the sub-notes are
+  all optional.
 
   - P: <pronunciation>
     How to pronounce this entry. For Japanese entries, it's composed of these parts:
     : [<hiragana>] [<audio>]
 
-    - =hiragana=: The hiragana reading of the entry. This is only necessary when the entry contains Kanji.
+    - =hiragana=: The hiragana reading of the entry. This is only necessary when
+      the entry contains Kanji.
     - =audio=: The audio of the reading.
 
     Both parts are optional.
@@ -166,12 +229,27 @@ Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See
     The translation of the entry in the languages you're familair with.
 
   - M: <multiple entry lines>
-    A sublist where each item is an entry line. This is useful when there are multiple entry lines for the current item and you want to make SPR (see below) out of them.
+    A sublist where each item is an entry line. This is useful when there are
+    multiple entry lines for the current item and you want to make SPR (see
+    below) out of them.
 
   - V: <vocabulary>
-    A [[#202410092157][Vocabulary]] sublist related to =entry=, the items of which will also be imported. If the parent item contains only one entry line, it will be used automatically as an example for these Vocabulary items, so that for example, it is displayed under the "Examples" sub-notes in their "Notes" field. This is called Automatic Parent Reference (APR). Only the first-level items have APR if the sublist is a multi-level list. This is because typically the first-level items are supposed to be contained in the parent item (i.e., a sentence and the new words it contains) while the nested items are not necessarily so, and you only want to see the contained vocabulary of a sentence after importing.
+    A [[#202410092157][Vocabulary]] sublist related to =entry=, the items of which will also be
+    imported. If the parent item contains only one entry line, it will be used
+    automatically as an example for these Vocabulary items, so that for example,
+    it is displayed under the "Examples" sub-notes in their "Notes" field. This
+    is called Automatic Parent Reference (APR). Only the first-level items have
+    APR if the sublist is a multi-level list. This is because typically the
+    first-level items are supposed to be contained in the parent item (i.e., a
+    sentence and the new words it contains) while the nested items are not
+    necessarily so, and you only want to see the contained vocabulary of a
+    sentence after importing.
 
-    If the parent item contains multiple entry lines you can use Selective Parent Reference (SPR), which makes reference only to the selected lines by utilizing the following specifications in the =S:= sub-notes of each Vocabulary item. The indices start from 1 in accordance with the numbering of items in ordered lists.
+    If the parent item contains multiple entry lines you can use Selective
+    Parent Reference (SPR), which makes reference only to the selected lines by
+    utilizing the following specifications in the =S:= sub-notes of each
+    Vocabulary item. The indices start from 1 in accordance with the numbering
+    of items in ordered lists.
 
     - =:L (<indices>)=
       The lines to be referenced. Each line is treated as an example.
@@ -180,25 +258,32 @@ Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See
       - =(<indices>)=: The indices of the lines to be referenced in the parent item.
 
     - =:G ((<indices>)...)=
-      The groups of lines to be referenced. Each group of lines together is one example. This is useful for generating multi-line examples such as dialogues.
+      The groups of lines to be referenced. Each group of lines together is one
+      example. This is useful for generating multi-line examples such as dialogues.
 
       - =:G=: A keyword short for "Groups".
       - =((<indices>)...)=: The groups of indices of the lines to be referenced.
 
-    The specs only tell the =S:= sub-notes which lines to select and do not affect its other aspects.
+    The specs only tell the =S:= sub-notes which lines to select and do not affect
+    its other aspects.
 
     If there isn't any SPR specs APR will be in effect.
 
-    The example below says selecting the 1st line, the 1st and 2nd line, the 6th and 7th line from the entry lines as examples for the current Vocabulary item.
+    The example below says selecting the 1st line, the 1st and 2nd line, the 6th
+    and 7th line from the entry lines as examples for the current Vocabulary item.
 
     #+begin_example
     - S: :L (1) :G ((1 2))
       - :G ((6 7))
     #+end_example
 
-    The entry lines can be specified in =entry= or the =M:= sub-notes. If both are present =M:= is preferred and =entry= is ignored.
+    The entry lines can be specified in =entry= or the =M:= sub-notes. If both are
+    present =M:= is preferred and =entry= is ignored.
 
-    You can specify lines or groups repetitively under different Vocabulary items of the same entry lines. The effect is that for an example which are repetitively specified, all the Vocabulary items specifying it are accumulated into its =V:= sub-notes, and it will be imported only once.
+    You can specify lines or groups repetitively under different Vocabulary
+    items of the same entry lines. The effect is that for an example which are
+    repetitively specified, all the Vocabulary items specifying it are
+    accumulated into its =V:= sub-notes, and it will be imported only once.
 
   - C: <comments>
     A single line or sublist explaining the entry.
@@ -261,9 +346,19 @@ Here is an example of a comprehensive Sentence list:
 :PROPERTIES:
 :CUSTOM_ID: 202410211926
 :END:
-Both Vocabulary and Sentence lists have these properties: notetype, deck, and tags, which correspond to the same-name concepts in Anki. These provide the default values for the notes when importing to Anki. You can specify them in heading drawers by the names =anki_notetype=, =anki_deck=, and =anki_tags=, or directly on a =#+ATTR_ANKI= tag line of a list, in a plist format such as =:notetype "my_notetype" :deck "my_deck" :tags "tag1 tag2"=.
+Both Vocabulary and Sentence lists have these properties: notetype, deck, and
+tags, which correspond to the same-name concepts in Anki. These provide the
+default values for the notes when importing to Anki. You can specify them in
+heading drawers by the names =anki_notetype=, =anki_deck=, and =anki_tags=, or
+directly on a =#+ATTR_ANKI= tag line of a list, in a plist format such as
+=:notetype "my_notetype" :deck "my_deck" :tags "tag1 tag2"=.
 
-For notetype and deck the one closest to the list takes precedence if they occur multiple times in the subree of the list. For tags all occurrences are accumulated for use along with tags on the headlines of the subtree. The tags are transformed into a sort of hierarchical tags corresponding to the hierarchy of the headings, which will then be displayed hierarchically in the tag tree of the Anki Browser.
+For notetype and deck the one closest to the list takes precedence if they occur
+multiple times in the subree of the list. For tags all occurrences are
+accumulated for use along with tags on the headlines of the subtree. The tags
+are transformed into a sort of hierarchical tags corresponding to the hierarchy
+of the headings, which will then be displayed hierarchically in the tag tree of
+the Anki Browser.
 
 Take this subtree for example,
 
@@ -288,7 +383,8 @@ Take this subtree for example,
 - 午後 ご・ご [1] [[cl:330479x304.wav][⏯]] n. afternoon 下午
 #+end_example
 
-The notetype and deck of the imported notes would be "Vocabulary" and "Japanese2" respectively, and they would have a tag tree like this:
+The notetype and deck of the imported notes would be "Vocabulary" and
+"Japanese2" respectively, and they would have a tag tree like this:
 
 #+begin_example
 - JP
@@ -304,39 +400,69 @@ The notetype and deck of the imported notes would be "Vocabulary" and "Japanese2
 #+end_example
 
 ** Importing
-To import a Vocabulary or Sentence list to Anki you only need to select the items and then call ~organki/import-region~. You would be asked to enter the notetype, deck, and tags for those notes. You can use the default values as defined in your org files if you don't want to change them. If you didn't select a region then the whole list at the current point would be selected for importing. When the command finishes successfully a file or files named "import<timestamp>.txt" will be produced under the =output-dir= you entered when calling the function.
+To import a Vocabulary or Sentence list to Anki you only need to select the
+items and then call ~organki/import-region~. You would be asked to enter the
+notetype, deck, and tags for those notes. You can use the default values as
+defined in your org files if you don't want to change them. If you didn't select
+a region then the whole list at the current point would be selected for
+importing. When the command finishes successfully a file or files named
+"import<timestamp>.txt" will be produced under the =output-dir= you entered when
+calling the function.
 
-When importing the generated file to Anki you can choose the Import option "Existing notes" in the "Import File" window to decide what to do with the existing notes - Update, Preserve, or Duplicate. It is recommended to always use "Duplicate" so that the existing notes would not be overwritten without notice, unless you're absolutely sure that those notes should be updated immediately.
+When importing the generated file to Anki you can choose the Import option
+"Existing notes" in the "Import File" window to decide what to do with the
+existing notes - Update, Preserve, or Duplicate. It is recommended to always use
+"Duplicate" so that the existing notes would not be overwritten without notice,
+unless you're absolutely sure that those notes should be updated immediately.
 
-The scope for duplication detection should be within all notes of the same notetype, i.e., Notetype for Match scope. The idea is that there should be only one note for an entry in a notetype no matter which deck it belongs to so that you don't have to go through multiple memory sessions for the same entry. If duplicates are found for a note you should examine and decide how to deal with them.
+The scope for duplication detection should be within all notes of the same
+notetype, i.e., Notetype for Match scope. The idea is that there should be only
+one note for an entry in a notetype no matter which deck it belongs to so that
+you don't have to go through multiple memory sessions for the same entry. If
+duplicates are found for a note you should examine and decide how to deal with
+them.
 
 [[i:20241019091112.png][screenshot]]
 
-If the list doesn't have the default notetype, deck, or tags as described in the [[#202410211926][Properties]] section, and you also didn't enter them when calling the function, then the generated file or files would contain no such information, and you need to choose them manually in the "Import File" window when importing to Anki.
+If the list doesn't have the default notetype, deck, or tags as described in the
+[[#202410211926][Properties]] section, and you also didn't enter them when calling the function,
+then the generated file or files would contain no such information, and you need
+to choose them manually in the "Import File" window when importing to Anki.
 
 [[i:20241019090928.png][screenshot]]
 
 *Which notetypes can you import the notes to?*
 
-Technically any notetype that has the same fields and order of the fields as Vocabulary and Sentence - as specified in the previous sections - can be used for importing the notes. In this case you're free to use any notetype name as you like.
+Technically any notetype that has the same fields and order of the fields as
+Vocabulary and Sentence - as specified in the previous sections - can be used
+for importing the notes. In this case you're free to use any notetype name as
+you like.
 
 *Options*
 
-You can use the following options to control certain aspects of the generated contents. Check their docstrings for more detailed descriptions.
+You can use the following options to control certain aspects of the generated
+contents. Check their docstrings for more detailed descriptions.
 
-- ~toggle-organki/import-region-open-files~: Whether to open the generated files automatically.
-
+- ~toggle-organki/import-region-open-files~: Whether to open the generated files
+  automatically.
 - ~toggle-organki/import-region-disable-tags~: Whether to disable tags.
+- ~toggle-organki/import-region-disable-APR~: Whether to disable Automatic Parent
+  Reference. If it is disabled the generated children will have no reference to
+  the main entry.
 
 ** Normalizing & Prettifying
-Organki can prettify the Vocabulary lists and Sentence lists to increase visual clarity.
+Organki can prettify the Vocabulary lists and Sentence lists to increase visual
+clarity.
 
 [[i:20241109160431.png][Image: Original list]]
 
 [[i:20241109160353.png][Image: Formatted list]]
 
-- ~organki/format-region-pretty~: Format the Sentence list in the region from START to END to a prettified version.
-- ~organki/prettify-region~: It's the same as ~organki/format-region-pretty~ visually but it doesn't change the original content. If ARG is non-nil revert to the original.
+- ~organki/format-region-pretty~: Format the Sentence list in the region from
+  START to END to a prettified version.
+- ~organki/prettify-region~: It's the same as ~organki/format-region-pretty~
+  visually but it doesn't change the original content. If ARG is non-nil revert
+  to the original.
 
 # todo
 - Normalize lists
@@ -346,7 +472,8 @@ Organki uses the plain text format exported from Anki for importing.
 
 [[i:20241019090828.png][screenshot]]
 
-In the file beginning there's a comment section where the columns of the notetype, deck, and tags of the notes are specified.
+In the file beginning there's a comment section where the columns of the
+notetype, deck, and tags of the notes are specified.
 
 #+begin_example
 #separator:tab

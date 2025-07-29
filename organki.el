@@ -104,6 +104,12 @@ the existing notes through importing but don't want the existing tags to be
 overwritten.")
 
 
+(defvar-local-toggle organki/import-region-disable-APR nil
+  "Whether to disable APR (Automatic Parent Reference) for `import-region'. If
+it is non-nil APR will be disabled and the generated children will have no
+reference to the main entry.")
+
+
 (defun organki/import-region (start end &optional output-dir notetype deck tags)
   "Convert a region from START to END, which is supposed to contain a Vocabulary
 list or a Sentence list, to a plain-text format for importing to Anki. Only
@@ -395,7 +401,8 @@ Return an alist of notetype/list-of-objects pairs."
                   (let* ((notes (or (oref voc notes) (make-hash-table :test 'equal)))
                          (notes-sens1 (gethash organki--key-sentence notes))
                          ;; When there isn't any SPR specs use APR
-                         (notes-sens2 (when (not (seq-find #'plistp notes-sens1))
+                         (notes-sens2 (when (and (not organki/import-region-disable-APR)
+                                                 (not (seq-find #'plistp notes-sens1)))
                                         (list (or (caadr select-all) item-sentence)))))
                     (dolist (sentence notes-sens1)
                       ;; If sentence is a plist it's the SPR specs. Replace it with
@@ -515,7 +522,7 @@ explicitly."
 
 
 (defun organki--select-sentences (sentences specs selects-table)
-  "Select a list of sentences from SENTENCES according SPECS, which is a plist
+  "Select a list of sentences from SENTENCES according to SPECS, which is a plist
 containing the :L (short for lines) and :G (short for groups) keywords and their
 corresponding lists of indicies (one-based). SELECTS-TABLE is used to cache the
 generated entries to prevent duplicates."
