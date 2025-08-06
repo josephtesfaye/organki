@@ -346,19 +346,56 @@ Here is an example of a comprehensive Sentence list:
 :PROPERTIES:
 :CUSTOM_ID: 202410211926
 :END:
-Both Vocabulary and Sentence lists have these properties: notetype, deck, and
-tags, which correspond to the same-name concepts in Anki. These provide the
-default values for the notes when importing to Anki. You can specify them in
-heading drawers by the names =anki_notetype=, =anki_deck=, and =anki_tags=, or
-directly on a =#+ATTR_ANKI= tag line of a list, in a plist format such as
-=:notetype "my_notetype" :deck "my_deck" :tags "tag1 tag2"=.
+Both Vocabulary and Sentence lists have these properties: deck, notetype, and
+tags, which correspond to the same-name concepts in Anki. If you have specified
+them when exporting the list then the notes will be imported to the
+specified deck with the specified notetype and tags.
 
-For notetype and deck the one closest to the list takes precedence if they occur
-multiple times in the subree of the list. For tags all occurrences are
-accumulated for use along with tags on the headlines of the subtree. The tags
-are transformed into a sort of hierarchical tags corresponding to the hierarchy
-of the headings, which will then be displayed hierarchically in the tag tree of
-the Anki Browser.
+You can specify default values of these properties to save you from entering
+them during every exporting. The default values can be specified for the
+following scopes:
+
+- all lists in the current buffer
+
+  To set the default values for the whole buffer you use the in-buffer settings
+  such as:
+
+  #+begin_example
+  ,#+ANKI_DECK: English
+  ,#+ANKI_NOTETYPE: Vocabulary
+  ,#+ANKI_TAGS: Fujisan
+  #+end_example
+
+- all lists under a subtree
+
+  To set the default values for a subtree you use a property drawer such as:
+
+  #+begin_example
+  ,*** Headline
+  :PROPERTIES:
+  :ANKI_DECK: English
+  :ANKI_NOTETYPE: Vocabulary
+  :ANKI_TAGS: Fujisan
+  :END:
+  #+end_example
+
+  Tags on the headline (as entered with ~org-ctrl-c-ctrl-c~) are also treated as
+  Anki tags.
+
+- only a certain list
+
+  To set the default values only for a certain list you use a tag line starting
+  with =#+ATTR_ANKI= directly over the list, values in the format of a plist, such
+  as:
+
+  : #+ATTR_ANKI: :deck "English" :notetype "Vocabulary" :tags "tag1 tag2"
+
+Specifications of these scopes can exist at the same time and in this case if
+notetype and deck occur several times in the subtree and its child subtrees, the
+one closest to the list takes precedence. For tags all occurrences from all
+scopes are accumulated and transformed into a tag tree as seen in the Anki
+browser with respect to the hierarchy of the scopes (actually a Cartesian
+product, if you know what it means).
 
 Take this subtree for example,
 

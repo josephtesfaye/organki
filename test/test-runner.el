@@ -16,7 +16,7 @@
       ;; Run tests for organki
       (test-run-tests
        test-root
-       '("test-organki.el")
+       '("test-organki.el" "test-organki-2.el")
        '(tag organki)))))
 
 (test-runner)

@@ -135,31 +135,32 @@ multiple times in the subree of the list. For tags all occurrences are
 accumulated for use along with tags on the headlines of the subtree. The tags
 are transformed into a sort of hierarchical tags according to the hierarchy of
 the headings, which will then be displayed hierarchically in the tag tree of the
-Anki Browser. See `organki/get-default-tags'"
+Anki Browser. See `organki--get-default-tags'"
 
   (interactive
-   (let* ((attr-anki (org-list-get-attr-args :attr_anki))
-          (default-output-dir "~/Downloads")
-          (default-notetype (or (plist-get attr-anki :notetype)
-                                (org-entry-get nil "ANKI_NOTETYPE" t)))
-          (default-deck (or (plist-get attr-anki :deck)
-                            (org-entry-get nil "ANKI_DECK" t)))
-          (default-tags (string-join (organki/get-default-tags attr-anki) " "))
-          (output-directory (read-directory-name
-                             (format "Output directory (default '%s'): " default-output-dir)
-                             default-output-dir default-output-dir t))
+   (let* (;; Default values
+          (default-props (organki--get-default-properties))
+          (default-deck (plist-get default-props :deck))
+          (default-notetype (plist-get default-props :notetype))
+          (default-tags (plist-get default-props :tags))
+          (default-outdir (plist-get default-props :outdir))
+          ;; User inputs
+          (deck (read-string (format "Deck (default '%s'): " default-deck) nil nil default-deck))
           (notetype (read-string (format "Notetype (default '%s'): " default-notetype)
                                  nil nil default-notetype))
-          (deck (read-string (format "Deck (default '%s'): " default-deck) nil nil default-deck))
           (tags (when (not organki/import-region-disable-tags)
-                  (read-string (format "Tags (default '%s'): " default-tags) nil nil default-tags))))
+                  (read-string (format "Tags (default '%s'): " default-tags)
+                               nil nil default-tags)))
+          (outdir (read-directory-name
+                   (format "Output directory (default '%s'): " default-outdir)
+                   default-outdir default-outdir t)))
 
      (when (string-empty-p notetype) (setq notetype nil))
      (when (string-empty-p deck) (setq deck nil))
      (when (string-empty-p tags) (setq tags nil))
      (if (region-active-p)
-         (list (region-beginning) (region-end) output-directory notetype deck tags)
-       (list nil nil output-directory notetype deck tags))))
+         (list (region-beginning) (region-end) outdir notetype deck tags)
+       (list nil nil outdir notetype deck tags))))
 
   (let ((results (organki--convert-region start end notetype deck tags))
         (notetypes (list organki--NV organki--NS))
@@ -290,8 +291,20 @@ of `organki--anki-vocabulary' objects."
 
 
 (defun organki--get-vocabulary-content (item)
-  (let ((content (org-list-item-get-content item t)))
+  (let ((content (org-list-item-get-content item t))
+        translation)
     (setq content (string-split-retain-separators content "\\. " 'after 1))
+    (setq translation (cadr content))
+    ;; Un-fill the translation
+    (when (string-match-p "\n" translation)
+      (setq translation (with-temp-buffer
+                          (insert translation)
+                          (goto-char (point-min))
+                          (set-fill-column most-positive-fixnum)
+                          (org-fill-paragraph)
+                          (buffer-string))))
+    (setq translation (list translation))
+
     (if-let ((part (car content))
              ;; Match English pronunciations, i.e., the part enclosed in `[]'
              ;; which occurs first for all such parts and doesn't contain
@@ -301,8 +314,8 @@ of `organki--anki-vocabulary' objects."
              ((string-match-p regexp (match-string 0 part)))
              ;; ((string-match-p regexp part))
              (splits (string-split-retain-separators part regexp nil 1)))
-        (setq content (append splits (cdr content)))
-      (setq content (append (string-split part " " t) (cdr content))))
+        (setq content (append splits translation))
+      (setq content (append (string-split part " " t) translation)))
     content))
 
 
@@ -791,11 +804,32 @@ displaying in an Anki card."
           (when tags "#tags column:3\n")))
 
 
-(defun organki/get-default-tags (&optional attr-anki)
+(defun organki--get-default-properties ()
+  "Get the default Organki properties and their values in a plist."
+
+  (let* (;; In-buffer settings
+         (key-deck "ANKI_DECK")
+         (key-note "ANKI_NOTETYPE")
+         (key-tags "ANKI_TAGS")
+         (keywords (list key-deck key-note key-tags))
+         (buffer-alist (org-collect-keywords keywords keywords))
+         ;; List attributes
+         (attr-anki (org-list-get-attr-args :attr_anki)))
+    (list :deck (or (plist-get attr-anki :deck)
+                    (org-entry-get nil key-deck t)
+                    (alist-get key-deck buffer-alist nil nil #'string=))
+          :notetype (or (plist-get attr-anki :notetype)
+                        (org-entry-get nil key-note t)
+                        (alist-get key-note buffer-alist nil nil #'string=))
+          :tags (string-join (organki--get-default-tags buffer-alist attr-anki) " ")
+          :outdir "~/Downloads")))
+
+
+(defun organki--get-default-tags (&optional buffer-alist attr-anki)
   "Get the default tags for the current region. If the region is in org mode
-retrieve all the tags in the current subtree, i.e., including the tags of the
-parent headings, and the tags specified in ATTR-ARGS, in a format conforming
-with Anki's tag trees.
+retrieve all the tags in the current subtree, which include the tags specified
+in in-buffer settings BUFFER-ALIST, the parent headings, and the list attributes
+ATTR-ARGS, in a format conforming with Anki's tag trees.
 
 For example, for a subtree like the following:
 
@@ -817,30 +851,37 @@ The output tags would be:
 Duolingo::Section01::Unit01
 #+end_example"
 
-  (let* ((element (org-element-at-point))
-         (direct-headline (org-element-lineage element '(headline) t))
-         (headline direct-headline)
-         (parent nil)
-         (is-headline direct-headline)
-         (headline-tags nil)
-         (tags nil)
+  (let* ((key-tags "ANKI_TAGS")
          (all-tags '())
          result)
-    (while is-headline
-      (setq headline-tags (mapcar 'substring-no-properties
-                                  (org-element-property :tags headline)))
-      (setq tags (org-entry-get (org-element-property :begin headline) "ANKI_TAGS"))
-      (when (and tags (not (string-blank-p tags)))
-        (setq headline-tags (append headline-tags (string-split tags))))
-      (when headline-tags
-        (push headline-tags all-tags))
-      (setq parent (org-element-property :parent headline))
-      (setq is-headline (equal 'headline (org-element-type parent)))
-      (when is-headline
-        (setq headline parent)))
+    ;; List tags
+    (when-let ((tags-str (plist-get attr-anki :tags))
+               (tags (string-split tags-str)))
+      (push tags all-tags))
 
-    (when (plist-get attr-anki :tags)
-      (setq all-tags (append all-tags (list (string-split (plist-get attr-anki :tags) " ")))))
+    ;; Subtree tags
+    (let* ((element (org-element-at-point))
+           (direct-headline (org-element-lineage element '(headline) t))
+           (headline direct-headline)
+           (is-headline direct-headline)
+           headline-tags parent tags)
+      (while is-headline
+        (setq headline-tags (mapcar 'substring-no-properties
+                                    (org-element-property :tags headline)))
+        (setq tags (org-entry-get (org-element-property :begin headline) key-tags))
+        (when (and tags (not (string-blank-p tags)))
+          (setq headline-tags (append headline-tags (string-split tags))))
+        (when headline-tags
+          (push headline-tags all-tags))
+        (setq parent (org-element-property :parent headline))
+        (setq is-headline (equal 'headline (org-element-type parent)))
+        (when is-headline
+          (setq headline parent))))
+
+    ;; In-buffer settings
+    (when-let ((tags-str (alist-get key-tags buffer-alist nil nil #'string=))
+               (tags (string-split tags-str)))
+      (push tags all-tags))
     (setq result (organki--combine-lists-to-strings all-tags))
     result))
 
