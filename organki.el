@@ -55,6 +55,10 @@
                 :initform ""
                 :type string
                 :documentation "The translation of the entry.")
+   (examples :initarg :examples
+             :initform nil
+             :type (or null string)
+             :documentation "The examples of the entry.")
    (notes :initarg :notes
           :initform nil
           :type (or null hash-table)
@@ -96,18 +100,31 @@
   "Whether to open the generated files upon calling `import-region'. If non-nil
 the generated files will be opened automatically.")
 
-
 (defvar-local-toggle organki/import-region-disable-tags nil
-  "Whether to disable tags upon calling `import-region'. If it is non-nil there
+                     "Whether to disable tags upon calling `import-region'. If it is non-nil there
 will be no tags for the generated items. This is useful when you want to update
 the existing notes through importing but don't want the existing tags to be
 overwritten.")
 
-
 (defvar-local-toggle organki/import-region-disable-APR nil
-  "Whether to disable APR (Automatic Parent Reference) for `import-region'. If
+                     "Whether to disable APR (Automatic Parent Reference) for `import-region'. If
 it is non-nil APR will be disabled and the generated children will have no
 reference to the main entry.")
+
+(defvar-local organki/convert-vocabulary-body-function nil
+  "Appoint a new function for converting the vocabulary body instead of the
+default method. This is mainly used for backward compatibility
+during the tests.")
+
+(defcustom organki/anki-vocabulary-fields
+  '(entry pronunciation class translation examples notes)
+
+  "Define the fields of the Vocabulary note type as a list of
+symbols found in the slot names of `organki--anki-vocabulary' to
+tell Organki which fields should be imported and what is the
+order of the fields."
+  :type '(repeat symbol)
+  :group 'organki)
 
 
 (defun organki/import-region (start end &optional output-dir notetype deck tags)
@@ -118,15 +135,12 @@ either START or END is `nil' then there is no region specified and the whole
 list at the point START or END (whichever is non-`nil') will be selected for the
 conversion. If both are `nil' the current point is used.
 
-If the conversion is successful a file named \"import<timestamp>.txt\" will be
-generated under OUTPUT-DIR.
-
 Both Vocabulary and Sentence lists have these properties: NOTETYPE, DECK, and
 TAGS, which correspond to the same-name concepts in Anki. These provide the
 default values for the notes when generating the files for importing to Anki.
 You can specify them in heading drawers by the names `anki_notetype',
 `anki_deck', and `anki_tags'. You can also specify them directly on a
-`\#+ATTR_ANKI' tag line of a list, in a plist such as:
+`\#+ATTR_ANKI' tag line of a list, in a plist form such as:
 
   :notetype \"my_notetype\" :deck \"my_deck\" :tags \"tag1 tag2\"
 
@@ -135,7 +149,15 @@ multiple times in the subree of the list. For tags all occurrences are
 accumulated for use along with tags on the headlines of the subtree. The tags
 are transformed into a sort of hierarchical tags according to the hierarchy of
 the headings, which will then be displayed hierarchically in the tag tree of the
-Anki Browser. See `organki--get-default-tags'"
+Anki Browser. See `organki--get-default-tags'.
+
+If the conversion is successful return an alist where each cons cell contains
+the output type (CAR) and its output file (CDR), such as
+
+((Vocabulary . import<timestamp>.txt) (Sentence . import<timestamp>.txt))
+
+The output files are named in the format \"import<timestamp>.txt\" and generated
+under OUTPUT-DIR."
 
   (interactive
    (let* (;; Default values
@@ -163,7 +185,6 @@ Anki Browser. See `organki--get-default-tags'"
        (list nil nil outdir notetype deck tags))))
 
   (let ((results (organki--convert-region start end notetype deck tags))
-        (notetypes (list organki--NV organki--NS))
         filepaths)
     (dolist (result results)
       (when-let ((content (cdr result))
@@ -190,20 +211,27 @@ whole list at the point START or END (whichever is non-nil) will be selected for
 the conversion. If both are `nil' the whole list at the current point is
 selected. Return an alist of notetype-result pairs."
 
-  (let* ((items (org-list-get-topmost-items-in-region start end))
-         (results (if (and notetype (eq organki--NS (intern notetype)))
-                      (organki--get-sentences items)
-                    (organki--get-vocabulary items)))
-         results2)
-    ;; Convert the lists to strings
-    (dolist (result results)
-      (when-let ((key (car result))
-                 (val (cdr result)))
-        (if (eq key organki--NV)
-            (setq val (organki--convert-vocabulary val (symbol-name organki--NV) deck tags))
-          (setq val (organki--convert-sentences val (symbol-name organki--NS) deck tags)))
-        (push (cons key val) results2)))
-    results2))
+  (if-let* ((items (org-list-get-topmost-items-in-region start end))
+            (results (if (and notetype (eq organki--NS (intern notetype)))
+                         (organki--get-sentences items)
+                       (organki--get-vocabulary items))))
+      (let (results2)
+        ;; Convert the lists to strings
+        (dolist (result results)
+          (when-let ((key (car result))
+                     (val (cdr result)))
+            (if (eq key organki--NV)
+                (setq val (organki--convert-vocabulary
+                           val (symbol-name organki--NV) deck tags))
+              (setq val (organki--convert-sentences
+                         val (symbol-name organki--NS) deck tags)))
+            (push (cons key val) results2)))
+        results2)
+
+    (elog--error "There is nothing to import (buffer=%s point=%s start=%s end=%s)."
+                 (current-buffer) (point) start end)
+    (error "There is nothing to import at point %s in %s."
+           (point) (current-buffer))))
 
 
 (defun organki--get-vocabulary (items &optional parent)
@@ -260,10 +288,11 @@ of `organki--anki-vocabulary' objects."
 
         ;; Construct the current Vocabulary object
         (setq item-voc (organki--anki-vocabulary
-                        :entry (organki--convert-fragments (car item-voc-content))
-                        :pronunciation (organki--convert-pronunciation
-                                        (string-join (seq-subseq item-voc-content 1 -1) " "))
-                        :class (nth (- (length item-voc-content) 2) item-voc-content)
+                        :entry
+                        (organki--convert-fragments (car item-voc-content))
+                        :pronunciation
+                        (organki--convert-pronunciation (cadr item-voc-content))
+                        :class (caddr item-voc-content)
                         :translation (car (last item-voc-content))
                         :notes item-notes
                         :parent parent))
@@ -292,31 +321,70 @@ of `organki--anki-vocabulary' objects."
 
 (defun organki--get-vocabulary-content (item)
   (let ((content (org-list-item-get-content item t))
-        translation)
-    (setq content (string-split-retain-separators content "\\. " 'after 1))
-    (setq translation (cadr content))
-    ;; Un-fill the translation
+        translation parts)
+    ;; Entry is English if it starts with ascii letters.
+    (if (string-match-p "^[[:ascii:]]+ " content)
+        (setq parts (organki--get-vocabulary-content-English content))
+      (setq parts (organki--get-vocabulary-content-Japanese content)))
+
+    ;; Un-fill the translation if it contains multiple lines.
+    (setq translation (car (last parts)))
     (when (string-match-p "\n" translation)
       (setq translation (with-temp-buffer
                           (insert translation)
                           (goto-char (point-min))
                           (set-fill-column most-positive-fixnum)
                           (org-fill-paragraph)
-                          (buffer-string))))
-    (setq translation (list translation))
+                          (buffer-string)))
+      (setcar (last parts) translation))
+    parts))
 
-    (if-let ((part (car content))
-             ;; Match English pronunciations, i.e., the part enclosed in `[]'
-             ;; which occurs first for all such parts and doesn't contain
-             ;; numbers.
-             (regexp "\\[[^0-9]+?\\]")
-             ((string-match "\\[.+?\\]" part))
-             ((string-match-p regexp (match-string 0 part)))
-             ;; ((string-match-p regexp part))
-             (splits (string-split-retain-separators part regexp nil 1)))
-        (setq content (append splits translation))
-      (setq content (append (string-split part " " t) translation)))
-    content))
+
+(defun organki--get-vocabulary-content-Japanese (string)
+  "Return the individual parts from an Japanese entry. The matching mechanism is
+described as follows:
+
+\"\\[[^[]+?\\]\" matches the first pair of square brackets (accent part), and
+it's enclosed in the grouping construct \"\\(...\\)?\" to mean it can be present
+or not. Likewise, \"\\[\\[.+?\\]\\]\" matches the second pair of square brackets
+(audio part) and can be present or not. Finally, \"[a-z]+\\.\"
+matches the part of speech and must be present."
+  (let ((regexp (concat "\\(?1:[ ]+[ぁ-んァ-ヶㇰ-ㇿー・]+\\)?" ; Match furigana
+                        "\\(?2:[ ]+\\[.+?\\]\\)?"   ; Match accent and audio
+                        "\\(?3:[ ]+[a-z]+\\.\\)"))) ; Match part of speech
+    (if (string-match regexp string)
+        (let* ((entry (substring string 0 (match-beginning 0)))
+               (furigana (string-trim-match (match-string 1 string)))
+               (audio (string-trim-match (match-string 2 string)))
+               (pron (string-join-non-blanks (list furigana audio) " "))
+               (class (string-trim-match (match-string 3 string)))
+               (translation (string-trim-match (substring string (match-end 3)))))
+          (list entry pron class translation))
+      (list string))))
+
+
+(defun organki--get-vocabulary-content-English (string)
+  "Return the individual parts from an English entry. The matching mechanism is
+described as follows:
+
+\"\\[[^[]+?\\]\" matches the first pair of square brackets (IPA part), and it's
+enclosed in the grouping construct \"\\(...\\)?\" to mean it can be present or
+not. Likewise, \"\\[\\[.+?\\]\\]\" matches the second pair of square brackets
+(audio part) and can be present or not. Finally, \"[a-z]+\\.\"
+matches the part of speech and must be present."
+
+  (let ((regexp (concat "\\(?1:[ ]+\\[[^[]+?\\]\\)?"    ; Match IPA
+                        "\\(?2:[ ]+\\[\\[.+?\\]\\]\\)?" ; Match audio
+                        "\\(?3:[ ]+[a-z]+\\.\\)")))     ; Match part of speech
+    (if (string-match regexp string)
+        (let* ((entry (substring string 0 (match-beginning 0)))
+               (ipa (string-trim-match (match-string 1 string)))
+               (audio (string-trim-match (match-string 2 string)))
+               (pron (string-join-non-blanks (list ipa audio) " "))
+               (class (string-trim-match (match-string 3 string)))
+               (translation (string-trim-match (substring string (match-end 3)))))
+          (list entry pron class translation))
+      (list string))))
 
 
 (defun organki--add-to-notes (parent children key)
@@ -625,8 +693,8 @@ Vocabulary or Sentence list)."
 
 (defun organki--convert-pronunciation (string)
   "Convert the audio file portion of the string."
-
-  (string-replace-fences string "[[cl:" "][⏯]]" "[sound:" "]"))
+  (when (string-not-blank-p string)
+    (string-replace-fences string "[[cl:" "][⏯]]" "[sound:" "]")))
 
 
 (defun organki--convert-fragments (string)
@@ -675,13 +743,8 @@ displaying in an Anki card."
   "Convert a list of `organki--anki-vocabulary' objects to plain-text format."
 
   (let* ((lines (mapcar (lambda (voc)
-                          (let ((temp (string-join
-                                       (list (oref voc entry)
-                                             (oref voc pronunciation)
-                                             (oref voc translation)
-                                             (organki--convert-notes (oref voc notes)))
-                                       "\t")))
-                            (delq nil (list notetype deck tags temp))))
+                          (let ((body (organki--convert-vocabulary-body voc)))
+                            (delq nil (list notetype deck tags body))))
                         vocabulary))
          (result (concat (organki--get-file-headers notetype deck tags)
                          (string-join (mapcar (lambda (line)
@@ -689,6 +752,33 @@ displaying in an Anki card."
                                               lines)
                                       "\n"))))
     result))
+
+
+(defun organki--convert-vocabulary-body (voc)
+  "Assemble the vocabulary body."
+  (if organki/convert-vocabulary-body-function
+      (funcall organki/convert-vocabulary-body-function voc)
+
+    (let ((fields (mapcar (lambda (field)
+                            (let ((value (slot-value voc field)))
+                              (if (eq field 'notes)
+                                  (organki--convert-notes value)
+                                value)))
+                          organki/anki-vocabulary-fields)))
+      (string-join fields "\t"))))
+
+
+(defun organki--convert-vocabulary-body-old (voc)
+  "Assemble the vocabulary body. This function is obsolete and kept for backward
+compatibility and testing."
+  (string-join
+   (list (oref voc entry)
+         (string-join-non-blanks (list (oref voc pronunciation)
+                                       (oref voc class))
+                                 " ")
+         (oref voc translation)
+         (organki--convert-notes (oref voc notes)))
+   "\t"))
 
 
 (defun organki--convert-sentences (sentences &optional notetype deck tags)
@@ -766,10 +856,12 @@ displaying in an Anki card."
 
   (let (lines)
     (dolist (voc vocabulary)
-      (let ((line (string-join (list (oref voc entry)
-                                     (oref voc pronunciation)
-                                     (oref voc translation))
-                               " ")))
+      (let ((line (string-join-non-blanks
+                   (list (oref voc entry)
+                         (oref voc pronunciation)
+                         (oref voc class)
+                         (oref voc translation))
+                   " ")))
         (setq line (concat "<li>" line "</li>"))
         (push line lines)))
     (when lines
@@ -814,18 +906,18 @@ displaying in an Anki card."
          (keywords (list key-deck key-note key-tags))
          (buffer-alist (org-collect-keywords keywords keywords))
          ;; List attributes
-         (attr-anki (org-list-get-attr-args :attr_anki)))
-    (list :deck (or (plist-get attr-anki :deck)
+         (attr_anki (org-list-get-attr-args :attr_anki)))
+    (list :deck (or (plist-get attr_anki :deck)
                     (org-entry-get nil key-deck t)
                     (alist-get key-deck buffer-alist nil nil #'string=))
-          :notetype (or (plist-get attr-anki :notetype)
+          :notetype (or (plist-get attr_anki :notetype)
                         (org-entry-get nil key-note t)
                         (alist-get key-note buffer-alist nil nil #'string=))
-          :tags (string-join (organki--get-default-tags buffer-alist attr-anki) " ")
+          :tags (string-join (organki--get-default-tags buffer-alist attr_anki) " ")
           :outdir "~/Downloads")))
 
 
-(defun organki--get-default-tags (&optional buffer-alist attr-anki)
+(defun organki--get-default-tags (&optional buffer-alist attr_anki)
   "Get the default tags for the current region. If the region is in org mode
 retrieve all the tags in the current subtree, which include the tags specified
 in in-buffer settings BUFFER-ALIST, the parent headings, and the list attributes
@@ -855,7 +947,7 @@ Duolingo::Section01::Unit01
          (all-tags '())
          result)
     ;; List tags
-    (when-let ((tags-str (plist-get attr-anki :tags))
+    (when-let ((tags-str (plist-get attr_anki :tags))
                (tags (string-split tags-str)))
       (push tags all-tags))
 

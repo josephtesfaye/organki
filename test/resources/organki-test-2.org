@@ -1,0 +1,193 @@
+#+ANKI_DECK: Test
+#+ANKI_NOTETYPE: Vocabulary
+#+ANKI_TAGS: tag1 tag2
+
+* Default value via in-buffer settings :tag3:tag4:
+:PROPERTIES:
+:ANKI_TAGS: tag5 tag6
+:END:
+
+This case tests the specification of the default values of Organki properties
+through in-buffer settings.
+
+#+ATTR_ANKI: :tags "tag7 tag8"
+- lapilli [ləˈpɪlʌɪ] n. pl. (Geology) rock fragments ejected from a volcano 火山砾
+- cumulonimbus [ˌkjuːmələʊˈnɪmbəs] n. a high mass of thick cloud with a flat
+  base, often seen during thunderstorms 积雨云
+
+#+ATTR_ARGS: :bindings :vfields1
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1::tag3::tag7 tag1::tag3::tag8 tag1::tag4::tag7 tag1::tag4::tag8 tag1::tag5::tag7 tag1::tag5::tag8 tag1::tag6::tag7 tag1::tag6::tag8 tag2::tag3::tag7 tag2::tag3::tag8 tag2::tag4::tag7 tag2::tag4::tag8 tag2::tag5::tag7 tag2::tag5::tag8 tag2::tag6::tag7 tag2::tag6::tag8	lapilli	[ləˈpɪlʌɪ]	n.	pl. (Geology) rock fragments ejected from a volcano 火山砾	
+Vocabulary	Test	tag1::tag3::tag7 tag1::tag3::tag8 tag1::tag4::tag7 tag1::tag4::tag8 tag1::tag5::tag7 tag1::tag5::tag8 tag1::tag6::tag7 tag1::tag6::tag8 tag2::tag3::tag7 tag2::tag3::tag8 tag2::tag4::tag7 tag2::tag4::tag8 tag2::tag5::tag7 tag2::tag5::tag8 tag2::tag6::tag7 tag2::tag6::tag8	cumulonimbus	[ˌkjuːmələʊˈnɪmbəs]	n.	a high mass of thick cloud with a flat base, often seen during thunderstorms 积雨云	
+#+end_example
+
+* Mixed-language entries (English/Japanese)
+Test the support for mixed-language entries (English/Japanese) in a Vocabulary list.
+
+Here is a Vocabulary list whose entries contain both English and Japanese ones:
+
+- 今日 n. today
+- 今日 きょう n. today
+- 今日 きょう [1] n. today
+- 今日 きょう [1] [[cl:foo.wav][⏯]] n. today
+- 昼間 ひる・ま [3] [[cl:foo.mp3][⏯]] / ちゅう・かん [0] [[cl:foo.mp3][⏯]] n. daytime 白天
+- shell membrane n. 蛋壳膜
+- shell membrane [abc] n. 蛋壳膜
+- shell membrane [abc] [[cl:foo.wav][⏯]] n. 蛋壳膜
+- shell membrane [[cl:foo.wav][⏯]] n. 蛋壳膜
+- shell membrane [abc] [[cl:foo.wav][⏯]] n. 蛋壳膜
+  蛋壳膜
+  蛋壳膜
+- 今日                                                     n.  today
+- 今日            きょう                                   n.  today
+- 今日            きょう   [1]                             n.  today
+- 今日            きょう   [1]   [[cl:foo.wav][⏯]]                        n.  today
+- 昼間            ひる・ま [3]   [[cl:foo.mp3][⏯]] / ちゅう・かん [0] [[cl:foo.mp3][⏯]]  n.  daytime 白天
+- shell membrane                                           n.  蛋壳膜
+- shell membrane  [abc]                                    n.  蛋壳膜
+- shell membrane  [abc]          [[cl:foo.wav][⏯]]                        n.  蛋壳膜
+- shell membrane                 [[cl:foo.wav][⏯]]                        n.  蛋壳膜
+
+#+ATTR_ARGS: :bindings :vfields1
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	今日		n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう	n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう [1]	n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう [1] [sound:foo.wav]	n.	today	
+Vocabulary	Test	tag1 tag2	昼間	ひる・ま [3] [sound:foo.mp3] / ちゅう・かん [0] [sound:foo.mp3]	n.	daytime 白天	
+Vocabulary	Test	tag1 tag2	shell membrane		n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc]	n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[sound:foo.wav]	n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜蛋壳膜蛋壳膜	
+Vocabulary	Test	tag1 tag2	今日		n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう	n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう [1]	n.	today	
+Vocabulary	Test	tag1 tag2	今日	きょう [1]   [sound:foo.wav]	n.	today	
+Vocabulary	Test	tag1 tag2	昼間	ひる・ま [3]   [sound:foo.mp3] / ちゅう・かん [0] [sound:foo.mp3]	n.	daytime 白天	
+Vocabulary	Test	tag1 tag2	shell membrane		n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc]	n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[sound:foo.wav]	n.	蛋壳膜	
+#+end_example
+
+* Test organki/convert-vocabulary-body-function
+Test the usage of the variable ~organki/convert-vocabulary-body-function~.
+
+- 今日 きょう [1] [[cl:foo.wav][⏯]] n. today
+- shell membrane [abc] [[cl:foo.wav][⏯]] n. 蛋壳膜
+
+#+ATTR_ARGS: :bindings :vfields1
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	今日	きょう [1] [sound:foo.wav]	n.	today	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
+#+end_example
+
+You can change how the vocabulary body is converted (the old way) by supplying a
+function to the variable ~organki/convert-vocabulary-body-function~. For example,
+when it's supplied with ~organki--convert-vocabulary-body-old~ the output is:
+
+#+NAME: TOKYO20250924093055
+#+ATTR_ARGS: :points (4075) :test noauto
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	今日	きょう [1] [sound:foo.wav] n.	today	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav] n.	蛋壳膜	
+#+end_example
+
+and when it's nil (default) the output is:
+
+#+NAME: TOKYO20250926230233
+#+ATTR_ARGS: :points (4075) :test noauto
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	今日	きょう [1] [sound:foo.wav]	n.	today		
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜		
+#+end_example
+
+* Test ~organki-test--get-tests~ :noauto:
+
+#+begin_src org
+A
+#+end_src
+
+The following output has 4 inputs:
+
+#+ATTR_ARGS: :test noauto
+- The input above it (27176)
+- The input named "20251002220322" in the current file (27752)
+- The input in the file "organki-test.org" in the current directory and named
+  "20251002220511" (5351)
+- The input in the file "readme.org" in the project root and named
+  "organki-example-properties" (15886)
+
+#+ATTR_ARGS: :inputs ("20251002220322"
+#+ATTR_ARGS: "organki-test.org::20251002220511"
+#+ATTR_ARGS: "r:readme.org::organki-example-properties")
+#+begin_example
+B
+#+end_example
+
+#+begin_src org
+C
+#+end_src
+
+#+ATTR_ARGS: :inputs ("20251002220322" "organki-test.org::20251002220511")
+#+ATTR_ARGS: :composite A
+#+begin_example
+D
+#+end_example
+
+#+ATTR_ARGS: :composite B
+#+begin_example
+E
+#+end_example
+
+#+begin_example
+F
+#+end_example
+
+#+NAME: 20251002220322
+#+ATTR_ARGS: :test noauto
+#+begin_src org
+G
+#+end_src
+
+The return result of ~organki-test--get-tests~ for this subtree should be:
+
+#+ATTR_ARGS: :test noauto
+#+begin_src elisp
+((27176                                                             ; input A
+  (27570                                                            ; output B
+   (28002                                                           ; input G
+    ("organki-test.org" . 5351)                                     ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 15886)))) ; input
+ (27747                                                             ; input C
+  ((27776 27910)                                                    ; output D+E
+   (28002                                                           ; input G
+    ("organki-test.org" . 5351)))                                   ; input
+  27969))                                                           ; output F
+#+end_src

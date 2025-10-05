@@ -128,6 +128,7 @@ A *Vocabulary* list uses this format:
 
 Here is a simple Vocabulary list:
 
+#+NAME: TOKYO20251003210207
 - 林檎 りんご [0] n. apple
 - 蜜柑 みかん [1] [[cl:202410021528.m4a][⏯]] n. mandarin orange
 
@@ -384,8 +385,9 @@ following scopes:
 
 - only a certain list
 
+  <<20250928093631>>
   To set the default values only for a certain list you use a tag line starting
-  with =#+ATTR_ANKI= directly over the list, values in the format of a plist, such
+  with ~#+ATTR_ANKI~ directly over the list, values in the format of a plist, such
   as:
 
   : #+ATTR_ANKI: :deck "English" :notetype "Vocabulary" :tags "tag1 tag2"
@@ -400,25 +402,25 @@ product, if you know what it means).
 Take this subtree for example,
 
 #+NAME: organki-example-properties
-#+begin_example
-\* Japanese :JP:
+#+begin_src org
+,* Japanese :JP:
 :PROPERTIES:
 :ANKI_NOTETYPE: Vocabulary
 :ANKI_DECK: Japanese
 :ANKI_TAGS: JLPT
 :END:
 
-\** Date & Time :Date:Time:
-\*** Vocabulary
+,** Date & Time :Date:Time:
+,*** Vocabulary
 :PROPERTIES:
 :ANKI_NOTE: One Entry One Card
 :END:
 
-#+ATTR_ANKI: :deck "Japanese2" :tags "elementary"
+,#+ATTR_ANKI: :deck "Japanese2" :tags "elementary"
 - 今日 きょう [1] [[cl:106329x1268.wav][⏯]] n. today 今天
 - 午前 ご・ぜん [1] n. morning 早上
 - 午後 ご・ご [1] [[cl:330479x304.wav][⏯]] n. afternoon 下午
-#+end_example
+#+end_src
 
 The notetype and deck of the imported notes would be "Vocabulary" and
 "Japanese2" respectively, and they would have a tag tree like this:
@@ -519,3 +521,151 @@ notetype, deck, and tags of the notes are specified.
 #deck column:2
 #tags column:6
 #+end_example
+
+** Testing
+You need to write ERT tests before submitting pull requests. The following is
+how I did the tests.
+
+*** Automatic tests
+The main entry point for testing is ~organki/import-region~, that is, you can call
+it with some inputs and then compare the outputs with your expected ones. This
+process can be done in a semi-automatic fashion with the assistance of
+~organki-test/run-tests-in-file~. You only need to write your test case as a
+subtree in an Org file under the directory =test/resources/= and put the inputs
+and expected outputs in the subtree, and then evaluate =test/test-runner.el=, no
+code writing during the process.
+
+**** Inputs and outputs
+To be specific, a test case or scenario is titled with a headline, under which
+there are inputs and outputs of the concrete tests. The inputs are written as
+plain lists, and the outputs of an input are presented in example blocks
+following the list until another list.
+
+An input can have multiple outputs and there is an ambiguity about it. Since
+~organki/import-region~ returns an alist which may contain multiple files we may
+say an input produces multiple outputs, which is different from what we are
+talking about in a test scenario, where if an input has multiple outputs each
+output corresponds to the whole result returned from a single call to
+~organki/import-region~, multiple or not. Thus such an output may refer to one or
+multiple example blocks and we say it's a *composite output*. To compose such an
+output add the ~:composite~ keyword to the [[TOKYO20251001193545][#+ATTR_ARGS]] of each component output.
+<<TOKYO20251001193106>>
+
+The input and its outputs can be in different files — say, when you want to test
+the integrity of an example input in the user manual but don’t want to keep the
+outputs there, but instead in another designated test file. In this case it's
+required that the input has a ~#+NAME~ tag line and each output use the ~:input~
+keyword in its [[TOKYO20251002095718][#+ATTR_ARGS]] to refer to that input. This also works when the
+input and outputs are in the same file, which provides another way of
+pinpointing them besides implicit inference. <<TOKYO20251002100052>>
+
+The input can also be an org source block, i.e.,
+
+#+begin_example
+,#+begin_src org
+input
+,#+end_src
+#+end_example
+
+In this case, the ~:points~ and ~:regions~ refer to the positions starting inside
+that block, or the sub-editing buffer opened by =C-c '= (~org-edit-src-code~). See
+[[#20251001192933][test parameters]]. <<TOKYO20251003200457>>
+
+**** Test parameters
+:PROPERTIES:
+:CUSTOM_ID: 20251001192933
+:END:
+A ~#+ATTR_ARGS~ tag line is used above an input or output to store parameters
+relating to that test. Its value takes the form of a plist, just without the
+outer brackets. Here are two basic parameters:
+
+- ~:points (1 10 ...)~: For output, meaning run test against the output with point
+  at these positions respectively.
+- ~:regions ((1 10) (2 8) ...)~: For output, meaning run test against the output
+  with these regions selected respectively.
+
+If neither of them is supplied the ~:begin~ of the input is used as a point.
+
+Multiple ~#+ATTR_ARGS~ lines are also possible if you want to put the parameters
+on separate lines.
+
+Parameters used in the [[20250928093631][#+ATTR_ANKI]] line can be overridden by supplying them in
+~#+ATTR_ARGS~.
+
+A subtree, a plain list, or an example block can be marked not for such testing:
+
+- A subtree is marked with the ~noauto~ tag in the headline.
+- A plain list or an example block is marked with ~:test noauto~ in ~#+ATTR_ARGS~.
+
+  If a list is marked then it is not treated as an input. The previous unmarked
+  list continues to be the current input, and the subsequent unmarked example
+  blocks are recognized as its outputs.
+
+For testing backward compatibility with the old test cases as the program
+evolves, a ~:bindings~ keyword is provided to the ~#+ATTR_ARGS~ line, which tells
+the testing program to declare a predefined set of variable bindings before
+calling Organki. See [[help:organki-test--bindings]].
+
+The ~:composite~ keyword is used to mark an output as part of a [[TOKYO20251001193106][composite output]],
+which takes one of the keys in the alist returned by ~organki/import-region~,
+i.e., ~Vocabulary~ or ~Sentence~ (symbols). For all other parameters common to the
+whole composite output, they are always found in the first component output's
+~#+ATTR_ARGS~ line. <<TOKYO20251001193545>>
+
+The ~:inputs~ keyword is used to pinpoint other inputs besides the default one by
+referring to their names specified in the ~#+NAME~ lines. If the inputs are in the
+same file you simply provide their names (as double-quoted strings), and if [[TOKYO20251002100052][in
+different files]] you should use the format ="<file>::<name>"= where =file= is the
+input's file path, which can be absolute or relative. If it's relative, you can
+prepend it with a =r:= to indicate relative to the project root, otherwise
+relative to the current directory. <<TOKYO20251002095718>>
+
+You can't refer to a plain list as an input in ~:inputs~ since the ~:points~ and
+~:regions~ are absolute positions for the default plain list, which contradicts
+with other plain lists as inputs. They are only relative when the default input
+is a source block or doesn't exist. In practice, you can use ~:inputs~ when:
+
+- The default input and the other inputs are all plain lists and there is
+  neither ~:points~ nor ~:regions~ specified.
+- The default input and the other inputs are all source blocks and in this case
+  ~:points~ and ~:regions~ are applicable.
+
+**** A minimal example
+Here is a minimal example of such a test. See the test files under
+=test/resources/= for the usage in action.
+
+#+begin_example
+,* Test case 1
+
+Description of this test.
+
+- 今日 きょう [1] [[cl:foo.wav][⏯]] n. today
+- shell membrane [abc] [[cl:foo.wav][⏯]] n. 蛋壳膜
+
+,#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	今日	きょう [1] [sound:foo.wav]	n.	today	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
+,#+end_example
+
+# No testing for this output.
+,#+ATTR_ARGS: notest
+,#+begin_example
+Some output.
+,#+end_example
+#+end_example
+
+*** Writing your own tests
+You can always write your own tests if they can't be done in the automatic way.
+However, there are some conventions to follow for this project.
+
+If you're to run a test with the entry point ~organki/import-region~, you can
+write the inputs and outputs similarly to the automatic way. The differences are
+
+1. An output must have the ~#+NAME: <unique name>~ line.
+
+Then you just call ~organki-test--run-example~ with that name in your ERT test.
