@@ -229,3 +229,24 @@ Sentence	Test	二番目の問題に答えてください。		Please answer the s
 #deck column:2
 Vocabulary	Test	一番目	いちばんめ	phrn.	first		<b>Examples</b><ul><li>一番目のドアを開けてください。 Please open the first door.</li></ul>
 #+end_example
+
+* Test diacritics
+Test [[p:notes/eecs.org::#20251009164033][decomposed kana characters]].
+
+#+begin_src org
+,#+ANKI_DECK: Test
+,#+ANKI_NOTETYPE: Vocabulary
+
+- 三匹目の犬 さんびきめのいぬ phrn. the third dog
+- 一頭目の象 いっとうめのぞう phrn. the first elephant
+#+end_src
+
+#+ATTR_ARGS: :points (48)
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+Vocabulary	Test	三匹目の犬	さんびきめのいぬ	phrn.	the third dog		
+Vocabulary	Test	一頭目の象	いっとうめのぞう	phrn.	the first elephant		
+#+end_example

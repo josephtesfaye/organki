@@ -355,9 +355,13 @@ it's enclosed in the grouping construct \"\\(...\\)?\" to mean it can be present
 or not. Likewise, \"\\[\\[.+?\\]\\]\" matches the second pair of square brackets
 (audio part) and can be present or not. Finally, \"[a-z]+\\.\"
 matches the part of speech and must be present."
-  (let ((regexp (concat "\\(?1:[ ]+[ぁ-んァ-ヶㇰ-ㇿー・]+\\)?" ; Match furigana
-                        "\\(?2:[ ]+\\[.+?\\]\\)?"   ; Match accent and audio
-                        "\\(?3:[ ]+[a-z]+\\.\\)"))) ; Match part of speech
+  (let ((regexp (concat
+                 ;; Match furigana (hiragana, katakana, diacritics)
+                 "\\(?1:[ ]+[ぁ-んァ-ヶㇰ-ㇿー・\u3099\u309A]+\\)?"
+                 ;; Match accent and audio
+                 "\\(?2:[ ]+\\[.+?\\]\\)?"
+                 ;; Match part of speech
+                 "\\(?3:[ ]+[a-z]+\\.\\)")))
     (if (string-match regexp string)
         (let* ((entry (substring string 0 (match-beginning 0)))
                (furigana (string-trim-match (match-string 1 string)))
