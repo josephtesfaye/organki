@@ -479,9 +479,13 @@ the results with EXPECTS."
 
 
 (defun organki-test--compare (output expect &optional point)
-  (let ((test (equal output expect))
+  (let ((success (equal output expect))
         diff)
-    (when (not test)
+    (when (not success)
+      ;; Close the source editing buffer.
+      (when (string-prefix-p "*organki-test-input-" (buffer-name))
+        (org-edit-src-abort))
+
       (setq diff (string-diff output expect 10))
       (ert-info ((format (concat "Output doesn't match expect "
                                  "at point %s in %s.\n"
@@ -491,6 +495,6 @@ the results with EXPECTS."
                          point (current-buffer) output expect
                          (car diff) (cadr diff))
                  :prefix "Error: ")
-        (should test)))))
+        (should success)))))
 
 (provide 'organki-test-common)

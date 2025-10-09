@@ -252,15 +252,15 @@ below.
     Vocabulary item. The indices start from 1 in accordance with the numbering
     of items in ordered lists.
 
-    - =:L (<indices>)=
-      The lines to be referenced. Each line is treated as an example.
+    - =:L (<indices>)=: The lines to be referenced. Each line is treated as an
+      example.
 
       - =:L=: A keyword short for "Lines".
       - =(<indices>)=: The indices of the lines to be referenced in the parent item.
 
-    - =:G ((<indices>)...)=
-      The groups of lines to be referenced. Each group of lines together is one
-      example. This is useful for generating multi-line examples such as dialogues.
+    - =:G ((<indices>)...)=: The groups of lines to be referenced. Each group of
+      lines together is one example. This is useful for generating multi-line
+      examples such as dialogues.
 
       - =:G=: A keyword short for "Groups".
       - =((<indices>)...)=: The groups of indices of the lines to be referenced.
@@ -356,7 +356,7 @@ You can specify default values of these properties to save you from entering
 them during every exporting. The default values can be specified for the
 following scopes:
 
-- all lists in the current buffer
+- All lists in the current buffer
 
   To set the default values for the whole buffer you use the in-buffer settings
   such as:
@@ -367,7 +367,7 @@ following scopes:
   ,#+ANKI_TAGS: Fujisan
   #+end_example
 
-- all lists under a subtree
+- All lists under a subtree
 
   To set the default values for a subtree you use a property drawer such as:
 
@@ -383,21 +383,25 @@ following scopes:
   Tags on the headline (as entered with ~org-ctrl-c-ctrl-c~) are also treated as
   Anki tags.
 
-- only a certain list
+- Only a certain list
 
-  <<20250928093631>>
   To set the default values only for a certain list you use a tag line starting
   with ~#+ATTR_ANKI~ directly over the list, values in the format of a plist, such
-  as:
+  as: <<20250928093631>>
 
   : #+ATTR_ANKI: :deck "English" :notetype "Vocabulary" :tags "tag1 tag2"
+
+  You can add ~#+ATTR_ANKI~ for a sublist, which is only effective when you make
+  an active region over its items. If ~#+ATTR_ANKI~ occurs multiple times on the
+  different levels of a list it's always the closest one to the active region
+  being adopted.
 
 Specifications of these scopes can exist at the same time and in this case if
 notetype and deck occur several times in the subtree and its child subtrees, the
 one closest to the list takes precedence. For tags all occurrences from all
 scopes are accumulated and transformed into a tag tree as seen in the Anki
 browser with respect to the hierarchy of the scopes (actually a Cartesian
-product, if you know what it means).
+product, if you know what that means).
 
 Take this subtree for example,
 
@@ -482,12 +486,18 @@ you like.
 You can use the following options to control certain aspects of the generated
 contents. Check their docstrings for more detailed descriptions.
 
-- ~toggle-organki/import-region-open-files~: Whether to open the generated files
-  automatically.
-- ~toggle-organki/import-region-disable-tags~: Whether to disable tags.
-- ~toggle-organki/import-region-disable-APR~: Whether to disable Automatic Parent
-  Reference. If it is disabled the generated children will have no reference to
-  the main entry.
+- ~organki-toggle/import-region-open-files~
+
+  Whether to open the generated files automatically.
+
+- ~organki-toggle/import-region-disable-tags~
+
+  Whether to disable tags.
+
+- ~organki-toggle/import-region-disable-APR~
+
+  Whether to disable Automatic Parent Reference. If it is disabled the generated
+  children will have no reference to the main entry.
 
 ** Normalizing & Prettifying
 Organki can prettify the Vocabulary lists and Sentence lists to increase visual

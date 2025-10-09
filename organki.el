@@ -96,19 +96,25 @@
   :documentation "A class representing the Anki notetype named \"Sentence\".")
 
 
-(defvar-local-toggle organki/import-region-open-files nil
-  "Whether to open the generated files upon calling `import-region'. If non-nil
-the generated files will be opened automatically.")
+;; This function definition needs to be put before the following variable
+;; declarations.
+(defun organki--funname (var)
+  (intern (concat "organki-toggle/" (string-remove-prefix
+                                     "organki/" (symbol-name var)))))
 
-(defvar-local-toggle organki/import-region-disable-tags nil
-                     "Whether to disable tags upon calling `import-region'. If it is non-nil there
-will be no tags for the generated items. This is useful when you want to update
-the existing notes through importing but don't want the existing tags to be
-overwritten.")
+(defvar-local-toggle organki/import-region-open-files nil organki--funname
+  "Whether to open the generated files upon calling `organki/import-region'. If
+non-nil the generated files will be opened automatically.")
 
-(defvar-local-toggle organki/import-region-disable-APR nil
-                     "Whether to disable APR (Automatic Parent Reference) for `import-region'. If
-it is non-nil APR will be disabled and the generated children will have no
+(defvar-local-toggle organki/import-region-disable-tags nil organki--funname
+"Whether to disable tags upon calling `organki/import-region'. If it is non-nil
+there will be no tags for the generated items. This is useful when you want to
+update the existing notes through importing but don't want the existing tags to
+be overwritten.")
+
+(defvar-local-toggle organki/import-region-disable-APR nil organki--funname
+"Whether to disable APR (Automatic Parent Reference) for `organki/import-region'.
+If it is non-nil APR will be disabled and the generated children will have no
 reference to the main entry.")
 
 (defvar-local organki/convert-vocabulary-body-function nil

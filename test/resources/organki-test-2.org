@@ -191,3 +191,41 @@ The return result of ~organki-test--get-tests~ for this subtree should be:
     ("organki-test.org" . 5351)))                                   ; input
   27969))                                                           ; output F
 #+end_src
+
+* Test ~org-list-get-attr-args~
+
+#+begin_src org
+,#+ANKI_DECK: Test
+,#+ANKI_NOTETYPE: Vocabulary
+
+1. number + 番目（ばんめ）
+
+   ,#+ATTR_ANKI: :notetype "Sentence"
+   - 一番目のドアを開けてください。 Please open the first door.
+     - V:
+       - 一番目 いちばんめ phrn. first
+
+   - 二番目の問題に答えてください。 Please answer the second question.
+
+2. つ + 目（め）
+#+end_src
+
+#+ATTR_ARGS: :regions ((69 253) (106 252))
+#+ATTR_ARGS: :composite Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+Sentence	Test	一番目のドアを開けてください。		Please open the first door.	<b>Vocabulary</b><ul><li>一番目 いちばんめ phrn. first</li></ul>
+Sentence	Test	二番目の問題に答えてください。		Please answer the second question.	
+#+end_example
+
+#+ATTR_ARGS: :composite Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+Vocabulary	Test	一番目	いちばんめ	phrn.	first		<b>Examples</b><ul><li>一番目のドアを開けてください。 Please open the first door.</li></ul>
+#+end_example
