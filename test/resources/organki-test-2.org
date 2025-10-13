@@ -69,7 +69,7 @@ Vocabulary	Test	tag1 tag2	shell membrane		n.	蛋壳膜
 Vocabulary	Test	tag1 tag2	shell membrane	[abc]	n.	蛋壳膜	
 Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
 Vocabulary	Test	tag1 tag2	shell membrane	[sound:foo.wav]	n.	蛋壳膜	
-Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜蛋壳膜蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜 蛋壳膜 蛋壳膜	
 Vocabulary	Test	tag1 tag2	今日		n.	today	
 Vocabulary	Test	tag1 tag2	今日	きょう	n.	today	
 Vocabulary	Test	tag1 tag2	今日	きょう [1]	n.	today	
@@ -103,7 +103,7 @@ function to the variable ~organki/convert-vocabulary-body-function~. For example
 when it's supplied with ~organki--convert-vocabulary-body-old~ the output is:
 
 #+NAME: TOKYO20250924093055
-#+ATTR_ARGS: :points (4075) :test noauto
+#+ATTR_ARGS: :points (4077) :test noauto
 #+begin_example
 #separator:tab
 #html:true
@@ -117,7 +117,7 @@ Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav] n.	蛋壳膜
 and when it's nil (default) the output is:
 
 #+NAME: TOKYO20250926230233
-#+ATTR_ARGS: :points (4075) :test noauto
+#+ATTR_ARGS: :points (4077) :test noauto
 #+begin_example
 #separator:tab
 #html:true
@@ -129,68 +129,161 @@ Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜
 #+end_example
 
 * Test ~organki-test--get-tests~ :noauto:
+Test ~organki-test--get-tests~ in normal usage:
 
 #+begin_src org
+,* Heading
+
+,#+begin_src org
 A
-#+end_src
+,#+end_src
 
 The following output has 4 inputs:
 
-#+ATTR_ARGS: :test noauto
-- The input above it (27176)
-- The input named "20251002220322" in the current file (27752)
+,#+ATTR_ARGS: :test noauto
+- The input above it (12)
+- The input named "20251002220322" in the current file (873)
 - The input in the file "organki-test.org" in the current directory and named
   "20251002220511" (5351)
 - The input in the file "readme.org" in the project root and named
   "organki-example-properties" (15886)
 
-#+ATTR_ARGS: :inputs ("20251002220322"
-#+ATTR_ARGS: "organki-test.org::20251002220511"
-#+ATTR_ARGS: "r:readme.org::organki-example-properties")
-#+begin_example
+,#+ATTR_ARGS: :inputs ("20251002220322"
+,#+ATTR_ARGS:          "organki-test.org::202410212013"
+,#+ATTR_ARGS:          "r:readme.org::organki-example-properties")
+,#+begin_example
 B
-#+end_example
+,#+end_example
 
-#+begin_src org
+,#+begin_src org
 C
-#+end_src
+,#+end_src
 
-#+ATTR_ARGS: :inputs ("20251002220322" "organki-test.org::20251002220511")
-#+ATTR_ARGS: :composite A
-#+begin_example
+,#+ATTR_ARGS: :inputs ("20251002220322"
+,#+ATTR_ARGS:          "organki-test.org::202410212013")
+,#+ATTR_ARGS: :composite D
+,#+begin_example
 D
-#+end_example
+,#+end_example
 
-#+ATTR_ARGS: :composite B
-#+begin_example
+,#+ATTR_ARGS: :composite E
+,#+begin_example
 E
-#+end_example
+,#+end_example
+
+,#+begin_example
+F
+,#+end_example
+
+,#+NAME: 20251002220322
+,#+ATTR_ARGS: :test noauto
+,#+begin_src org
+G
+,#+end_src
+#+end_src
+
+The output of calling ~(organki-test--get-tests 1)~ should be:
 
 #+begin_example
-F
+((12                                                                ; input A
+  (401                                                              ; output B
+   (869                                                             ; input G
+    ("organki-test.org" . 403)                                      ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 16174)))) ; input
+ (594                                                               ; input C
+  ((623 777)                                                        ; output D+E
+   (869                                                             ; input G
+    ("organki-test.org" . 403)))                                    ; input
+  836))                                                             ; output F
 #+end_example
 
-#+NAME: 20251002220322
-#+ATTR_ARGS: :test noauto
+Test consecutive composite outputs:
+
 #+begin_src org
+,* Heading
+,#+begin_src org
+A
+,#+end_src
+
+,#+NAME: 20251013145359
+,#+ATTR_ARGS: :test noauto
+,#+begin_src org
+B
+,#+end_src
+
+The following output has 1 extra input:
+
+,#+ATTR_ARGS: :test noauto
+- The input named "20251013145359" in the current file (63)
+
+,#+ATTR_ARGS: :inputs ("20251013145359" "20251013145359")
+,#+ATTR_ARGS: :composite C
+,#+begin_example
+C
+,#+end_example
+
+,#+ATTR_ARGS: :composite D
+,#+begin_example
+D
+,#+end_example
+
+Another input:
+
+,#+begin_src org
+E
+,#+end_src
+
+,#+ATTR_ARGS: :composite F
+,#+begin_example
+F
+,#+end_example
+
+,#+ATTR_ARGS: :composite G
+,#+begin_example
 G
+,#+end_example
 #+end_src
 
-The return result of ~organki-test--get-tests~ for this subtree should be:
+The output of calling ~(organki-test--get-tests 1)~ should be:
 
-#+ATTR_ARGS: :test noauto
-#+begin_src elisp
-((27176                                                             ; input A
-  (27570                                                            ; output B
-   (28002                                                           ; input G
-    ("organki-test.org" . 5351)                                     ; input
-    ("/Users/josephtesfaye/projects/organki/readme.org" . 15886)))) ; input
- (27747                                                             ; input C
-  ((27776 27910)                                                    ; output D+E
-   (28002                                                           ; input G
-    ("organki-test.org" . 5351)))                                   ; input
-  27969))                                                           ; output F
+#+begin_example
+((11 ((246 362) (40 40))) (437 (466 525)))
+#+end_example
+
+#+begin_src org
+,* Heading
+,#+begin_src org
+A
+,#+end_src
+
+,#+NAME: 20251013145359
+,#+ATTR_ARGS: :test noauto
+,#+begin_src org
+B
+,#+end_src
+
+The following output has 1 extra input:
+
+,#+ATTR_ARGS: :test noauto
+- The input named "20251013145359" in the current file (63)
+
+,#+ATTR_ARGS: :inputs ("20251013145359" "20251013145359")
+,#+ATTR_ARGS: :composite C
+,#+begin_example
+C
+,#+end_example
+
+,#+ATTR_ARGS: :composite D
+,#+begin_example
+D
+,#+end_example
 #+end_src
+
+The output of calling ~(organki-test--get-tests 1)~ should be:
+
+#+begin_example
+((11 ((246 362) (40 40))))
+#+end_example
 
 * Test ~org-list-get-attr-args~
 
@@ -249,4 +342,20 @@ Test [[p:notes/eecs.org::#20251009164033][decomposed kana characters]].
 #deck column:2
 Vocabulary	Test	三匹目の犬	さんびきめのいぬ	phrn.	the third dog		
 Vocabulary	Test	一頭目の象	いっとうめのぞう	phrn.	the first elephant		
+#+end_example
+
+* Convert plain lists to HTML
+- accrete [ə'kri:t] vi./vt. grow or form by accumulation or coalescence 积淀、增生
+  - E:
+    - It's not even all that easy to navigate, because most of the material has
+      just accreted over the past seven years.
+    - The collection of art he had accreted was to be sold.
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	accrete	[ə'kri:t]	vi./vt.	grow or form by accumulation or coalescence 积淀、增生		<b>Examples</b><p><ul><li>It&apos;s not even all that easy to navigate, because most of the material has just accreted over the past seven years.</li><li>The collection of art he had accreted was to be sold.</li></ul></p>
 #+end_example

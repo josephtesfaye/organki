@@ -16,7 +16,8 @@
 (defconst organki-test--bindings
   '(:vbody1
     (organki/convert-vocabulary-body-function
-     organki--convert-vocabulary-body-old)
+     organki--convert-vocabulary-body-old
+     organki/convert-list-to-type text)
     :vfields1
     (organki/anki-vocabulary-fields
      (entry pronunciation class translation notes)))
@@ -78,10 +79,11 @@ same form.")
                    ;; has :inputs key
                    ((and (pred listp)
                          (guard (= 2 (length points-old)))
+                         (let output (car points-old))
                          (let inputs (cadr points-old))
                          (guard (listp inputs)))
                     (oset obj inputs inputs)
-                    (list (car points-old)))
+                    (if (listp output) output (list output)))
                    ;; are all integers
                    ((and (pred listp)
                          (guard (not (seq-find (lambda (o)
@@ -103,17 +105,39 @@ same form.")
   "Run all runnable tests in FILES automatically. Each element of FILES can
 either be a filename—all tests in that file will run, or a list where
 the CAR is the filename and the CDR is the headlines—only tests of which will
-run."
+run. You can specify one of the following keywords at the end of the CDR to runs
+tests in the scope specified by the keyword in addition to those specified as
+headlines.
+
+    :after - Run tests after the last headline.
+    :before - Run tests before the last headline."
 
   (dolist (file files)
     (with-current-buffer (find-file-noselect
                           (organki-test--find-file
                            (if (listp file) (car file) file) 'test))
-      (elog--debug "* Run tests in file: %s"
-                   (if (listp file)
-                       (concat (car file) ": " (string-join (cdr file) ", "))
-                     file))
-      (let ((headlines (and (listp file) (cdr file))))
+      (elog--debug
+       "* Run tests in file: %s"
+       (if (listp file)
+           (concat (car file) ": " (string-join (mapcar
+                                                 (lambda (s)
+                                                   (if (not (stringp s))
+                                                       (symbol-name s)
+                                                     s))
+                                                 (cdr file))
+                                                ", "))
+         file))
+
+      (let* ((headlines (and (listp file) (cdr file)))
+             (scope (and headlines (car (member (car (last headlines))
+                                                '(:after :before)))))
+             (last-headline (and scope (car (last headlines 2)))))
+        ;; Record the position the last headline to test when scope is
+        ;; specified.
+        (when last-headline
+          (setq last-headline (org-find-exact-headline-in-buffer
+                               last-headline nil t)))
+
         (org-element-map (org-element-parse-buffer 'headline) 'headline
           (lambda (element)
             (let* ((headline (org-element-property :raw-value element))
@@ -122,7 +146,12 @@ run."
               ;; When the headline isn't tagged "noauto" and can be found in
               ;; `headlines' (if non-nil) run it as an automatic test.
               (when (and (not (member "noauto" tags))
-                         (or (null headlines) (member headline headlines)))
+                         (or (null headlines)
+                             (or (member headline headlines)
+                                 (and last-headline
+                                      (pcase scope
+                                        (:after (> pos last-headline))
+                                        (:before (< pos last-headline)))))))
                 (elog--debug "** Run tests in subtree: %s" headline)
                 (organki-test--run-subtree pos)))))))))
 
@@ -342,15 +371,21 @@ the `cdr' is the positions of the input's corresponding outputs. "
                    (composite (plist-get attr_args :composite))
                    (noauto (eq 'noauto (plist-get attr_args :test)))
                    inputs)
-              ;; If an input is marked with the `noauto' tag in the #+ATTR_ARGS
-              ;; line, it is not treated as an input, and the previous unmarked
-              ;; list continues to be the current input. If an example block has
-              ;; an `:test noauto' it is not treated as an output.
-              (if (member (org-element-type element) '(plain-list src-block))
-                  (when (not noauto)
-                    (push (list begin) alist))
+              (cl-symbol-macrolet ((prev-io (car alist)))
+                ;; If an input is marked with the `noauto' tag in the #+ATTR_ARGS
+                ;; line, it is not treated as an input, and the previous unmarked
+                ;; list continues to be the current input. If an example block has
+                ;; an `:test noauto' it is not treated as an output.
+                (if (member (org-element-type element) '(plain-list src-block))
+                    (when (not noauto)
+                      ;; When bumping into another input the previous composite
+                      ;; output comes to an end.
+                      (when (and (listp (car prev-io)) composite-inputs)
+                        (setcar prev-io (list composite-inputs (car prev-io)))
+                        (setq composite-inputs nil))
 
-                (cl-symbol-macrolet ((prev-io (car alist)))
+                      (push (list begin) alist))
+
                   (when (not noauto)
                     (setq inputs (organki-test--get-inputs attr_args))
                     (ert-info ((format "No input found for the output at %s in %s"
@@ -366,9 +401,12 @@ the `cdr' is the positions of the input's corresponding outputs. "
                               (push begin (car prev-io))
                             (push (list begin) prev-io)))
 
-                      ;; An output can have multiple inputs from the :input key.
+                      ;; An output can have multiple inputs from the :inputs key.
                       ;; In this case, the output in the return result is a list
                       ;; whose CAR is the output and CDR is the inputs.
+
+                      ;; When bumping into a non-composite output the previous
+                      ;; composite output comes to an end.
                       (when (and (listp (car prev-io)) composite-inputs)
                         (setcar prev-io (list composite-inputs (car prev-io)))
                         (setq composite-inputs nil))
@@ -377,7 +415,14 @@ the `cdr' is the positions of the input's corresponding outputs. "
                       (push (if inputs (list inputs begin) begin) prev-io)))))))
 
           ;; Exclude sublists
-          nil nil 'plain-list))
+          nil nil 'plain-list)
+
+        ;; When the composite output is at the end of the subtree
+        (cl-symbol-macrolet ((prev-io (car alist)))
+          (when (and (listp (car prev-io)) composite-inputs)
+            (setcar prev-io (list composite-inputs (car prev-io)))
+            (setq composite-inputs nil))))
+
       (setq alist (deep-reverse alist)))
     alist))
 

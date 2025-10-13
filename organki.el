@@ -15,11 +15,13 @@
 ;; software.
 
 ;;; Code:
-(require 'jts-hash-table-utils)
+(require 's)
 (require 'jts-string-utils)
+(require 'jts-hash-table-utils)
 (require 'jts-buffer-utils)
 (require 'jts-org-utils)
 (require 'jts-func-utils)
+(require 'jts-xml-utils)
 
 (defconst organki--NS 'Sentence "The \"Sentence\" notetype.")
 (defconst organki--NV 'Vocabulary "The \"Vocabulary\" notetype.")
@@ -102,18 +104,27 @@
   (intern (concat "organki-toggle/" (string-remove-prefix
                                      "organki/" (symbol-name var)))))
 
-(defvar-local-toggle organki/import-region-open-files nil organki--funname
-  "Whether to open the generated files upon calling `organki/import-region'. If
+(defvar-local-toggle
+ organki/import-region-open-files nil organki--funname
+ "Whether to open the generated files upon calling `organki/import-region'. If
 non-nil the generated files will be opened automatically.")
 
-(defvar-local-toggle organki/import-region-disable-tags nil organki--funname
-"Whether to disable tags upon calling `organki/import-region'. If it is non-nil
+(defvar-local-toggle
+ organki/disable-tags nil organki--funname
+ "Whether to disable tags upon calling `organki/import-region'. If it is non-nil
 there will be no tags for the generated items. This is useful when you want to
 update the existing notes through importing but don't want the existing tags to
 be overwritten.")
 
-(defvar-local-toggle organki/import-region-disable-APR nil organki--funname
-"Whether to disable APR (Automatic Parent Reference) for `organki/import-region'.
+(defvar-local-toggle
+ organki/use-headlines-as-tags nil organki--funname
+ "Whether to use the headlines themselves as tags. If non-nil the headlines
+themselves are treated as tags in addition to the normal headline tags and the
+`:ANKI_TAGS:' property.")
+
+(defvar-local-toggle
+ organki/import-region-disable-APR nil organki--funname
+ "Whether to disable APR (Automatic Parent Reference) for `organki/import-region'.
 If it is non-nil APR will be disabled and the generated children will have no
 reference to the main entry.")
 
@@ -124,12 +135,21 @@ during the tests.")
 
 (defcustom organki/anki-vocabulary-fields
   '(entry pronunciation class translation examples notes)
-
   "Define the fields of the Vocabulary note type as a list of
 symbols found in the slot names of `organki--anki-vocabulary' to
 tell Organki which fields should be imported and what is the
 order of the fields."
   :type '(repeat symbol)
+  :group 'organki)
+
+(defcustom organki/convert-list-to-type nil
+  "Which type of content should the plain lists be convert into. This is used to
+convert any plain list without a special meaning such as one present in a
+comment. The default value is nil, which is to convert them to the HTML format,
+and if it is `text' convert to a plain text format which preserves the
+indentation of the original lists."
+  :type '(choice (const :tag "HTML" nil)
+	             (const :tag "Plain text" text))
   :group 'organki)
 
 
@@ -176,7 +196,7 @@ under OUTPUT-DIR."
           (deck (read-string (format "Deck (default '%s'): " default-deck) nil nil default-deck))
           (notetype (read-string (format "Notetype (default '%s'): " default-notetype)
                                  nil nil default-notetype))
-          (tags (when (not organki/import-region-disable-tags)
+          (tags (when (not organki/disable-tags)
                   (read-string (format "Tags (default '%s'): " default-tags)
                                nil nil default-tags)))
           (outdir (read-directory-name
@@ -288,7 +308,8 @@ of `organki--anki-vocabulary' objects."
                   (push key-item-sentences child-sentences)))
 
                ;; Convert sub-items or other types of sublists
-               (t (setq key-item-notes (organki--convert-other-notes key-item key-item-strs))))
+               (t (setq key-item-notes (organki--convert-other-notes
+                                        key-item key-item-strs))))
 
               (puthash key-item-key key-item-notes item-notes))))
 
@@ -336,12 +357,7 @@ of `organki--anki-vocabulary' objects."
     ;; Un-fill the translation if it contains multiple lines.
     (setq translation (car (last parts)))
     (when (string-match-p "\n" translation)
-      (setq translation (with-temp-buffer
-                          (insert translation)
-                          (goto-char (point-min))
-                          (set-fill-column most-positive-fixnum)
-                          (org-fill-paragraph)
-                          (buffer-string)))
+      (setq translation (string-unfill translation))
       (setcar (last parts) translation))
     parts))
 
@@ -361,7 +377,7 @@ matches the part of speech and must be present."
                  ;; Match accent and audio
                  "\\(?2:[ ]+\\[.+?\\]\\)?"
                  ;; Match part of speech
-                 "\\(?3:[ ]+[a-z]+\\.\\)")))
+                 "\\(?3:[ ]+[a-z./]+\\.\\)")))
     (if (string-match regexp string)
         (let* ((entry (substring string 0 (match-beginning 0)))
                (furigana (string-trim-match (match-string 1 string)))
@@ -385,7 +401,7 @@ matches the part of speech and must be present."
 
   (let ((regexp (concat "\\(?1:[ ]+\\[[^[]+?\\]\\)?"    ; Match IPA
                         "\\(?2:[ ]+\\[\\[.+?\\]\\]\\)?" ; Match audio
-                        "\\(?3:[ ]+[a-z]+\\.\\)")))     ; Match part of speech
+                        "\\(?3:[ ]+[a-z./]+\\.\\)")))   ; Match part of speech
     (if (string-match regexp string)
         (let* ((entry (substring string 0 (match-beginning 0)))
                (ipa (string-trim-match (match-string 1 string)))
@@ -462,10 +478,12 @@ Return an alist of notetype/list-of-objects pairs."
                             (key-item-sentences (cdr (assoc organki--NS key-item-results))))
                        (push key-item-vocs child-vocs)
                        (push key-item-sentences child-sentences)
-                       (setq key-item-notes (organki--get-direct-children item key-item-vocs))))
+                       (setq key-item-notes (organki--get-direct-children
+                                             item key-item-vocs))))
 
                     ;; Read the string after the key as the value.
-                    (_ (setq key-item-notes (organki--convert-other-notes key-item key-item-strs))))
+                    (_ (setq key-item-notes (organki--convert-other-notes
+                                             key-item key-item-strs))))
 
                   (puthash key-item-key key-item-notes item-notes)))
 
@@ -728,25 +746,37 @@ displaying in an Anki card."
          (contents (when (not (string-blank-p key-item-content))
                      (list (organki--convert-fragments key-item-content))))
          (key-item-subtree (org-list-item-get-subtree key-item))
-         (struct (org-list-get-struct key-item))
+         (list-contents
+          (when key-item-subtree
+            (if organki/convert-list-to-type
+                (organki--convert-list-to-text key-item key-item-subtree)
+              (xml/list->html (org-list->html-lst key-item-subtree))))))
+    (setq contents (append contents (list list-contents)))
+    (setq contents (string-join-non-blanks contents "<br>"))
+    contents))
+
+
+(defun organki--convert-list-to-text (key-item key-item-subtree)
+  "Convert a plain list to a plain text format which preserves the original
+indentation."
+
+  (let* ((struct (org-list-get-struct key-item))
          ;; Find the minmium indentation
          (min-ind (when key-item-subtree
                     (apply 'min (mapcar (lambda (item)
                                           (org-list-get-ind item struct))
-                                        key-item-subtree)))))
-
+                                        key-item-subtree))))
+         contents)
     (dolist (item key-item-subtree)
       (when-let ((content (org-list-item-get-content item t))
                  (ind (- (org-list-get-ind item struct) min-ind))
                  ((not (string-blank-p content))))
-        (push (concat (string-repeat "&nbsp;" ind)
-                      "• " (organki--convert-fragments content))
-              contents)))
-
-    (when contents
-      (setq contents (nreverse contents))
-      (setq contents (string-join (delq nil contents) "<br>")))
-    contents))
+        (when (string-match-p "\n" content)
+          (setq content (string-unfill content)))
+        (setq content (concat (string-repeat "&nbsp;" ind) "• "
+                              (organki--convert-fragments content)))
+        (push content contents)))
+    (string-join (delq nil (nreverse contents)) "<br>")))
 
 
 (defun organki--convert-vocabulary (vocabulary &optional notetype deck tags)
@@ -963,27 +993,35 @@ Duolingo::Section01::Unit01
 
     ;; Subtree tags
     (let* ((element (org-element-at-point))
-           (direct-headline (org-element-lineage element '(headline) t))
-           (headline direct-headline)
-           (is-headline direct-headline)
-           headline-tags parent tags)
-      (while is-headline
-        (setq headline-tags (mapcar 'substring-no-properties
-                                    (org-element-property :tags headline)))
-        (setq tags (org-entry-get (org-element-property :begin headline) key-tags))
+           (headline (org-element-lineage element '(headline) t))
+           headline-tags tags)
+      (while (equal 'headline (org-element-type headline))
+        ;; Use the headline itself as a tag
+        (when organki/use-headlines-as-tags
+          (push (s-upper-camel-case (org-element-property :raw-value headline))
+                headline-tags))
+        ;; Add headline tags
+        (setq tags (mapcar 'substring-no-properties
+                           (org-element-property :tags headline)))
+        (setq headline-tags (append headline-tags tags))
+        ;; Add property tags
+        (setq tags (org-entry-get (org-element-property :begin headline)
+                                  key-tags))
         (when (and tags (not (string-blank-p tags)))
           (setq headline-tags (append headline-tags (string-split tags))))
+
         (when headline-tags
-          (push headline-tags all-tags))
-        (setq parent (org-element-property :parent headline))
-        (setq is-headline (equal 'headline (org-element-type parent)))
-        (when is-headline
-          (setq headline parent))))
+          (push headline-tags all-tags)
+          (setq headline-tags nil))
+
+        (setq headline (org-element-property :parent headline))))
 
     ;; In-buffer settings
     (when-let ((tags-str (alist-get key-tags buffer-alist nil nil #'string=))
                (tags (string-split tags-str)))
       (push tags all-tags))
+
+    ;; Create the tag tree
     (setq result (organki--combine-lists-to-strings all-tags))
     result))
 
@@ -1163,13 +1201,5 @@ original."
                                      'organki))
                                (overlays-in items-start items-end))))
     (mapc #'delete-overlay overlays)))
-
-
-;; ==== Key-bindings ====
-;; Add these commands to org mode key-bindings
-(with-eval-after-load 'org
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    "i" 'organki/import-region
-    "TAB" 'organki/prettify-region))
 
 (provide 'organki)

@@ -490,14 +490,26 @@ contents. Check their docstrings for more detailed descriptions.
 
   Whether to open the generated files automatically.
 
-- ~organki-toggle/import-region-disable-tags~
+- ~organki-toggle/disable-tags~
 
   Whether to disable tags.
+
+- ~organki-toggle/use-headlines-as-tags~
+
+  Whether to use the headlines themselves as tags.
 
 - ~organki-toggle/import-region-disable-APR~
 
   Whether to disable Automatic Parent Reference. If it is disabled the generated
   children will have no reference to the main entry.
+
+- ~organki/convert-list-to-type~
+
+  Which type of content should the plain lists be convert into. This is used to
+  convert any plain list without a special meaning such as one present in a
+  comment. The default value is nil, which is to convert them to the HTML
+  format, and if it is ~text~ convert to a plain text format which preserves the
+  indentation of the original lists.
 
 ** Normalizing & Prettifying
 Organki can prettify the Vocabulary lists and Sentence lists to increase visual
