@@ -20,14 +20,20 @@
      organki/convert-list-to-type text)
     :vfields1
     (organki/anki-vocabulary-fields
-     (entry pronunciation class translation notes)))
+     (entry pronunciation class translation notes))
+    :cpa
+    (current-prefix-arg (4)))
 
   "A plist which contains multiple sets of variable bindings. Users can select a
-set of bindings by providing the key via the `:bindings' keyword in the
-`#+ATTR_ARGS' line above an output, such as `#+ATTR_ARGS: :bindings :old'. Then
-the automatic tests will declare those bindings before calling
-`organki/import-region'. This is mainly for testing backward compatibility with
-the old test cases as the program evolves.")
+set or several sets of bindings by providing the corresponding keywords to the
+`:bindings' keyword in the `#+ATTR_ARGS' line above an output, such as
+
+  #+ATTR_ARGS: :bindings :old
+  #+ATTR_ARGS: :bindings (:old :new)
+
+Then the automatic tests will declare those bindings before generating the
+output. This is mainly used for testing backward compatibility with the old test
+cases as the program evolves.")
 
 
 (defclass organki-test--output ()
@@ -259,6 +265,13 @@ assuming the tests are written in the format as described by
                  (attr_args2 (copy-sequence attr_args)))
             (cl-remf attr_args2 :regions)
             (setq attr_args2 (append attr_args2 default-props))
+            ;; Call `organki/import-region' with the universal prefix argument
+            ;; so that the default properties can be populated.
+            (let ((bindings (plist-get attr_args2 :bindings)))
+              (when (and bindings (symbolp bindings))
+                (setq bindings (list bindings)))
+              (setq bindings (append bindings (list :cpa)))
+              (setq attr_args2 (plist-put attr_args2 :bindings bindings)))
             (oset output attr_args attr_args2)
             (organki-test--run-inputs output main-buffer)
             (oset output attr_args attr_args)))))))
@@ -296,12 +309,17 @@ output (example block) in a test file."
 `organki-test--bindings'."
 
   (let* ((attr_args (oref output attr_args))
-         (bindings-key (plist-get attr_args :bindings)))
-    (if bindings-key
-        (let* ((variables (plist-get organki-test--bindings bindings-key))
+         (bindings (plist-get attr_args :bindings)))
+    (if bindings
+        (let* ((variables (apply #'append
+                                 (mapcar
+                                  (lambda (binding)
+                                    (plist-get organki-test--bindings binding))
+                                  (or (and (symbolp bindings) (list bindings))
+                                      bindings))))
                (vars (cl-loop for (k v) on variables by #'cddr collect k))
                (vals (cl-loop for (k v) on variables by #'cddr collect v)))
-          (ert-info ((format "No bindings found for the key %s" bindings-key)
+          (ert-info ((format "No bindings found for the key %s" bindings)
                      :prefix "Error: ")
             (should variables))
           (cl-progv vars vals (organki-test--run-attr_args output)))

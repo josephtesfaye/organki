@@ -199,20 +199,22 @@ under OUTPUT-DIR."
   (interactive
    (let* (;; Default values
           (default-props (organki--get-default-properties))
-          (default-deck (plist-get default-props :deck))
-          (default-notetype (plist-get default-props :notetype))
-          (default-tags (plist-get default-props :tags))
-          (default-outdir (plist-get default-props :outdir))
-          ;; User inputs
-          (deck (read-string (format "Deck (default '%s'): " default-deck) nil nil default-deck))
-          (notetype (read-string (format "Notetype (default '%s'): " default-notetype)
-                                 nil nil default-notetype))
-          (tags (when (not organki/disable-tags)
-                  (read-string (format "Tags (default '%s'): " default-tags)
-                               nil nil default-tags)))
-          (outdir (read-directory-name
-                   (format "Output directory (default '%s'): " default-outdir)
-                   default-outdir default-outdir t)))
+          (deck (plist-get default-props :deck))
+          (notetype (plist-get default-props :notetype))
+          (tags (plist-get default-props :tags))
+          (outdir (plist-get default-props :outdir)))
+     (when current-prefix-arg
+       ;; User inputs
+       (setq deck (read-string (format "Deck (default '%s'): " deck)
+                               nil nil deck))
+       (setq notetype (read-string (format "Notetype (default '%s'): " notetype)
+                                   nil nil notetype))
+       (setq tags (when (not organki/disable-tags)
+                    (read-string (format "Tags (default '%s'): " tags)
+                                 nil nil tags)))
+       (setq outdir (read-directory-name
+                     (format "Output directory (default '%s'): " outdir)
+                     outdir outdir t)))
 
      (when (string-empty-p notetype) (setq notetype nil))
      (when (string-empty-p deck) (setq deck nil))

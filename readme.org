@@ -443,14 +443,17 @@ The notetype and deck of the imported notes would be "Vocabulary" and
 #+end_example
 
 ** Importing
-To import a Vocabulary or Sentence list to Anki you only need to select the
-items and then call ~organki/import-region~. You would be asked to enter the
-notetype, deck, and tags for those notes. You can use the default values as
-defined in your org files if you don't want to change them. If you didn't select
-a region then the whole list at the current point would be selected for
-importing. When the command finishes successfully a file or files named
-"import<timestamp>.txt" will be produced under the =output-dir= you entered when
-calling the function.
+To import a Vocabulary or Sentence list to Anki put point anywhere in the list
+then call ~organki/import-region~ (=M-m m i=). Then the list will be exported to the
+format for importing to Anki in a file or files named like
+"import<timestamp>.txt" under the default directory (=~/Downloads=) immediately.
+
+You can also export part of the list by selecting the items in a region. Only
+notes fully falling into the region are deemed "selected".
+
+You can change the notetype, deck, tags, and output directory for the current
+call by passing a universal prefix argument (=C-u=). Their default values (if any)
+will be indicated in the prompt line.
 
 When importing the generated file to Anki you can choose the Import option
 "Existing notes" in the "Import File" window to decide what to do with the
@@ -626,7 +629,8 @@ A subtree, a plain list, or an example block can be marked not for such testing:
 For testing backward compatibility with the old test cases as the program
 evolves, a ~:bindings~ keyword is provided to the ~#+ATTR_ARGS~ line, which tells
 the testing program to declare a predefined set of variable bindings before
-calling Organki. See [[help:organki-test--bindings]].
+generating the outputs. Its value is either a keyword or a list of keywords as
+found in the plist [[help:organki-test--bindings][organki-test--bindings]].
 
 The ~:composite~ keyword is used to mark an output as part of a [[TOKYO20251001193106][composite output]],
 which takes one of the keys in the alist returned by ~organki/import-region~,
