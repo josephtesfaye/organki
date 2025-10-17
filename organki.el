@@ -152,6 +152,17 @@ indentation of the original lists."
 	             (const :tag "Plain text" text))
   :group 'organki)
 
+(defcustom organki/convert-leveled-string-to-type 'html
+  "Which type of content should leveled strings be converted into. A leveled
+string is a string containing leveled numbering such as \"1. a; 1.1 b; 1.1.1 c;
+1.2 d\". See `string-to-tree' for more details.
+
+If `nil', don't convert, preserving the original text.
+If `html', convert them to the XML lists (default)."
+  :type '(choice (const :tag "Plain text" nil)
+	             (const :tag "HTML list" html))
+  :group 'organki)
+
 
 (defun organki/import-region (start end &optional output-dir notetype deck tags)
   "Convert a region from START to END, which is supposed to contain a Vocabulary
@@ -346,6 +357,19 @@ of `organki--anki-vocabulary' objects."
     (list (cons organki--NS sentences) (cons organki--NV vocabulary))))
 
 
+(defun organki--add-to-notes (parent children key)
+  "Add PARENT to CHILDREN's notes (a hash-table) under KEY."
+
+  (dolist (child children)
+    (when (or (cl-typep child 'organki--anki-sentence)
+              (cl-typep child 'organki--anki-vocabulary))
+      (let* ((notes (or (oref child notes) (make-hash-table :test 'equal)))
+             (subitems (gethash key notes)))
+        (push parent subitems)
+        (puthash key subitems notes)
+        (oset child notes notes)))))
+
+
 (defun organki--get-vocabulary-content (item)
   (let ((content (org-list-item-get-content item t))
         translation parts)
@@ -380,11 +404,12 @@ matches the part of speech and must be present."
                  "\\(?3:[ ]+[a-z./]+\\.\\)")))
     (if (string-match regexp string)
         (let* ((entry (substring string 0 (match-beginning 0)))
-               (furigana (string-trim-match (match-string 1 string)))
-               (audio (string-trim-match (match-string 2 string)))
+               (furigana (organki--normalize-text (match-string 1 string)))
+               (audio (organki--normalize-text (match-string 2 string)))
                (pron (string-join-non-blanks (list furigana audio) " "))
-               (class (string-trim-match (match-string 3 string)))
-               (translation (string-trim-match (substring string (match-end 3)))))
+               (class (organki--normalize-text (match-string 3 string)))
+               (translation (organki--normalize-text
+                             (substring string (match-end 3)))))
           (list entry pron class translation))
       (list string))))
 
@@ -404,26 +429,27 @@ matches the part of speech and must be present."
                         "\\(?3:[ ]+[a-z./]+\\.\\)")))   ; Match part of speech
     (if (string-match regexp string)
         (let* ((entry (substring string 0 (match-beginning 0)))
-               (ipa (string-trim-match (match-string 1 string)))
-               (audio (string-trim-match (match-string 2 string)))
+               (ipa (organki--normalize-text (match-string 1 string)))
+               (audio (organki--normalize-text (match-string 2 string)))
                (pron (string-join-non-blanks (list ipa audio) " "))
-               (class (string-trim-match (match-string 3 string)))
-               (translation (string-trim-match (substring string (match-end 3)))))
+               (class (organki--normalize-text (match-string 3 string)))
+               (translation (organki--normalize-text
+                             (substring string (match-end 3)))))
           (list entry pron class translation))
       (list string))))
 
 
-(defun organki--add-to-notes (parent children key)
-  "Add PARENT to CHILDREN's notes (a hash-table) under KEY."
+(defun organki--normalize-text (text)
+  "Normalize the formatting and removing redundant substrings."
 
-  (dolist (child children)
-    (when (or (cl-typep child 'organki--anki-sentence)
-              (cl-typep child 'organki--anki-vocabulary))
-      (let* ((notes (or (oref child notes) (make-hash-table :test 'equal)))
-             (subitems (gethash key notes)))
-        (push parent subitems)
-        (puthash key subitems notes)
-        (oset child notes notes)))))
+  (when (stringp text)
+    (save-match-data
+      (setq text (string-trim text))
+      ;; Remove anchors
+      (when-let ((regexp "<<.*?>> ?")
+                 ((string-match-p regexp text)))
+        (setq text (replace-regexp-in-string regexp "" text)))
+      text)))
 
 
 (defun organki--get-sentences (items &optional parent)
@@ -743,14 +769,14 @@ sublist (if any) are concatenated into a plain string with format suitable for
 displaying in an Anki card."
 
   (let* ((key-item-content (cdr key-item-strs))
-         (contents (when (not (string-blank-p key-item-content))
+         (contents (when (string-not-blank-p key-item-content)
                      (list (organki--convert-fragments key-item-content))))
          (key-item-subtree (org-list-item-get-subtree key-item))
          (list-contents
           (when key-item-subtree
             (if organki/convert-list-to-type
                 (organki--convert-list-to-text key-item key-item-subtree)
-              (xml/list->html (org-list->html-lst key-item-subtree))))))
+              (html-list-from-tree (org-list-to-tree key-item-subtree))))))
     (setq contents (append contents (list list-contents)))
     (setq contents (string-join-non-blanks contents "<br>"))
     contents))
@@ -796,16 +822,47 @@ indentation."
 
 (defun organki--convert-vocabulary-body (voc)
   "Assemble the vocabulary body."
+
   (if organki/convert-vocabulary-body-function
       (funcall organki/convert-vocabulary-body-function voc)
 
-    (let ((fields (mapcar (lambda (field)
-                            (let ((value (slot-value voc field)))
-                              (if (eq field 'notes)
-                                  (organki--convert-notes value)
-                                value)))
-                          organki/anki-vocabulary-fields)))
-      (string-join fields "\t"))))
+    (string-join
+     (mapcar
+      (lambda (field)
+        (let ((value (slot-value voc field)))
+          (pcase field
+            ('translation (organki--convert-translation value voc))
+            ('notes (organki--convert-notes value))
+            (_ value))))
+      organki/anki-vocabulary-fields)
+     "\t")))
+
+
+(defun organki--convert-translation (string voc)
+  (let* ((class (oref voc class))
+         (classes (and (stringp class) (string-split class "/")))
+         (len (length classes)))
+    (if-let (((> len 1))
+             (parts (string-split string "/"))
+             ((length= parts len)))
+        (string-join (seq-mapn (lambda (a b)
+                                 (concat "<div>" a "</div>"
+                                         (organki--convert-leveled-string b)))
+                               classes parts))
+      (organki--convert-leveled-string string))))
+
+
+(defun organki--convert-leveled-string (string)
+  "Convert STRING which contains leveled numbering to an XML list. See
+`string-to-tree' for more details about STRING."
+
+  (if (and (eq 'html organki/convert-leveled-string-to-type)
+           (string-leveled-p string))
+      (html-list-from-string
+       string
+       (lambda (cons)
+         (string-remove-suffix ";" (string-trim (cdr cons)))))
+    string))
 
 
 (defun organki--convert-vocabulary-body-old (voc)

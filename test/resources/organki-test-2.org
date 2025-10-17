@@ -359,3 +359,25 @@ Vocabulary	Test	一頭目の象	いっとうめのぞう	phrn.	the first elep
 #tags column:3
 Vocabulary	Test	tag1 tag2	accrete	[ə'kri:t]	vi./vt.	grow or form by accumulation or coalescence 积淀、增生		<b>Examples</b><p><ul><li>It&apos;s not even all that easy to navigate, because most of the material has just accreted over the past seven years.</li><li>The collection of art he had accreted was to be sold.</li></ul></p>
 #+end_example
+
+* Convert leveled strings to HTML lists
+- rivet [ˈrɪvɪt] n./v. <<rivet>> a short metal pin or bolt for holding together
+  two metal plates, its headless end being beaten out or pressed down when in
+  place 铆钉 / join or fasten with a rivet or rivets; 铆、铆接
+
+- adjunct [ˈædʒʌŋkt] n./adj. 1. a thing added to something else as a
+  supplementary rather than an essential part; 1.1. a person who is another's
+  assistant or subordinate; 2. [Grammar] a word or phrase that constitutes an
+  optional element / 1. connected or added to something; 1.1. [NAmE] (of an
+  academic post) attached to the staff of a university in a temporary or
+  assistant capacity
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	rivet	[ˈrɪvɪt]	n./v.	<div>n.</div>a short metal pin or bolt for holding together two metal plates, its headless end being beaten out or pressed down when in place 铆钉 <div>v.</div> join or fasten with a rivet or rivets; 铆、铆接		
+Vocabulary	Test	tag1 tag2	adjunct	[ˈædʒʌŋkt]	n./adj.	<div>n.</div><ol><li>a thing added to something else as a supplementary rather than an essential part<ol><li>a person who is another&apos;s assistant or subordinate</li></ol></li><li>[Grammar] a word or phrase that constitutes an optional element</li></ol><div>adj.</div><ol><li>connected or added to something<ol><li>[NAmE] (of an academic post) attached to the staff of a university in a temporary or assistant capacity</li></ol></li></ol>		
+#+end_example
