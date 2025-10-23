@@ -330,14 +330,14 @@ Vocabulary	Test	food::tag1 food::tag2	昼間	ひる・ま [3] n.	daytime 白天	
 #+NAME: 202410241949
 1. (sentence 1)。 (translation 1)
 2. (sentence 2)？  (translation 2)
-3. A: (sentence 3.2)? (translation 3.2)
-   B: (sentence 3.3)？ (translation 3.3)
+3. A: (sentence 3.2)?/ (translation 3.2)
+   B: (sentence 3.3)？/ (translation 3.3)
 
-4. (sentence 4)
+4. (sentence 4)。
    - P: (pronunciation 4) [[cl:202410021529.m5a][⏯]]
    - T: (translation 4)
 
-5. (sentence 5)
+5. (sentence 5)。
    - P: [[cl:202410021529.m5a][⏯]]
    - T: (translation 5)
    - V:
@@ -358,8 +358,8 @@ first item should generate the following output:
 Sentence	Test	food	(sentence 1)。		(translation 1)	
 Sentence	Test	food	(sentence 2)？		(translation 2)	
 Sentence	Test	food	A: (sentence 3.2)?<br>B: (sentence 3.3)？		A: (translation 3.2)<br>B: (translation 3.3)	
-Sentence	Test	food	(sentence 4)	(pronunciation 4) [sound:202410021529.m5a]	(translation 4)	
-Sentence	Test	food	(sentence 5)	[sound:202410021529.m5a]	(translation 5)	<b>Vocabulary</b><ul><li>word 5.2 [IPA 5.2] [[audio 5.2]] class. translation 5.2</li><li>word 5.3 [IPA 5.3] class. translation 5.3</li></ul>
+Sentence	Test	food	(sentence 4)。	(pronunciation 4) [sound:202410021529.m5a]	(translation 4)	
+Sentence	Test	food	(sentence 5)。	[sound:202410021529.m5a]	(translation 5)	<b>Vocabulary</b><ul><li>word 5.2 [IPA 5.2] [[audio 5.2]] class. translation 5.2</li><li>word 5.3 [IPA 5.3] class. translation 5.3</li></ul>
 #+end_example
 
 #+NAME: case2/organki/import-region/output6/2
@@ -370,8 +370,8 @@ Sentence	Test	food	(sentence 5)	[sound:202410021529.m5a]	(translation 5)	<b>Voca
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	food	word 5.2	[IPA 5.2] [[audio 5.2]] class.	translation 5.2	<b>Examples</b><ul><li>(sentence 5) (translation 5)</li></ul>
-Vocabulary	Test	food	word 5.3	[IPA 5.3] class.	translation 5.3	<b>Examples</b><ul><li>(sentence 5) (translation 5)</li></ul>
+Vocabulary	Test	food	word 5.2	[IPA 5.2] [[audio 5.2]] class.	translation 5.2	<b>Examples</b><ul><li>(sentence 5)。 (translation 5)</li></ul>
+Vocabulary	Test	food	word 5.3	[IPA 5.3] class.	translation 5.3	<b>Examples</b><ul><li>(sentence 5)。 (translation 5)</li></ul>
 #+end_example
 
 #+NAME: 202410291202
@@ -437,11 +437,11 @@ This [[202410292115][list]] is used to test audios of sentences. The output shou
 #notetype column:1
 #deck column:2
 #tags column:3
-Sentence	Test	food	[sound:202410021528.m4a]  あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	
-Sentence	Test	food	[sound:202410271111.m4a]  A: 君も行くだろう？<br>[sound:202410271112.m4a]  B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
-Sentence	Test	food	[sound:202410271111.m4a]  A: 君も行くだろう2？<br>B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
-Sentence	Test	food	A: 君も行くだろう3？<br>[sound:202410271112.m4a]  B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
-Sentence	Test	food	[sound:202410021528.m4a]  あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	<b>Vocabulary</b><ul><li>きっと [0] adv. surely; probably</li><li>だろう [2] col. I think/suppose/guess (that) ...</li></ul>
+Sentence	Test	food	[sound:202410021528.m4a] あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	
+Sentence	Test	food	[sound:202410271111.m4a] A: 君も行くだろう？<br>[sound:202410271112.m4a] B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	food	[sound:202410271111.m4a] A: 君も行くだろう2？<br>B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	food	A: 君も行くだろう3？<br>[sound:202410271112.m4a] B: はい、もちろん。		A: You’re also going, right?<br>B: Yes, of course.	
+Sentence	Test	food	[sound:202410021528.m4a] あしたもきっといい天気だろう。		The weather will probably be nice tomorrow, too.	<b>Vocabulary</b><ul><li>きっと [0] adv. surely; probably</li><li>だろう [2] col. I think/suppose/guess (that) ...</li></ul>
 #+end_example
 
 #+NAME: case2/organki/import-region/output8/2
@@ -452,8 +452,8 @@ Sentence	Test	food	[sound:202410021528.m4a]  あしたもきっといい天気�
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	food	きっと	[0] adv.	surely; probably	<b>Examples</b><ul><li>[sound:202410021528.m4a]  あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
-Vocabulary	Test	food	だろう	[2] col.	I think/suppose/guess (that) ...	<b>Examples</b><ul><li>[sound:202410021528.m4a]  あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food	きっと	[0] adv.	surely; probably	<b>Examples</b><ul><li>[sound:202410021528.m4a] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
+Vocabulary	Test	food	だろう	[2] col.	I think/suppose/guess (that) ...	<b>Examples</b><ul><li>[sound:202410021528.m4a] あしたもきっといい天気だろう。 The weather will probably be nice tomorrow, too.</li></ul>
 #+end_example
 
 #+NAME: 202411082333
@@ -563,7 +563,8 @@ Vocabulary	Test2	Test::date::tag1 Test::date::tag2 Test::time::tag1 Test::time::
 
 #+NAME: 202410282038
 #+ATTR_ANKI: :notetype "Sentence" :tags "number"
-- 一つのりんごを食べました。/りんごを一つ食べました。 I ate one apple.
+- 一つのりんごを食べました。 I ate one apple.
+  - A: りんごを一つ食べました。
 - 二個の玉葱を切ってください。 Please cut two onions.
 
 #+NAME: case3/default-properties/sentence
@@ -573,7 +574,7 @@ Vocabulary	Test2	Test::date::tag1 Test::date::tag2 Test::time::tag1 Test::time::
 #notetype column:1
 #deck column:2
 #tags column:3
-Sentence	Test	Test::date::number Test::time::number	一つのりんごを食べました。/りんごを一つ食べました。		I ate one apple.	
+Sentence	Test	Test::date::number Test::time::number	一つのりんごを食べました。		I ate one apple.	<b>Alternatives</b><p>りんごを一つ食べました。</p>
 Sentence	Test	Test::date::number Test::time::number	二個の玉葱を切ってください。		Please cut two onions.	
 #+end_example
 
@@ -1036,7 +1037,8 @@ separators. The output should be:
 - Asking how many years has it been
   - M:
     1) A: ここに何年いますか？ How many years have you been here?
-    2) B: もう長年ここにいます。多分10年以上でしょう。 I've been here for many years. Probably more than 10 years.
+    2) B: もう長年ここにいます。多分10年以上でしょう。/ I've been here for many
+       years. Probably more than 10 years.
 
   - V:
     - もう adv. already 已经

@@ -24,12 +24,17 @@
 (ert-deftest organki-test/convert-pronunciation ()
   :tags '(organki)
 
-  (should (equal (organki--convert-pronunciation "test [[cl:202410021528.m4a][⏯]]")
+  (should (equal (organki--convert-pronunciation "test 123") "test 123"))
+  (should (equal (organki--convert-pronunciation
+                  "test [[cl:202410021528.m4a][⏯]]")
                  "test [sound:202410021528.m4a]"))
   (should (equal (organki--convert-pronunciation "test [[cl:abc][⏯]]")
                  "test [sound:abc]"))
-  (should (equal (organki--convert-pronunciation "test 123")
-                 "test 123")))
+  (should (equal (organki--convert-pronunciation "test [[a:abc.m4a][⏯]]")
+                 "test [sound:abc.m4a]"))
+  (should (equal (organki--convert-pronunciation
+                  " [3] [[cl:foo.mp3][⏯]] / ちゅう・かん [0] [[cl:foo.mp3][⏯]]")
+                 " [3] [sound:foo.mp3] / ちゅう・かん [0] [sound:foo.mp3]")))
 
 
 (ert-deftest organki-test/convert-vocabulary-body-function ()

@@ -177,13 +177,15 @@ Here is a more comprehensive Vocabulary list:
 A *Sentence* list uses this format:
 
 #+begin_example
-- [<audio>] <entry> [<translation>]
+- [<audio>] [<speaker>] <entry> [<translation>]
   - [<notes>]
 #+end_example
 
 - =audio=: The audio of the entry, if any.
-- =entry=: A sentence in the original language, such as Japanese. The entry must
-  end in one of these punctuation marks followed by at least one space: =.?。？=.
+- =entry=: A sentence in the original language, such as Japanese. It must end in
+  one of these punctuation marks followed by at least one space: =.?。？/=. If you
+  want to include these punctuation marks =.?。？= multiple times in the entry
+  (i.e., multiple full sentences), you must use =/= at the end.
 
 - =translation=: The translation of =entry=, in whatever language you're familiar
   with. It's optional in the sense that if the entry is a complex sentence that
@@ -202,8 +204,8 @@ A *Sentence* list uses this format:
 
 The =audio=, =entry= and =translation= combined is called an "entry line". There can
 be multiple entry lines on the same item, say, to form a dialogue or a short
-passage. If it's a dialogue each line must begin with a *speaker* which takes the
-format "<speaker>: " where =speaker= is any string followed by a colon and a
+passage. If it's a dialogue each line must begin with a =speaker= which takes the
+format "<speaker>: " where speaker is any string followed by a colon and a
 space. For example,
 
 - A: はなさんはイギリス人ですか。 Is Hana British?

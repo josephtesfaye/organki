@@ -451,6 +451,12 @@ matches the part of speech and must be present."
       (when-let ((regexp "<<.*?>> ?")
                  ((string-match-p regexp text)))
         (setq text (replace-regexp-in-string regexp "" text)))
+
+      (when-let ((regexp "/")
+                 ((string-suffix-p regexp text)))
+        (setq text (string-trim (string-remove-suffix regexp text))))
+
+      (setq text (organki--convert-pronunciation text))
       text)))
 
 
@@ -587,17 +593,22 @@ Return an alist of notetype/list-of-objects pairs."
   "Convert the content of ITEM (buffer position only) to a list of
 `organki--anki-sentence' objects, or convert the `M' sublist if it exists."
 
-  (let* ((mul-key-item (when key-items
-                         (seq-find
-                          (lambda (key-item)
-                            (let* ((key-item-strs (org-list-item-get-key-item key-item))
-                                   (key-item-key (car key-item-strs)))
-                              (equal key-item-key organki--key-mul)))
-                          key-items)))
-         (item-lines (if mul-key-item
-                         (mapcar #'org-list-item-get-content
-                                 (org-list-item-get-children mul-key-item))
-                       (split-string (org-list-item-get-content item t) "\n" t " +")))
+  (let* ((mul-key-item
+          (when key-items
+            (seq-find
+             (lambda (key-item)
+               (let* ((key-item-strs (org-list-item-get-key-item key-item))
+                      (key-item-key (car key-item-strs)))
+                 (equal key-item-key organki--key-mul)))
+             key-items)))
+
+         (item-lines
+          (if mul-key-item
+              (mapcar (lambda (point)
+                        (string-unfill (org-list-item-get-content point)))
+                      (org-list-item-get-children mul-key-item))
+            (split-string (org-list-item-get-content item t) "\n" t " +")))
+
          item-sentences)
 
     (dolist (line item-lines)
@@ -607,22 +618,26 @@ Return an alist of notetype/list-of-objects pairs."
           (push specs item-sentences)
 
         ;; Create a sentence for each line
-        (let* ((split-line (mapcar #'string-trim (string-split-retain-separators
-                                                  line "[]:.?。？] " 'after)))
-               (audio (when (string-match "⏯" (car split-line))
-                        (concat (organki--convert-pronunciation (car split-line)) " ")))
-               (speaker-peek (if audio (cadr split-line) (car split-line)))
-               (speaker (when (string-match ":" speaker-peek) speaker-peek))
-               (contents (cond ((xor audio speaker) (cdr split-line))
-                               ((and audio speaker) (cddr split-line))
-                               (t split-line)))
-               (entry (string-join-non-blanks (list audio speaker (car contents)) " "))
-               (translation (string-join-non-blanks
-                             (flatten-list (list speaker (cdr contents))) " "))
-               (sentence (organki--anki-sentence
-                          :entry entry
-                          :translation translation)))
-          (push sentence item-sentences))))
+        (if-let ((regexp (concat "\\(?1:\\[.+\\]\\)?"          ; Match audio
+                                 "\\(?2: *.*[:：] *\\)?"       ; Match speaker
+                                 (if (string-match-p "/" line) ; Match sentence
+                                     "\\(?3:.+?/\\)"           ; Match / first
+                                   "\\(?3:.+?[.?。？]\\)")
+                                 "\\(?4:.*\\)")) ; Match translation
+                 ((string-match regexp line)))
+            (let* ((audio (organki--normalize-text (match-string 1 line)))
+                   (speaker (organki--normalize-text (match-string 2 line)))
+                   (entry (organki--normalize-text (match-string 3 line)))
+                   (translation (organki--normalize-text (match-string 4 line)))
+                   (sentence (organki--anki-sentence
+                              :entry (string-join-non-blanks
+                                      (list audio speaker entry) " ")
+                              ;; :pronunciation audio
+                              :translation (string-join-non-blanks
+                                            (list speaker translation) " "))))
+              (push sentence item-sentences))
+
+          (error "Sentence isn't formatted properly: %S" line))))
     (nreverse item-sentences)))
 
 
@@ -749,8 +764,13 @@ Vocabulary or Sentence list)."
 
 (defun organki--convert-pronunciation (string)
   "Convert the audio file portion of the string."
-  (when (string-not-blank-p string)
-    (string-replace-fences string "[[cl:" "][⏯]]" "[sound:" "]")))
+  (if-let (((string-not-blank-p string))
+           (open "\\[\\[.*?:")
+           (close "\\]\\[⏯\\]\\]")
+           (regexp (concat open ".*" close))
+           ((string-match-p regexp string)))
+      (string-replace-fences string open close "[sound:" "]" t)
+    string))
 
 
 (defun organki--convert-fragments (string)

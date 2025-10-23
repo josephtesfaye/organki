@@ -189,7 +189,7 @@ The output of calling ~(organki-test--get-tests 1)~ should be:
   (401                                                              ; output B
    (869                                                             ; input G
     ("organki-test.org" . 403)                                      ; input
-    ("/Users/josephtesfaye/projects/organki/readme.org" . 16174)))) ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 16326)))) ; input
  (594                                                               ; input C
   ((623 777)                                                        ; output D+E
    (869                                                             ; input G
@@ -380,4 +380,54 @@ Vocabulary	Test	tag1 tag2	accrete	[ə'kri:t]	vi./vt.	grow or form by accumulatio
 #tags column:3
 Vocabulary	Test	tag1 tag2	rivet	[ˈrɪvɪt]	n./v.	<div>n.</div>a short metal pin or bolt for holding together two metal plates, its headless end being beaten out or pressed down when in place 铆钉 <div>v.</div> join or fasten with a rivet or rivets; 铆、铆接		
 Vocabulary	Test	tag1 tag2	adjunct	[ˈædʒʌŋkt]	n./adj.	<div>n.</div><ol><li>a thing added to something else as a supplementary rather than an essential part<ol><li>a person who is another&apos;s assistant or subordinate</li></ol></li><li>[Grammar] a word or phrase that constitutes an optional element</li></ol><div>adj.</div><ol><li>connected or added to something<ol><li>[NAmE] (of an academic post) attached to the staff of a university in a temporary or assistant capacity</li></ol></li></ol>		
+#+end_example
+
+* Optimize delimiters for Sentence lists
+:PROPERTIES:
+:ANKI_NOTETYPE: Sentence
+:END:
+
+Test supported delimiters between entry and translation (=。?？/=), and between
+speaker and entry (=:：=).
+
+- タンさん、お仕事は？ Mr. Tan, what do you do for work?
+- Sarah: タンさん、お仕事は？ Mr. Tan, what do you do for work?
+- サラ：タンさん、お仕事は？ Mr. Tan, what do you do for work?
+- [[cl:202403132337.m4a][⏯]] サラ：タンさん、お仕事は？ Mr. Tan, what do you do for work?
+- Mr. Tan, what do you do for work? / タンさん、お仕事は？
+- Sarah: Mr. Tan, what do you do for work. / タンさん、お仕事は？
+- タンさん、お仕事は？
+  - T: Mr. Tan, what do you do for work?
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	tag1 tag2	タンさん、お仕事は？		Mr. Tan, what do you do for work?	
+Sentence	Test	tag1 tag2	Sarah: タンさん、お仕事は？		Sarah: Mr. Tan, what do you do for work?	
+Sentence	Test	tag1 tag2	サラ： タンさん、お仕事は？		サラ： Mr. Tan, what do you do for work?	
+Sentence	Test	tag1 tag2	[sound:202403132337.m4a] サラ： タンさん、お仕事は？		サラ： Mr. Tan, what do you do for work?	
+Sentence	Test	tag1 tag2	Mr. Tan, what do you do for work?		タンさん、お仕事は？	
+Sentence	Test	tag1 tag2	Sarah: Mr. Tan, what do you do for work.		Sarah: タンさん、お仕事は？	
+Sentence	Test	tag1 tag2	タンさん、お仕事は？		Mr. Tan, what do you do for work?	
+#+end_example
+
+- Part 2
+  - M:
+    - タンさん、お仕事は？ Mr. Tan, what do you do for work?
+    - Sarah: タンさん、お仕事は？ Mr. Tan, what do you do for work?
+    - サラ：タンさん、お仕事は？ Mr. Tan, what do you do for work?
+    - [[cl:202403132337.m4a][⏯]] サラ：タンさん、お仕事は？ Mr. Tan, what do you do for work?
+    - Mr. Tan, what do you do for work? / タンさん、お仕事は？
+    - Sarah: Mr. Tan, what do you do for work. / タンさん、お仕事は？
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	tag1 tag2	タンさん、お仕事は？<br>Sarah: タンさん、お仕事は？<br>サラ： タンさん、お仕事は？<br>[sound:202403132337.m4a] サラ： タンさん、お仕事は？<br>Mr. Tan, what do you do for work?<br>Sarah: Mr. Tan, what do you do for work.		Mr. Tan, what do you do for work?<br>Sarah: Mr. Tan, what do you do for work?<br>サラ： Mr. Tan, what do you do for work?<br>サラ： Mr. Tan, what do you do for work?<br>タンさん、お仕事は？<br>Sarah: タンさん、お仕事は？	
 #+end_example

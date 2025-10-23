@@ -516,6 +516,9 @@ the results with EXPECTS."
                    (lambda (prompt &optional dir default-dirname mustmatch initial)
                      default-dirname)))
 
+          ;; If the current point changes after this call it may be because you
+          ;; have edited the org buffer. You can just close and open that
+          ;; buffer again.
           (setq results (call-interactively 'organki/import-region))
           (dolist (result results)
             (let* ((result-file (cdr result))
