@@ -109,7 +109,7 @@ same form.")
 
 (defun organki-test--run-files (files)
   "Run all runnable tests in FILES automatically. Each element of FILES can
-either be a filename—all tests in that file will run, or a list where
+be either a filename—all tests in that file will run, or a list where
 the CAR is the filename and the CDR is the headlines—only tests of which will
 run. You can specify one of the following keywords at the end of the CDR to runs
 tests in the scope specified by the keyword in addition to those specified as
@@ -120,20 +120,9 @@ headlines.
 
   (dolist (file files)
     (with-current-buffer (find-file-noselect
-                          (organki-test--find-file
+                          (jhelt-find-file
                            (if (listp file) (car file) file) 'test))
-      (elog--debug
-       "* Run tests in file: %s"
-       (if (listp file)
-           (concat (car file) ": " (string-join (mapcar
-                                                 (lambda (s)
-                                                   (if (not (stringp s))
-                                                       (symbol-name s)
-                                                     s))
-                                                 (cdr file))
-                                                ", "))
-         file))
-
+      (jhelt-log-file file)
       (let* ((headlines (and (listp file) (cdr file)))
              (scope (and headlines (car (member (car (last headlines))
                                                 '(:after :before)))))
@@ -160,20 +149,6 @@ headlines.
                                         (:before (< pos last-headline)))))))
                 (elog--debug "** Run tests in subtree: %s" headline)
                 (organki-test--run-subtree pos)))))))))
-
-
-(defun organki-test--find-file (name &optional dir-type)
-  "Find a file by NAME, which can be an absolute file path, or a name relative
-to the project root or another directory according to DIR-TYPE."
-
-  (let ((dir (pcase dir-type
-               ('test (expand-file-name "test/resources"
-                                        (project-root (project-current))))
-               ('root (project-root (project-current))))))
-    (when (not (file-name-absolute-p name))
-      (setq name (expand-file-name name dir)))
-    (should (file-exists-p name))
-    name))
 
 
 (defun organki-test--run-subtree (headline-or-pos)
@@ -459,7 +434,7 @@ CDR the position in that file."
                  (file (substring input 0 (match-beginning 0)))
                  (name (substring input (match-end 0)))
                  (path (if (string-prefix-p "r:" file)
-                           (organki-test--find-file
+                           (jhelt-find-file
                             (string-remove-prefix "r:" file) 'root)
                          file)))
             (with-current-buffer (find-file-noselect path)
@@ -482,7 +457,7 @@ CDR the position in that file."
               (organki-test--output :points
                                     (org-element-property :begin element))
             element)))
-      nil t)))
+      nil t 'plain-list)))
 
 
 (defun organki-test--import-region (output)

@@ -152,6 +152,15 @@ indentation of the original lists."
 	             (const :tag "Plain text" text))
   :group 'organki)
 
+(defcustom organki/preserve-newlines nil
+  "Whether to preserve the newlines in the paragraphs of a list item when
+converted to HTML. A single newline character doesn't make two paragraphs unless
+another newline immediately follows it (i.e., a blank line), which stays true
+anywhere in an Org file. This variable enables the newlines in a list item to be
+preserved even if there are no blank lines."
+  :type 'boolean
+  :group 'organki)
+
 (defcustom organki/convert-leveled-string-to-type 'html
   "Which type of content should leveled strings be converted into. A leveled
 string is a string containing leveled numbering such as \"1. a; 1.1 b; 1.1.1 c;
@@ -164,7 +173,7 @@ If `html', convert them to the XML lists (default)."
   :group 'organki)
 
 
-(defun organki/import-region (start end &optional output-dir notetype deck tags)
+(defun organki/import-region (start end &optional output-dir notetype deck tags props)
   "Convert a region from START to END, which is supposed to contain a Vocabulary
 list or a Sentence list, to a plain-text format for importing to Anki. Only
 items completely fall into the region will be selected for the conversion. If
@@ -197,12 +206,13 @@ The output files are named in the format \"import<timestamp>.txt\" and generated
 under OUTPUT-DIR."
 
   (interactive
-   (let* (;; Default values
-          (default-props (organki--get-default-properties))
+   ;; Default values
+   (let* ((default-props (organki--get-default-properties))
           (deck (plist-get default-props :deck))
           (notetype (plist-get default-props :notetype))
           (tags (plist-get default-props :tags))
-          (outdir (plist-get default-props :outdir)))
+          (outdir (plist-get default-props :outdir))
+          (props default-props))
      (when current-prefix-arg
        ;; User inputs
        (setq deck (read-string (format "Deck (default '%s'): " deck)
@@ -220,10 +230,11 @@ under OUTPUT-DIR."
      (when (string-empty-p deck) (setq deck nil))
      (when (string-empty-p tags) (setq tags nil))
      (if (region-active-p)
-         (list (region-beginning) (region-end) outdir notetype deck tags)
-       (list nil nil outdir notetype deck tags))))
+         (list (region-beginning) (region-end) outdir notetype deck tags props)
+       (list nil nil outdir notetype deck tags props))))
 
-  (let ((results (organki--convert-region start end notetype deck tags))
+  (let ((results (organki--convert-region-with-bindings
+                  start end notetype deck tags props))
         filepaths)
     (dolist (result results)
       (when-let ((content (cdr result))
@@ -239,6 +250,15 @@ under OUTPUT-DIR."
         (message "File written to %s" filepath)))
     ;; Return the filepaths
     filepaths))
+
+
+(defun organki--convert-region-with-bindings
+    (&optional start end notetype deck tags props)
+  (let* ((bindings (plist-get props :bindings)))
+    (if bindings
+        (bind-from-plist bindings
+          (organki--convert-region start end notetype deck tags))
+      (organki--convert-region start end notetype deck tags))))
 
 
 (defun organki--convert-region (&optional start end notetype deck tags)
@@ -321,7 +341,7 @@ of `organki--anki-vocabulary' objects."
                   (push key-item-sentences child-sentences)))
 
                ;; Convert sub-items or other types of sublists
-               (t (setq key-item-notes (organki--convert-other-notes
+               (t (setq key-item-notes (organki--get-notes
                                         key-item key-item-strs))))
 
               (puthash key-item-key key-item-notes item-notes))))
@@ -373,7 +393,7 @@ of `organki--anki-vocabulary' objects."
 
 
 (defun organki--get-vocabulary-content (item)
-  (let ((content (org-list-item-get-content item t))
+  (let ((content (org-list-item-get-content item 'first))
         translation parts)
     ;; Entry is English if it starts with ascii letters.
     (if (string-match-p "^[[:ascii:]]+ " content)
@@ -516,7 +536,7 @@ Return an alist of notetype/list-of-objects pairs."
                                              item key-item-vocs))))
 
                     ;; Read the string after the key as the value.
-                    (_ (setq key-item-notes (organki--convert-other-notes
+                    (_ (setq key-item-notes (organki--get-notes
                                              key-item key-item-strs))))
 
                   (puthash key-item-key key-item-notes item-notes)))
@@ -607,7 +627,7 @@ Return an alist of notetype/list-of-objects pairs."
               (mapcar (lambda (point)
                         (string-unfill (org-list-item-get-content point)))
                       (org-list-item-get-children mul-key-item))
-            (split-string (org-list-item-get-content item t) "\n" t " +")))
+            (split-string (org-list-item-get-content item 'first) "\n" t " +")))
 
          item-sentences)
 
@@ -785,23 +805,35 @@ the form for displaying in Anki."
   string)
 
 
-(defun organki--convert-other-notes (key-item key-item-strs)
+(defun organki--get-notes (key-item key-item-strs)
   "Convert other types of KEY-ITEM to notes. The KEY-ITEM's value and its
 sublist (if any) are concatenated into a plain string with format suitable for
 displaying in an Anki card."
 
-  (let* ((key-item-content (cdr key-item-strs))
-         (contents (when (string-not-blank-p key-item-content)
-                     (list (organki--convert-fragments key-item-content))))
-         (key-item-subtree (org-list-item-get-subtree key-item))
-         (list-contents
-          (when key-item-subtree
-            (if organki/convert-list-to-type
-                (organki--convert-list-to-text key-item key-item-subtree)
-              (html-list-from-tree (org-list-to-tree key-item-subtree))))))
-    (setq contents (append contents (list list-contents)))
-    (setq contents (string-join-non-blanks contents "<br>"))
-    contents))
+  (if-let ((key (car key-item-strs))
+           ((or (string= key organki--key-pron)
+                (string= key organki--key-trans))))
+      (organki--convert-fragments (cdr key-item-strs))
+
+    (if organki/convert-list-to-type
+        ;; Convert to plain text
+        (let* ((key-item-content (cdr key-item-strs))
+               (contents (when (string-not-blank-p key-item-content)
+                           (list (organki--convert-fragments key-item-content))))
+               (key-item-subtree (org-list-item-get-subtree key-item))
+               (list-contents
+                (when key-item-subtree
+                  (organki--convert-list-to-text key-item key-item-subtree))))
+          (setq contents (append contents (list list-contents)))
+          (setq contents (string-join-non-blanks contents "<br>"))
+          (setq contents (concat "<p>" contents "</p>"))
+          contents)
+
+      ;; Convert to HTML
+      (let* ((pair (org-list-item-get-key-item key-item t))
+             (content (org-list-string-to-html
+                       (cdr pair) organki/preserve-newlines)))
+        content))))
 
 
 (defun organki--convert-list-to-text (key-item key-item-subtree)
@@ -816,7 +848,7 @@ indentation."
                                         key-item-subtree))))
          contents)
     (dolist (item key-item-subtree)
-      (when-let ((content (org-list-item-get-content item t))
+      (when-let ((content (org-list-item-get-content item 'first))
                  (ind (- (org-list-get-ind item struct) min-ind))
                  ((not (string-blank-p content))))
         (when (string-match-p "\n" content)
@@ -935,11 +967,10 @@ compatibility and testing."
                             ((equal key organki--key-sentence)
                              (organki--convert-notes-sentences val))
 
-                            ((equal key organki--key-example)
-                             (concat "<p>" val "</p>"))
+                            ((equal key organki--key-example) val)
 
                             (t (concat (organki--convert-notes-subnote-name key)
-                                       "<p>" val "</p>")))))
+                                       val)))))
                  (puthash key val2 notes2)))
              notes)
 
@@ -1018,22 +1049,58 @@ compatibility and testing."
 (defun organki--get-default-properties ()
   "Get the default Organki properties and their values in a plist."
 
-  (let* (;; In-buffer settings
-         (key-deck "ANKI_DECK")
-         (key-note "ANKI_NOTETYPE")
-         (key-tags "ANKI_TAGS")
-         (keywords (list key-deck key-note key-tags))
-         (buffer-alist (org-collect-keywords keywords keywords))
-         ;; List attributes
-         (attr_anki (org-list-get-attr-args :attr_anki)))
-    (list :deck (or (plist-get attr_anki :deck)
-                    (org-entry-get nil key-deck t)
-                    (alist-get key-deck buffer-alist nil nil #'string=))
-          :notetype (or (plist-get attr_anki :notetype)
-                        (org-entry-get nil key-note t)
-                        (alist-get key-note buffer-alist nil nil #'string=))
-          :tags (string-join (organki--get-default-tags buffer-alist attr_anki) " ")
-          :outdir "~/Downloads")))
+  (let* ((core-names (list "deck" "notetype" "tags" '("outdir" . "~/Downloads")))
+         (buffer-keys (mapcar (lambda (name)
+                                (concat "ANKI_" (upcase (if (dot-consp name)
+                                                            (car name)
+                                                          name))))
+                              core-names))
+         ;; In-buffer settings
+         (buffer-alist (org-collect-keywords buffer-keys buffer-keys))
+         ;; List attributes (tag line)
+         (attr_anki (org-list-get-attr-args :attr_anki))
+         (tags (organki--get-default-tags buffer-alist attr_anki))
+         props)
+
+    (setq core-names (delete "tags" core-names))
+    (dolist (core-name core-names)
+      (let* ((name (if (dot-consp core-name) (car core-name) core-name))
+             (keyword (intern (concat ":" name)))
+             (buf-key (concat "ANKI_" (upcase name)))
+             (value (or (plist-get attr_anki keyword)
+                        (org-entry-get nil buf-key t)
+                        (alist-get buf-key buffer-alist nil nil #'string=)
+                        (when (dot-consp core-name) (cdr core-name)))))
+        (push keyword props)
+        (push value props)))
+
+    ;; Tags
+    (push :tags props)
+    (push (string-join tags " ") props)
+
+    ;; Variables
+    (let* ((variables '("newlines" organki/preserve-newlines))
+           (names (mapcar #'car (seq-partition variables 2)))
+           bindings)
+      (dolist (name names)
+        (let* ((keyword (intern (concat ":" name)))
+               (buf-key (concat "ANKI_" (upcase name)))
+               (value (or (plist-get attr_anki keyword)
+                          (org-entry-get nil buf-key t)
+                          (alist-get buf-key buffer-alist nil nil #'string=))))
+          ;; Check if the key is present at all
+          (when (or (plist-member attr_anki keyword)
+                    (org-entry-get nil buf-key t)
+                    (assoc buf-key buffer-alist))
+            (push (plist-get variables name) bindings)
+            (push value bindings))))
+
+      (when bindings
+        (setq bindings (nreverse bindings))
+        (push :bindings props)
+        (push bindings props)))
+
+    (nreverse props)))
 
 
 (defun organki--get-default-tags (&optional buffer-alist attr_anki)
@@ -1190,7 +1257,7 @@ item."
         (table (make-hash-table :test 'equal)))
     (dolist (item items)
       (let* ((org-item (org-list-get-item item))
-             (entry-lines (org-list-item-get-content item t))
+             (entry-lines (org-list-item-get-content item 'first))
              (line-start (org-element-property :contents-begin org-item))
              (bullet-len (- line-start (org-element-property :begin org-item)))
              (bullet-spaces (format " \\{%d\\}" bullet-len))

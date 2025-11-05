@@ -41,7 +41,7 @@
   "Test `organki/convert-vocabulary-body-function'."
   :tags '(organki)
 
-  (with-current-buffer (find-file-noselect (organki-test--find-file
+  (with-current-buffer (find-file-noselect (jhelt-find-file
                                             "organki-test-2.org" 'test))
     (elog--debug "* Run test organki/convert-vocabulary-body-function in file: %s"
                  (buffer-name))
@@ -55,7 +55,7 @@
   "Test `organki-test--get-tests'."
   :tags '(organki)
 
-  (with-current-buffer (find-file-noselect (organki-test--find-file
+  (with-current-buffer (find-file-noselect (jhelt-find-file
                                             "organki-test-2.org" 'test))
     (elog--debug "* Run test organki-test--get-tests in file: %s" (buffer-name))
     (let ((io-list (organki-test--get-tests "Test ~organki-test--get-tests~" t))
@@ -83,7 +83,7 @@
 (ert-deftest organki-test/prettfy-region ()
   :tags '(organki)
 
-  (with-current-buffer (find-file-noselect (organki-test--find-file
+  (with-current-buffer (find-file-noselect (jhelt-find-file
                                             "organki-test.org" 'test))
     (elog--debug "* Run test prettfy-region in file: %s" (buffer-name))
     (let* ((io (car (organki-test--get-tests "Testing prettifying region" t)))

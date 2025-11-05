@@ -9,14 +9,13 @@
 ;;; Code:
 (setq test-root (expand-file-name "test" (project-root (project-current))))
 (add-to-list 'load-path test-root)
-(add-to-list 'load-path "~/projects/jts-utils")
 
-(require 'jts-test-utils)
+(require 'jhelt)
 
 (defun test-runner ()
   (interactive)
   (cl-block nil
-    (test-run-tests test-root
+    (jhelt/run-tests test-root
                     '("organki-test.el")
                     '(tag organki))))
 

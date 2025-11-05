@@ -189,7 +189,7 @@ The output of calling ~(organki-test--get-tests 1)~ should be:
   (401                                                              ; output B
    (869                                                             ; input G
     ("organki-test.org" . 403)                                      ; input
-    ("/Users/josephtesfaye/projects/organki/readme.org" . 16326)))) ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 16336)))) ; input
  (594                                                               ; input C
   ((623 777)                                                        ; output D+E
    (869                                                             ; input G
@@ -357,7 +357,7 @@ Vocabulary	Test	一頭目の象	いっとうめのぞう	phrn.	the first elep
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	tag1 tag2	accrete	[ə'kri:t]	vi./vt.	grow or form by accumulation or coalescence 积淀、增生		<b>Examples</b><p><ul><li>It&apos;s not even all that easy to navigate, because most of the material has just accreted over the past seven years.</li><li>The collection of art he had accreted was to be sold.</li></ul></p>
+Vocabulary	Test	tag1 tag2	accrete	[ə'kri:t]	vi./vt.	grow or form by accumulation or coalescence 积淀、增生		<b>Examples</b><ul><li>It's not even all that easy to navigate, because most of the material has just accreted over the past seven years.</li><li>The collection of art he had accreted was to be sold.</li></ul>
 #+end_example
 
 * Convert leveled strings to HTML lists
@@ -430,4 +430,77 @@ Sentence	Test	tag1 tag2	タンさん、お仕事は？		Mr. Tan, what do you do 
 #deck column:2
 #tags column:3
 Sentence	Test	tag1 tag2	タンさん、お仕事は？<br>Sarah: タンさん、お仕事は？<br>サラ： タンさん、お仕事は？<br>[sound:202403132337.m4a] サラ： タンさん、お仕事は？<br>Mr. Tan, what do you do for work?<br>Sarah: Mr. Tan, what do you do for work.		Mr. Tan, what do you do for work?<br>Sarah: Mr. Tan, what do you do for work?<br>サラ： Mr. Tan, what do you do for work?<br>サラ： Mr. Tan, what do you do for work?<br>タンさん、お仕事は？<br>Sarah: タンさん、お仕事は？	
+#+end_example
+
+* Parse item content to HTML
+#+ATTR_ANKI: :notetype "Vocabulary" :newlines t
+- 林檎 りんご [0] n. apple
+  - C: Page 18
+
+    Different forms of negation:
+
+    - Item 1
+      Test 1
+      1. Item 1.1
+         Test 1.1
+      2. Item 1.2
+         Test 1.2
+         - Item 1.2.1
+           Test 1.2.1
+    - Item 2
+      - Item 2.1
+    - Item 3
+
+    Page 18
+
+    1. Item 1
+    2. Item 2
+    3. Item 3
+
+    Page 18
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	林檎	りんご [0]	n.	apple		<b>Comments</b><p>Page 18</p><p>Different forms of negation:</p><ul><li>Item 1<p>Test 1</p><ol><li>Item 1.1<p>Test 1.1</p></li><li>Item 1.2<p>Test 1.2</p><ul><li>Item 1.2.1<p>Test 1.2.1</p></li></ul></li></ol></li><li>Item 2<ul><li>Item 2.1</li></ul></li><li>Item 3</li></ul><p>Page 18</p><ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol><p>Page 18</p>
+#+end_example
+
+#+ATTR_ANKI: :notetype "Sentence" :newlines t
+- タン： サラさんも学生ですか。 Are you a student too, Ms. Sara?
+  サラ： いいえ、学生じゃありません。 No, I’m not a student.
+
+  - C: Page 18
+
+    Different forms of negation:
+
+    - Item 1
+      Test 1
+      1. Item 1.1
+         Test 1.1
+      2. Item 1.2
+         Test 1.2
+         - Item 1.2.1
+           Test 1.2.1
+    - Item 2
+      - Item 2.1
+    - Item 3
+
+    Page 18
+
+    1. Item 1
+    2. Item 2
+    3. Item 3
+
+    Page 18
+
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	tag1 tag2	タン： サラさんも学生ですか。<br>サラ： いいえ、学生じゃありません。		タン： Are you a student too, Ms. Sara?<br>サラ： No, I’m not a student.	<b>Comments</b><p>Page 18</p><p>Different forms of negation:</p><ul><li>Item 1<p>Test 1</p><ol><li>Item 1.1<p>Test 1.1</p></li><li>Item 1.2<p>Test 1.2</p><ul><li>Item 1.2.1<p>Test 1.2.1</p></li></ul></li></ol></li><li>Item 2<ul><li>Item 2.1</li></ul></li><li>Item 3</li></ul><p>Page 18</p><ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol><p>Page 18</p>
 #+end_example

@@ -54,8 +54,9 @@ A *Vocabulary* list uses this format:
     - When the entry contains multiple kanji characters the hiragana characters
       are separated or grouped using middle dots =・= by their kanji readings.
 
-  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See [[p:notes/japanese.org::#20250218230448][Accent
-    type convention]].
+  - =accent type=: The accent type of the reading, e.g. [0], [1], etc. See
+    [[p:notes/japanese.org::#20250218230448][Accent type convention]].
+
   - =audio file=: The audio of the reading, if any.
 
   For English entries it's composed of these parts:
@@ -87,7 +88,9 @@ A *Vocabulary* list uses this format:
 
 - =notes=: Additional notes about the entry. It includes the following optional
   sub-notes:
-  - A: <alternative forms>
+
+  - ~A:~ <alternative forms>
+
     A single line listing the alternative forms of the entry (same
     pronunciation, different forms).
 
@@ -96,21 +99,25 @@ A *Vocabulary* list uses this format:
     characters. The symbols are listed below:
 
     - ~^{▽}~: A white down-pointing triangle superscript, meaning the marked
-      character's readings (音訓) are not included in the Jōyō Kanji Table ([[file:~/projects/notes/japanese.org::#202409272057][常用
-      漢字表]]). For example, 和^{▽}やか.
+      character's readings (音訓) are not included in the Jōyō Kanji Table
+      ([[file:~/projects/notes/japanese.org::#202409272057][常用漢字表]]). For example, 和^{▽}やか.
 
     - ~〈〉~: A pair of angle brackets enclosing the entry, meaning the reading is
       a Jukujikun (熟字訓) for the entry. For example, 〈今日〉.
 
-  - C: <comments>
-    Explanatory notes or tips about the entry. It may contain a sub-list which
-    would then be displayed as-is except the bullet style in the cards' Notes fields.
+  - ~C:~ <comments>
 
-  - E: <examples>
+    Explanatory notes or tips about the entry. It may contain a sub-list which
+    would then be displayed as-is except the bullet style in the cards' Notes
+    fields.
+
+  - ~E:~ <examples>
+
     Examples that demonstrate the usage of the entry. The format of its contents
     is the same as that of =C:=.
 
-  - S: <sentences>
+  - ~S:~ <sentences>
+
     A [[#202410092201][Sentence]] sub-list that demonstrates the usage of the entry, the items of
     which are combined with the contents of =E:= so both of them are displayed
     under the "Examples" sub-notes. The items of this sub-list are also imported
@@ -118,11 +125,13 @@ A *Vocabulary* list uses this format:
     sub-notes of their "Notes" field. Only the first-level items will display
     the main entry in this way if the sub-list is a multi-level list.
 
-  - F: <family>
+  - ~F:~ <family>
+
     A Vocabulary sub-list of words or phrases closely related to or belonging to
     the same grammatical family as the entry.
 
-  - L: <linking>
+  - ~L:~ <linking>
+
     A Vocabulary sub-list, are words or phrases related to the entry that may
     assist in your memorization.
 
@@ -219,6 +228,7 @@ below.
   all optional.
 
   - P: <pronunciation>
+
     How to pronounce this entry. For Japanese entries, it's composed of these parts:
     : [<hiragana>] [<audio>]
 
@@ -229,14 +239,17 @@ below.
     Both parts are optional.
 
   - T: <translation>
+
     The translation of the entry in the languages you're familair with.
 
   - M: <multiple entry lines>
+
     A sublist where each item is an entry line. This is useful when there are
     multiple entry lines for the current item and you want to make SPR (see
     below) out of them.
 
   - V: <vocabulary>
+
     A [[#202410092157][Vocabulary]] sublist related to =entry=, the items of which will also be
     imported. If the parent item contains only one entry line, it will be used
     automatically as an example for these Vocabulary items, so that for example,
@@ -289,6 +302,7 @@ below.
     accumulated into its =V:= sub-notes, and it will be imported only once.
 
   - C: <comments>
+
     A single line or sublist explaining the entry.
 
 Here is an example of a comprehensive Sentence list:
@@ -349,19 +363,20 @@ Here is an example of a comprehensive Sentence list:
 :PROPERTIES:
 :CUSTOM_ID: 202410211926
 :END:
-Both Vocabulary and Sentence lists have these properties: deck, notetype, and
-tags, which correspond to the same-name concepts in Anki. If you have specified
-them when exporting the list then the notes will be imported to the
-specified deck with the specified notetype and tags.
 
-You can specify default values of these properties to save you from entering
-them during every exporting. The default values can be specified for the
-following scopes:
+*** Properties and their scopes
+Both Vocabulary and Sentence lists have properties such as deck, notetype, and
+tags, etc., which specifies which deck the notes will be imported to, the
+notetype and tags of the notes, respectively.
 
-- All lists in the current buffer
+You can specify the properties during exporting, but a better way is to give
+them default values before exporting to save you from entering them
+repetitively, which are specified in the following ways and scopes:
 
-  To set the default values for the whole buffer you use the in-buffer settings
-  such as:
+- For all lists in the current buffer
+
+  You can set the default values for the whole buffer with these in-buffer
+  settings:
 
   #+begin_example
   ,#+ANKI_DECK: English
@@ -369,9 +384,9 @@ following scopes:
   ,#+ANKI_TAGS: Fujisan
   #+end_example
 
-- All lists under a subtree
+- For all lists under a subtree
 
-  To set the default values for a subtree you use a property drawer such as:
+  You can also set them for a subtree only in a property drawer such as:
 
   #+begin_example
   ,*** Headline
@@ -382,28 +397,28 @@ following scopes:
   :END:
   #+end_example
 
-  Tags on the headline (as entered with ~org-ctrl-c-ctrl-c~) are also treated as
-  Anki tags.
+  Headline tags (as entered with ~org-ctrl-c-ctrl-c~) are also treated as part of
+  the Anki tags.
 
-- Only a certain list
+- For a certain list
 
-  To set the default values only for a certain list you use a tag line starting
-  with ~#+ATTR_ANKI~ directly over the list, values in the format of a plist, such
-  as: <<20250928093631>>
+  You can set the default values only for a certain list in a tag line named
+  ~#+ATTR_ANKI~ directly over the list, values in the format of a plist, such as:
+  <<20250928093631>>
 
   : #+ATTR_ANKI: :deck "English" :notetype "Vocabulary" :tags "tag1 tag2"
 
-  You can add ~#+ATTR_ANKI~ for a sublist, which is only effective when you make
-  an active region over its items. If ~#+ATTR_ANKI~ occurs multiple times on the
+  You can also put the tag line over a sublist and it is effective when you make
+  an active region over its items. If the tag line occurs multiple times on the
   different levels of a list it's always the closest one to the active region
   being adopted.
 
-Specifications of these scopes can exist at the same time and in this case if
-notetype and deck occur several times in the subtree and its child subtrees, the
-one closest to the list takes precedence. For tags all occurrences from all
-scopes are accumulated and transformed into a tag tree as seen in the Anki
-browser with respect to the hierarchy of the scopes (actually a Cartesian
-product, if you know what that means).
+Specifications of different scopes can coexist and in this case if notetype and
+deck occur several times in the subtree and its child subtrees, the one closest
+to the list takes precedence. For tags all occurrences from all scopes are
+accumulated and transformed into a tag tree as seen in the Anki browser with
+respect to the hierarchy of the scopes (actually a Cartesian product, if you
+know what that means).
 
 Take this subtree for example,
 
@@ -443,6 +458,24 @@ The notetype and deck of the imported notes would be "Vocabulary" and
   - Time
     - elementary
 #+end_example
+
+*** All the properties
+The properties follow the naming convention that the in-buffer settings, drawer
+properties, and tag lines all have the same core names but slightly different
+alteration adjusted to the corresponding scope. For example, here is how the
+property =deck= is specified in each scope:
+
+- As an in-buffer setting: =#+ANKI_DECK: <value>=
+- As a property in a property drawer: =:ANKI_NOTETYPE: <value>=
+- As a property in a tag line: =:deck "<value>"=
+
+Thus in the following list only the core names of the properties are mentioned.
+
+- =deck=: The deck to which the notes will be imported.
+- =notetype=: The notetype in which the notes will be imported.
+- =tags=: The tags of the notes.
+- =outdir=: The output directory where the generated files are placed.
+- =newlines=: Set the variable ~organki/preserve-newlines~.
 
 ** Importing
 To import a Vocabulary or Sentence list to Anki put point anywhere in the list
