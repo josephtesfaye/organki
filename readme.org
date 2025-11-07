@@ -211,6 +211,15 @@ A *Sentence* list uses this format:
   - みずとごはんです。 It's water and rice.
   - みず、ください。 Water, please.
 
+  Note that the translation must be on the same line with the entry if not in an
+  =T:= item, in case you have enabled ~auto-fill-mode~. Say, a list like this will
+  produce erroneous result:
+
+  #+begin_src org
+  - 学生たちを引率して博物館に行った。 I led [took] a group of students
+    to the museum.
+  #+end_src
+
 The =audio=, =entry= and =translation= combined is called an "entry line". There can
 be multiple entry lines on the same item, say, to form a dialogue or a short
 passage. If it's a dialogue each line must begin with a =speaker= which takes the
@@ -219,6 +228,11 @@ space. For example,
 
 - A: はなさんはイギリス人ですか。 Is Hana British?
   B: いいえ、ブラジル人です。 No, she's Brazilian.
+
+You can disable this feature by turning on the variable
+~organki/disable-multi-entry-lines~ and henceforth all lines of the same item are
+treated as one entry line, in case of a conceptual conflict between this feature
+and ~auto-fill-mode~. <<TOKYO20251107203643>>
 
 Alternatively, you can put the entry lines in the =M:= sub-notes of =notes=. See
 below.
@@ -463,7 +477,7 @@ The notetype and deck of the imported notes would be "Vocabulary" and
 The properties follow the naming convention that the in-buffer settings, drawer
 properties, and tag lines all have the same core names but slightly different
 alteration adjusted to the corresponding scope. For example, here is how the
-property =deck= is specified in each scope:
+property ~deck~ is specified in each scope:
 
 - As an in-buffer setting: =#+ANKI_DECK: <value>=
 - As a property in a property drawer: =:ANKI_NOTETYPE: <value>=
@@ -471,11 +485,12 @@ property =deck= is specified in each scope:
 
 Thus in the following list only the core names of the properties are mentioned.
 
-- =deck=: The deck to which the notes will be imported.
-- =notetype=: The notetype in which the notes will be imported.
-- =tags=: The tags of the notes.
-- =outdir=: The output directory where the generated files are placed.
-- =newlines=: Set the variable ~organki/preserve-newlines~.
+- ~deck~: The deck to which the notes will be imported.
+- ~notetype~: The notetype in which the notes will be imported.
+- ~tags~: The tags of the notes.
+- ~outdir~: The output directory where the generated files are placed.
+- ~newlines~: Set the variable ~organki/preserve-newlines~.
+- ~dmel~: Set the variable ~organki/disable-multi-entry-lines~.
 
 ** Importing
 To import a Vocabulary or Sentence list to Anki put point anywhere in the list
@@ -548,6 +563,12 @@ contents. Check their docstrings for more detailed descriptions.
   comment. The default value is nil, which is to convert them to the HTML
   format, and if it is ~text~ convert to a plain text format which preserves the
   indentation of the original lists.
+
+- ~organki/disable-multi-entry-lines~
+
+  Disable the [[TOKYO20251107203643][multiple entry lines]] feature when non-nil so that all lines of the
+  same item are treated as one entry line, in case of a conceptual conflict
+  between this feature and ~auto-fill-mode~.
 
 ** Normalizing & Prettifying
 Organki can prettify the Vocabulary lists and Sentence lists to increase visual

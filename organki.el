@@ -142,6 +142,13 @@ order of the fields."
   :type '(repeat symbol)
   :group 'organki)
 
+(defcustom organki/disable-multi-entry-lines nil
+  "Disable the \"multiple entry lines\" feature when non-nil so that all lines of
+the same item are treated as one entry line, in case of a conceptual conflict
+between this feature and `auto-fill-mode'."
+  :type 'boolean
+  :group 'organki)
+
 (defcustom organki/convert-list-to-type nil
   "Which type of content should the plain lists be convert into. This is used to
 convert any plain list without a special meaning such as one present in a
@@ -399,12 +406,6 @@ of `organki--anki-vocabulary' objects."
     (if (string-match-p "^[[:ascii:]]+ " content)
         (setq parts (organki--get-vocabulary-content-English content))
       (setq parts (organki--get-vocabulary-content-Japanese content)))
-
-    ;; Un-fill the translation if it contains multiple lines.
-    (setq translation (car (last parts)))
-    (when (string-match-p "\n" translation)
-      (setq translation (string-unfill translation))
-      (setcar (last parts) translation))
     parts))
 
 
@@ -467,6 +468,11 @@ matches the part of speech and must be present."
   (when (stringp text)
     (save-match-data
       (setq text (string-trim text))
+
+      ;; Remove newlines
+      (when (string-match-p "\n" text)
+        (setq text (string-unfill text)))
+
       ;; Remove anchors
       (when-let ((regexp "<<.*?>> ?")
                  ((string-match-p regexp text)))
@@ -477,6 +483,7 @@ matches the part of speech and must be present."
         (setq text (string-trim (string-remove-suffix regexp text))))
 
       (setq text (organki--convert-pronunciation text))
+      (setq text (organki--convert-fragments text))
       text)))
 
 
@@ -627,7 +634,11 @@ Return an alist of notetype/list-of-objects pairs."
               (mapcar (lambda (point)
                         (string-unfill (org-list-item-get-content point)))
                       (org-list-item-get-children mul-key-item))
-            (split-string (org-list-item-get-content item 'first) "\n" t " +")))
+
+            (let ((content (org-list-item-get-content item 'first)))
+              (if organki/disable-multi-entry-lines
+                  (list (string-unfill content))
+                (split-string content "\n" t " +")))))
 
          item-sentences)
 
@@ -813,7 +824,7 @@ displaying in an Anki card."
   (if-let ((key (car key-item-strs))
            ((or (string= key organki--key-pron)
                 (string= key organki--key-trans))))
-      (organki--convert-fragments (cdr key-item-strs))
+      (organki--normalize-text (cdr key-item-strs))
 
     (if organki/convert-list-to-type
         ;; Convert to plain text
@@ -1079,7 +1090,8 @@ compatibility and testing."
     (push (string-join tags " ") props)
 
     ;; Variables
-    (let* ((variables '("newlines" organki/preserve-newlines))
+    (let* ((variables '("newlines" organki/preserve-newlines
+                        "dmel" organki/disable-multi-entry-lines))
            (names (mapcar #'car (seq-partition variables 2)))
            bindings)
       (dolist (name names)

@@ -189,7 +189,7 @@ The output of calling ~(organki-test--get-tests 1)~ should be:
   (401                                                              ; output B
    (869                                                             ; input G
     ("organki-test.org" . 403)                                      ; input
-    ("/Users/josephtesfaye/projects/organki/readme.org" . 16336)))) ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 16900)))) ; input
  (594                                                               ; input C
   ((623 777)                                                        ; output D+E
    (869                                                             ; input G
@@ -503,4 +503,42 @@ Vocabulary	Test	tag1 tag2	林檎	りんご [0]	n.	apple		<b>Comments</b><p>Page 
 #deck column:2
 #tags column:3
 Sentence	Test	tag1 tag2	タン： サラさんも学生ですか。<br>サラ： いいえ、学生じゃありません。		タン： Are you a student too, Ms. Sara?<br>サラ： No, I’m not a student.	<b>Comments</b><p>Page 18</p><p>Different forms of negation:</p><ul><li>Item 1<p>Test 1</p><ol><li>Item 1.1<p>Test 1.1</p></li><li>Item 1.2<p>Test 1.2</p><ul><li>Item 1.2.1<p>Test 1.2.1</p></li></ul></li></ol></li><li>Item 2<ul><li>Item 2.1</li></ul></li><li>Item 3</li></ul><p>Page 18</p><ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol><p>Page 18</p>
+#+end_example
+
+* Disable multiple entry lines
+#+ATTR_ANKI: :notetype "Sentence" :dmel t
+- 「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違
+  いであると思われる場合は、フォームのオーナーにお問い合わせください。/
+
+  - T: The acceptance of responses for ‘[Accompanied] International Job Fair’
+    has ended. If you believe this is an error, please contact the form’s owner.
+
+  - V:
+    - 引率 いんそつ [0] n. lead, supervise, accompany
+      - S:
+        - 学生たちを引率して博物館に行った。 I led [took] a group of students to
+          the museum.
+          - V:
+            - 博物館 はく・ぶつ・かん [4] n. museum 博物馆
+
+#+ATTR_ARGS: :composite Sentence
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Sentence	Test	tag1 tag2	「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違 いであると思われる場合は、フォームのオーナーにお問い合わせください。		The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.	<b>Vocabulary</b><ul><li>引率 いんそつ [0] n. lead, supervise, accompany</li></ul>
+Sentence	Test	tag1 tag2	学生たちを引率して博物館に行った。		I led [took] a group of students to the museum.	<b>Vocabulary</b><ul><li>引率 いんそつ [0] n. lead, supervise, accompany</li><li>博物館 はく・ぶつ・かん [4] n. museum 博物馆</li></ul>
+#+end_example
+
+#+ATTR_ARGS: :composite Vocabulary
+#+begin_example
+#separator:tab
+#html:true
+#notetype column:1
+#deck column:2
+#tags column:3
+Vocabulary	Test	tag1 tag2	引率	いんそつ [0]	n.	lead, supervise, accompany		<b>Examples</b><ul><li>「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違 いであると思われる場合は、フォームのオーナーにお問い合わせください。 The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.</li><li>学生たちを引率して博物館に行った。 I led [took] a group of students to the museum.</li></ul>
+Vocabulary	Test	tag1 tag2	博物館	はく・ぶつ・かん [4]	n.	museum 博物馆		<b>Examples</b><ul><li>学生たちを引率して博物館に行った。 I led [took] a group of students to the museum.</li></ul>
 #+end_example
