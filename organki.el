@@ -473,6 +473,11 @@ matches the part of speech and must be present."
       (when (string-match-p "\n" text)
         (setq text (string-unfill text)))
 
+      ;; Remove spaces for Japanese (text that doesn't contain ASCII characters
+      ;; followed by at least one space).
+      (when (not (string-match-p "[[:ascii:]]+ +" text))
+        (setq text (replace-regexp-in-string  " +" "" text)))
+
       ;; Remove anchors
       (when-let ((regexp "<<.*?>> ?")
                  ((string-match-p regexp text)))

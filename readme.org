@@ -86,8 +86,10 @@ A *Vocabulary* list uses this format:
     you want to write explanations or notes for the entry you can put them in
     the =notes= sublist.
 
-- =notes=: Additional notes about the entry. It includes the following optional
-  sub-notes:
+- =notes=: Additional notes about the entry, which is a sublist of the entry item
+  and each item of which starts with a special key and a colon to indicate the
+  type of note. The complete keys (or types of notes) are listed below. Unlisted
+  keys or items in another format are ignored during [[#20251126120339][exporting]].
 
   - ~A:~ <alternative forms>
 
@@ -474,6 +476,9 @@ The notetype and deck of the imported notes would be "Vocabulary" and
 #+end_example
 
 *** All the properties
+:PROPERTIES:
+:CUSTOM_ID: 20251126121234
+:END:
 The properties follow the naming convention that the in-buffer settings, drawer
 properties, and tag lines all have the same core names but slightly different
 alteration adjusted to the corresponding scope. For example, here is how the
@@ -492,11 +497,16 @@ Thus in the following list only the core names of the properties are mentioned.
 - ~newlines~: Set the variable ~organki/preserve-newlines~.
 - ~dmel~: Set the variable ~organki/disable-multi-entry-lines~.
 
-** Importing
-To import a Vocabulary or Sentence list to Anki put point anywhere in the list
-then call ~organki/import-region~ (=M-m m i=). Then the list will be exported to the
-format for importing to Anki in a file or files named like
-"import<timestamp>.txt" under the default directory (=~/Downloads=) immediately.
+** Exporting and Importing
+:PROPERTIES:
+:CUSTOM_ID: 20251126120339
+:END:
+To import a Vocabulary or Sentence list to Anki you need to first export it to
+the format suitable for importing to Anki, that is, put the cursor anywhere in
+the list and then call ~organki/import-region~ (=M-m m i=). The list will be
+exported to a file or files with the naming "import<timestamp>.txt" under the
+default directory (=~/Downloads= by default, customizable through the variable
+[[#20251126121234][outdir]]) immediately.
 
 You can also export part of the list by selecting the items in a region. Only
 notes fully falling into the region are deemed "selected".

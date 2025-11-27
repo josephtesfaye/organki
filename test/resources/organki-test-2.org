@@ -69,7 +69,7 @@ Vocabulary	Test	tag1 tag2	shell membrane		n.	蛋壳膜
 Vocabulary	Test	tag1 tag2	shell membrane	[abc]	n.	蛋壳膜	
 Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜	
 Vocabulary	Test	tag1 tag2	shell membrane	[sound:foo.wav]	n.	蛋壳膜	
-Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜 蛋壳膜 蛋壳膜	
+Vocabulary	Test	tag1 tag2	shell membrane	[abc] [sound:foo.wav]	n.	蛋壳膜蛋壳膜蛋壳膜	
 Vocabulary	Test	tag1 tag2	今日		n.	today	
 Vocabulary	Test	tag1 tag2	今日	きょう	n.	today	
 Vocabulary	Test	tag1 tag2	今日	きょう [1]	n.	today	
@@ -189,7 +189,7 @@ The output of calling ~(organki-test--get-tests 1)~ should be:
   (401                                                              ; output B
    (869                                                             ; input G
     ("organki-test.org" . 403)                                      ; input
-    ("/Users/josephtesfaye/projects/organki/readme.org" . 16900)))) ; input
+    ("/Users/josephtesfaye/projects/organki/readme.org" . 17134)))) ; input
  (594                                                               ; input C
   ((623 777)                                                        ; output D+E
    (869                                                             ; input G
@@ -528,7 +528,7 @@ Sentence	Test	tag1 tag2	タン： サラさんも学生ですか。<br>サラ：
 #notetype column:1
 #deck column:2
 #tags column:3
-Sentence	Test	tag1 tag2	「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違 いであると思われる場合は、フォームのオーナーにお問い合わせください。		The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.	<b>Vocabulary</b><ul><li>引率 いんそつ [0] n. lead, supervise, accompany</li></ul>
+Sentence	Test	tag1 tag2	「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違いであると思われる場合は、フォームのオーナーにお問い合わせください。		The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.	<b>Vocabulary</b><ul><li>引率 いんそつ [0] n. lead, supervise, accompany</li></ul>
 Sentence	Test	tag1 tag2	学生たちを引率して博物館に行った。		I led [took] a group of students to the museum.	<b>Vocabulary</b><ul><li>引率 いんそつ [0] n. lead, supervise, accompany</li><li>博物館 はく・ぶつ・かん [4] n. museum 博物馆</li></ul>
 #+end_example
 
@@ -539,6 +539,6 @@ Sentence	Test	tag1 tag2	学生たちを引率して博物館に行った。		I l
 #notetype column:1
 #deck column:2
 #tags column:3
-Vocabulary	Test	tag1 tag2	引率	いんそつ [0]	n.	lead, supervise, accompany		<b>Examples</b><ul><li>「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違 いであると思われる場合は、フォームのオーナーにお問い合わせください。 The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.</li><li>学生たちを引率して博物館に行った。 I led [took] a group of students to the museum.</li></ul>
+Vocabulary	Test	tag1 tag2	引率	いんそつ [0]	n.	lead, supervise, accompany		<b>Examples</b><ul><li>「【引率】インターナショナルジョブフェア」の回答の受け付けは終了しました。間違いであると思われる場合は、フォームのオーナーにお問い合わせください。 The acceptance of responses for ‘[Accompanied] International Job Fair’ has ended. If you believe this is an error, please contact the form’s owner.</li><li>学生たちを引率して博物館に行った。 I led [took] a group of students to the museum.</li></ul>
 Vocabulary	Test	tag1 tag2	博物館	はく・ぶつ・かん [4]	n.	museum 博物馆		<b>Examples</b><ul><li>学生たちを引率して博物館に行った。 I led [took] a group of students to the museum.</li></ul>
 #+end_example
