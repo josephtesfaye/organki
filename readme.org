@@ -450,7 +450,7 @@ Take this subtree for example,
 ,** Date & Time :Date:Time:
 ,*** Vocabulary
 :PROPERTIES:
-:ANKI_NOTE: One Entry One Card
+:ANKI_NOTETYPE: One Entry One Card
 :END:
 
 ,#+ATTR_ANKI: :deck "Japanese2" :tags "elementary"
