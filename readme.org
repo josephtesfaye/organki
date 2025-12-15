@@ -485,7 +485,7 @@ alteration adjusted to the corresponding scope. For example, here is how the
 property ~deck~ is specified in each scope:
 
 - As an in-buffer setting: =#+ANKI_DECK: <value>=
-- As a property in a property drawer: =:ANKI_NOTETYPE: <value>=
+- As a property in a property drawer: =:ANKI_DECK: <value>=
 - As a property in a tag line: =:deck "<value>"=
 
 Thus in the following list only the core names of the properties are mentioned.
