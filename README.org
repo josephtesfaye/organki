@@ -1,0 +1,24 @@
+* Installation
+1. Download or clone the repo to a directory, e.g., =~/projects/organki/=.
+2. Load the package using one of the following methods:
+
+   #+begin_src elisp
+   ;; Use load-file
+   (load-file "~/projects/organki/organki.el")
+
+   ;; Use load
+   (add-to-list 'load-path "~/projects/organki/")
+   (load 'organki)
+
+   ;; Use use-package
+   (use-package organki
+     :init
+     ;; Bind the keys when an org file is first visited.
+     (with-eval-after-load 'org
+       (spacemacs/set-leader-keys-for-major-mode 'org-mode
+         "i" 'organki/import-region
+         "TAB" 'organki/prettify-region))
+     ;; Load the package when one of these commands is first called.
+     :autoload (organki/import-region)
+     :load-path "~/projects/organki/")
+   #+end_src
