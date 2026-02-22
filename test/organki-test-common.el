@@ -109,11 +109,10 @@ same form.")
 
 (defun organki-test--run-files (files)
   "Run all runnable tests in FILES automatically. Each element of FILES can
-be either a filename—all tests in that file will run, or a list where
-the CAR is the filename and the CDR is the headlines—only tests of which will
-run. You can specify one of the following keywords at the end of the CDR to runs
-tests in the scope specified by the keyword in addition to those specified as
-headlines.
+be either a filename—all tests in that file will run, or a list where the CAR is
+the filename and the CDR is the headlines—only tests of which will run. You can
+specify one of the following keywords at the end of the CDR to run tests in the
+scope specified by the keyword in addition to those specified as headlines.
 
     :after - Run tests after the last headline.
     :before - Run tests before the last headline."
