@@ -5,7 +5,7 @@
 
 ;; Author: josephtesfaye
 ;; Version: 1.0
-;; Package-Requires: ((emacs "29.1"))
+;; Package-Requires: ((emacs "29.1") (s "1.13.0"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -17,6 +17,7 @@
 ;;; Code:
 (require 's)
 (require 'jts-string-utils)
+(require 'jts-list-utils)
 (require 'jts-hash-table-utils)
 (require 'jts-buffer-utils)
 (require 'jts-org-utils)
