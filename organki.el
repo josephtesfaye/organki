@@ -406,7 +406,9 @@ of `organki--anki-vocabulary' objects."
     ;; Entry is English if it starts with ascii letters.
     (if (string-match-p "^[[:ascii:]]+ " content)
         (setq parts (organki--get-vocabulary-content-English content))
-      (setq parts (organki--get-vocabulary-content-Japanese content)))
+      (setq parts (organki--get-vocabulary-content-Japanese content))
+      (when (not parts)
+        (setq parts (organki--get-vocabulary-content-Japanese-format2 content))))
     parts))
 
 
@@ -435,7 +437,29 @@ matches the part of speech and must be present."
                (translation (organki--normalize-text
                              (substring string (match-end 3)))))
           (list entry pron class translation))
-      (list string))))
+      nil)))
+
+
+(defun organki--get-vocabulary-content-Japanese-format2 (string)
+  "Return the individual parts from an Japanese entry. The matching mechanism is
+described as follows:
+
+  （開｜始：かい｜し：0：n,vs：start; commencement）"
+
+  (let ((regexp "（\\(?1:.+?\\)：\\(?2:.+?\\)：\\(?3:.+?\\)：\\(?4:.+?\\)：\\(?5:.+?\\)）"))
+    (if (string-match regexp string)
+        (let* ((entry (organki--normalize-text (match-string 1 string)))
+               (furigana (organki--normalize-text (match-string 2 string)))
+               (accent (organki--normalize-text (match-string 3 string)))
+               (class (organki--normalize-text (match-string 4 string)))
+               (translation (organki--normalize-text (match-string 5 string)))
+               pron)
+          (setq entry (string-replace "｜" "" entry))
+          (setq furigana (string-replace "｜" "" furigana))
+          (setq pron (string-join-non-blanks
+                      (list furigana (concat "[" accent "]")) " "))
+          (list entry pron class translation))
+      nil)))
 
 
 (defun organki--get-vocabulary-content-English (string)

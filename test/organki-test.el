@@ -80,6 +80,15 @@
           (should (equal output expect)))))))
 
 
+(ert-deftest organki-test/get-vocabulary-content-Japanese-format2 ()
+  (should (equal (organki--get-vocabulary-content-Japanese-2
+                  "（開｜始：かい｜し：0：n,vs：start; commencement）")
+                 '("開始" "かいし [0]" "n,vs" "start; commencement")))
+  (should (equal (organki--get-vocabulary-content-Japanese-2
+                  "開始 かいし [0] n. vs. start; commencement;")
+                 '("開始 かいし [0] n. vs. start; commencement;"))))
+
+
 (ert-deftest organki-test/prettfy-region ()
   :tags '(organki)
 
